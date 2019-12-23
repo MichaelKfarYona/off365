@@ -16,6 +16,7 @@ import Pages.MainPage;
 import Pages.Office365Page;
 import Pages.PowerAutomate;
 import Pages.PowerAutomate.LeftMenuItemPowerAutomate;
+import Pages.Settings.ApplicationName;
 import Pages.Settings;
 import Pages.TeamsChannelPage;
 import Pages.TeamsChannelPage.KindOfTeam;
@@ -23,7 +24,7 @@ import Pages.TeamsChannelPage.KindOfTeam;
 public class TestPowerAutomate extends Settings{
 
 	ExtentHtmlReporter htmlReporter;final String newTeamName = "AUTOMATION_TEST_TEAM_";
-	final int lineNumber = 2;String loginName = "Michael@msglab.tech";String password = "Amdocs@123";
+	String loginName = "Michael@msglab.tech";String password = "Amdocs@123";
 	final String ownerName = "Michael Prudnikov";int teamNumber = getRandom();ExtentTest testLog = null;
 	final String AUTO_FLOW_NAME = "AUTO_TITLE_";
 	final String MAIL_TO = "michael.prudnikov@amdocs.com"; 
@@ -35,7 +36,8 @@ public class TestPowerAutomate extends Settings{
 	public void createNewFlow() throws Exception {
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Create new team: Started");
-		loginAsAmdocsUser("Power Automate");
+		loginAsAmdocsUserSettings(ApplicationName.POWER_AUTOMATE); // Settings.class method
+		//loginAsAmdocsUser("Power Automate");
 		PowerAutomate powerPage = new PowerAutomate(driver);
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		powerPage.createNewFlow();

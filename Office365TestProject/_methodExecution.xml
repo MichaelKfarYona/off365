@@ -5,9 +5,11 @@
 		<classes>
 			 
 			<!-- Teams -->
-			<class name="tests.TestFlowViaTeams">
+			<class name="tests.TestTeamsChannelPage">
 				<methods>
-					<include name="createNewFlow"/>
+					<include name="createNewTeam"/>
+					<include name="assignRoleValidation"/>
+					
 					
 				</methods>
 			</class>

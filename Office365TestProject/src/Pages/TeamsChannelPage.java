@@ -90,7 +90,7 @@ public class TeamsChannelPage {
 		createButton.click();Thread.sleep(7000);
 		Actions builder = new Actions(driver);
         builder.sendKeys(Keys.chord(Keys.ESCAPE)).perform();
-			skipButton = driver.findElement(By.xpath("//button[@role='button']"));
+			skipButton = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@role='button']")));
 			 skipButton.click();
 		
 	}
@@ -164,9 +164,9 @@ public class TeamsChannelPage {
 		clickByFilterButton();
 		setFilterByTeamOrChannel(searchTeam);
 		Thread.sleep(2000);
-		WebElement moreOptions = driver.findElement(By.xpath("//button[@title='More options']"));
+		WebElement moreOptions = driver.findElement(By.xpath("//*/h3/a//button[@title='More options']")); //div/h3/a//button[@title='More options']
 		moreOptions.click();Thread.sleep(2000);
-		linkToMemberSettings = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@track-summary='View Team']")));
+		linkToMemberSettings = (new WebDriverWait(driver, 15)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@track-summary='View Team']")));
 		linkToMemberSettings.click();
 	}
 	
@@ -498,8 +498,9 @@ public class TeamsChannelPage {
 		filterButton.click();
 	}
 	public void setFilterByTeamOrChannel(String filter) {
-		filterByTeamOrChannel = driver.findElement(By.xpath("//input[@id='left-rail-header-filter-input']"));
+		filterByTeamOrChannel = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='left-rail-header-filter-input']")));
 		filterByTeamOrChannel.sendKeys(filter);
+		
 	}
 	public boolean elementIsNotPresent(String xpath){
 	       return driver.findElements(By.xpath(xpath)).isEmpty();

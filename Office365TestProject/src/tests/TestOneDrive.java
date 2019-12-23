@@ -18,6 +18,7 @@ import Pages.Office365Page;
 import Pages.OneDrive;
 import Pages.OneDrive.LeftMenuItem;
 import Pages.OneDrive.NewMenuItem;
+import Pages.Settings.ApplicationName;
 import Pages.Settings;
 import Pages.TeamsChannelPage;
 import Pages.WordDocumentPage;
@@ -41,7 +42,8 @@ public class TestOneDrive extends Settings{
 	public void addNewFolderOneDrive() throws Exception {
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Create new folder: Started");
-		loginAsAmdocsUser("OneDrive");
+		loginAsAmdocsUserSettings(ApplicationName.ONEDRIVE); // Settings.class method
+		//loginAsAmdocsUser("OneDrive");
 		OneDrive oneDrive = new OneDrive(driver);
 		String tempFolderName = FOLDER_NAME+getRandom();
 		oneDrive.addItemOneDrive_NewMenu(NewMenuItem.FOLDER);

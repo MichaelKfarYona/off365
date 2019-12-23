@@ -13,6 +13,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 import Pages.MainPage;
 import Pages.Office365Page;
+
 import Pages.Planner;
 import Pages.PowerAutomate;
 import Pages.Settings;
@@ -33,7 +34,8 @@ public class TestFlowViaTeams extends Settings{
 	public void createNewFlow() throws Exception {
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Create new Flow: Started");
-		loginAsAmdocsUser("Teams");
+		//loginAsAmdocsUser("Teams"); // this.class method
+		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 		teamsPage.clickTeamsTab();
 		String element = "Flow";

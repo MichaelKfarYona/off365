@@ -9,14 +9,19 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
+
+import Pages.OneDrive.LeftMenuItem;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -24,7 +29,31 @@ import org.openqa.selenium.remote.CapabilityType;
 
 
 public class Settings {
-
+	 public enum ApplicationName{
+			OUTLOOK, ONEDRIVE, WORD, EXCEL, POWERPOINT, ONENOTE, SHAREPOINT,TEAMS,YAMMER,DYNAMICS365,POWER_AUTOMATE, FORMS, PLANNER, TODO, DELVE
+		}
+		public void chooseApplicationByName(ApplicationName item) {
+			String parametrListItem = null;
+			switch(item) { 
+			case OUTLOOK: parametrListItem = "Outlook";  break;
+			case ONEDRIVE: parametrListItem = "OneDrive";  break;
+			case WORD: parametrListItem = "Word";  break;
+			case EXCEL: parametrListItem = "Excel";  break;
+			case POWERPOINT: parametrListItem = "PowerPoint";  break;
+			case ONENOTE: parametrListItem = "OneNote"; break; 
+			case SHAREPOINT: parametrListItem = "SharePoint"; break;
+			case TEAMS:parametrListItem = "Teams"; break;
+			case YAMMER:parametrListItem = "Yammer"; break;
+			case DYNAMICS365:parametrListItem = "Dynamics 365"; break;
+			case POWER_AUTOMATE:parametrListItem = "Power Automate"; break;
+			case FORMS:parametrListItem = "Forms"; break;
+			case PLANNER:parametrListItem = "Planner"; break;
+			case TODO:parametrListItem = "To Do"; break;
+			case DELVE:parametrListItem = "Delve"; break;
+			}
+			WebElement leftMenuItemElement = driver.findElement(By.xpath("//div[@class='hero-container']//div[@title='"+parametrListItem+"']"));
+			leftMenuItemElement.click();
+		}
 	protected static ExtentReports extent;
 	
     private static ThreadLocal parentTest = new ThreadLocal();
@@ -85,10 +114,11 @@ public class Settings {
     }
     
     
-    public void loginAsAmdocsUserSettings(String appName) throws InterruptedException, IOException{
+    public void loginAsAmdocsUserSettings(ApplicationName appName) throws InterruptedException, IOException{
+    	testLogger = extent.createTest(getClass().getName());
     	testLogger.log(Status.INFO, "Login as User");
         MainPage mainPage = new MainPage(driver);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
         mainPage.setLogin(loginName); 
         if(loginName.equals("Michael@msglab.tech")) {mainPage.setPassword(password); mainPage.signInNo();}
         testLogger.log(Status.INFO, "Open Office 365");
@@ -96,14 +126,15 @@ public class Settings {
         System.out.println("OFFICE 365");
         Thread.sleep(2000);
         testLogger.log(Status.INFO, "Click Teams link ");
-        officePage.chooseApplication(appName);
+        chooseApplicationByName(appName);
+       // officePage.chooseApplication(appName);
         /************************
          * Switch between tabs *
          ************************/
         ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
        driver.switchTo().window(tabs.get(1));
-       
-       if(appName == "Teams") {
+       //System.out.println("******* "+appName.toString());
+       if(appName.toString().equals("TEAMS")) {
   	   TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
   	   try { Thread.sleep(8000);
        } catch (InterruptedException e) {e.printStackTrace();        }

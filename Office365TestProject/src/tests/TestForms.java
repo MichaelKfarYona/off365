@@ -14,6 +14,7 @@ import Pages.Forms;
 import Pages.MainPage;
 import Pages.Office365Page;
 import Pages.Forms.FormType;
+import Pages.Settings.ApplicationName;
 import Pages.Settings;
 import Pages.TeamsChannelPage;
 
@@ -67,6 +68,7 @@ public class TestForms extends Settings{
 	    	testLogger = extent.createTest(getClass().getName());
 	    	testLogger.log(Status.INFO, "Start Forms app");
 	    	try {
+	    		//loginAsAmdocsUserSettings(ApplicationName.FORMS); // Settings.class method
 	    	loginAsAmdocsUser("Forms");
 	    	String myParam = "Test_Form_Name_"+getRandom();
 	    	Thread.sleep(2000);

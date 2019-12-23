@@ -13,6 +13,7 @@ import Pages.MainPage;
 import Pages.Office365Page;
 import Pages.Settings;
 import Pages.TeamsChannelPage;
+import Pages.Settings.ApplicationName;
 
 public class TestPlannerViaTeams extends Settings{
 	final String APP_NAME = "Teams";
@@ -26,7 +27,8 @@ public class TestPlannerViaTeams extends Settings{
 	public void addPlannerViaTeams() throws Exception {
 		testLog = extent.createTest(getClass().getName());
     	testLog.log(Status.INFO, "Start Browser");
-		loginAsAmdocsUser(APP_NAME);
+    	loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
+		//loginAsAmdocsUser(APP_NAME);
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 		String plannerNameToTab = NAME_YOUR_PLAN_+getRandom();
 		testLog.log(Status.INFO, "Teams is opened");

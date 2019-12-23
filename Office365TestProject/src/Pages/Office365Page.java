@@ -23,6 +23,8 @@ public class Office365Page {
         PageFactory.initElements(driver, this);
     }
     
+   
+    
    @FindBy(xpath = "//span[@class='ms-ohp-svg-Icon ms-ohp-Icon ms-ohp-Icon--teamsLogo ms-ohp-Icon--teamsLogoFill ng-star-inserted']")
     public WebElement teamsLink;
 
@@ -30,6 +32,7 @@ public class Office365Page {
 	 * Choose application on Office 365 page * 
 	 * @throws InterruptedException 
 	 *****************************************/
+   				   
        public void chooseApplication(String appName) throws InterruptedException {
     	   //Thread.sleep(3000);
     	   appLink = (new WebDriverWait(driver, 15)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title='"+appName+"']"))); 

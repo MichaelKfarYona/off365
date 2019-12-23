@@ -17,6 +17,7 @@ import Pages.MainPage;
 import Pages.Office365Page;
 import Pages.Planner;
 import Pages.Planner.Privacy;
+import Pages.Settings.ApplicationName;
 import Pages.Settings;
 import Pages.TeamsChannelPage;
 
@@ -38,7 +39,8 @@ public class TestPlanner extends Settings{
 		testLog = extent.createTest(getClass().getName());
     	testLog.log(Status.INFO, "Start Planner app");
     	try {
-    	loginAsAmdocsUser("Planner");
+    		loginAsAmdocsUserSettings(ApplicationName.PLANNER); // Settings.class method
+    	//loginAsAmdocsUser("Planner");
     	String myParamPlannerName = newPlanName+getRandom();
     	Thread.sleep(1000);
     	Planner plannerPage = new Planner(driver);

@@ -16,6 +16,7 @@ import Pages.MainPage;
 import Pages.Office365Page;
 import Pages.Settings;
 import Pages.TeamsChannelPage;
+import Pages.Settings.ApplicationName;
 
 public class TestFormViaTeams extends Settings {
 
@@ -34,8 +35,8 @@ public class TestFormViaTeams extends Settings {
 		testLog = extent.createTest(getClass().getName());
 		String element = "Forms";
 		String nameF = formName + getRandom();
-		
-		loginAsAmdocsUser(APP_NAME);
+		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
+		//loginAsAmdocsUser(APP_NAME);
 		testLog.log(Status.INFO, "Loggedin");
 		try {
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);

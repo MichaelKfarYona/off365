@@ -15,6 +15,7 @@ import Pages.Office365Page;
 import Pages.Settings;
 import Pages.TeamsChannelPage;
 import Pages.ToDo;
+import Pages.Settings.ApplicationName;
 import Pages.ToDo.LeftMenuItems;
 
 public class TestsToDo extends Settings{
@@ -33,7 +34,8 @@ public class TestsToDo extends Settings{
 	    	testLog = extent.createTest(getClass().getName());
 	    	testLog.log(Status.INFO, "Start: ToDo app");
 	    	try {
-	    	loginAsAmdocsUser("To Do");
+	    		loginAsAmdocsUserSettings(ApplicationName.TODO); // Settings.class method
+	    	//loginAsAmdocsUser("To Do");
 	    	Thread.sleep(2000);
 	    	ToDo toDoPage = new ToDo(driver);
 	    	Thread.sleep(7000);

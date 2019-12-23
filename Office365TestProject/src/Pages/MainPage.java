@@ -39,7 +39,7 @@ public class MainPage {
     	staySignedIn_No.click();
     }
     public void setLogin(String word) throws InterruptedException{
-    	loginField = driver.findElement(By.xpath("//input[@type='email']")); 
+    	loginField = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='email']"))); 
     	loginField.sendKeys(word); 
     	submitButton.click();
     	

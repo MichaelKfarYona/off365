@@ -18,6 +18,7 @@ import Pages.MainPage;
 import Pages.Office365Page;
 import Pages.Settings;
 import Pages.TeamsChannelPage;
+import Pages.Settings.ApplicationName;
 import Pages.TeamsChannelPage.KindOfTeam;
 import Pages.TeamsChannelPage.LeftMenuTeams;
 import Pages.TeamsChannelPage.MessageTypeInConversationsTeamsTab;
@@ -42,7 +43,8 @@ public class TestTeamsChannelPage extends Settings {
 	public void createNewTeam() throws Exception {
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Create new team: Started");
-		loginAsAmdocsUser("Teams");
+		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
+		//loginAsAmdocsUser("Teams");
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 		teamsPage.clickTeamsTab();
 		Thread.sleep(3000);
@@ -61,7 +63,8 @@ public class TestTeamsChannelPage extends Settings {
 		// ExtentTest testLog = extent.createTest(getClass().getName());
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Checking the existence of the team");
-		loginAsAmdocsUser("Teams");
+		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
+		//loginAsAmdocsUser("Teams");
 		testLog.log(Status.INFO, "Logged in to the Teams");
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 		teamsPage.clickTeamsTab();
@@ -80,7 +83,8 @@ public class TestTeamsChannelPage extends Settings {
 		public void deleteNewTeam() throws Exception {
 			testLog = extent.createTest(getClass().getName());
 			testLog.log(Status.INFO, "Checking the existence of the team");
-			loginAsAmdocsUser("Teams");
+			loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
+			//loginAsAmdocsUser("Teams");
 			testLog.log(Status.INFO, "Logged in to the Teams");
 			TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 			teamsPage.clickTeamsTab();
@@ -103,7 +107,8 @@ public class TestTeamsChannelPage extends Settings {
 		public void chatAttachmentOneDrive() throws Exception {
 			testLog = extent.createTest(getClass().getName());
 			testLog.log(Status.INFO, "Attachment in chat");
-			loginAsAmdocsUser("Teams");
+			loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
+			//loginAsAmdocsUser("Teams");
 			TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 			teamsPage.clickChatTab();
 			teamsPage.chooseAttachment_OneDrive_Chat();
@@ -118,7 +123,8 @@ public class TestTeamsChannelPage extends Settings {
 		public void setStatusInTeams() throws Exception {
 			testLog = extent.createTest(getClass().getName());
 			testLog.log(Status.INFO, "Change status in Teams");
-			loginAsAmdocsUser("Teams");
+			loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
+			//loginAsAmdocsUser("Teams");
 			TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 			teamsPage.clickTeamsTab();
 			String statusName = teamsPage.chooseStatus(UserStatus.APPEAR_AWAY);
@@ -134,7 +140,8 @@ public class TestTeamsChannelPage extends Settings {
 	public void assignRoleValidation() throws Exception {
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Assign role validation");
-		loginAsAmdocsUser("Teams");
+		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
+		//loginAsAmdocsUser("Teams");
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 		teamsPage.clickTeamsTab();
 		teamsPage.openTeamMembersSettingsDot(newTeamName+teamNumber);
@@ -161,7 +168,9 @@ public class TestTeamsChannelPage extends Settings {
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Assign role validation");
 		String[] invitePeople = {"prudnikov.michael@aol.com"}; // You can add as many users as you like "Dolphie.Lobo@amdocs.com"
-		loginAsAmdocsUser("Teams");
+		
+		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
+		//loginAsAmdocsUser("Teams");
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 		teamsPage.clickByLeftMenuItem(LeftMenuTeams.CALENDAR);
 		String newMeetingTitle = meetingTitle+getRandom();
