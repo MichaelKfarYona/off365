@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="My test suite">
+	<test name="testing">
+		<classes>
+			 
+			<!-- Teams -->
+			<class name="tests.TestFlowViaTeams">
+				<methods>
+					<include name="createNewFlow"/>
+					
+				</methods>
+			</class>
+ 
+	
+			<!-- Run by groups -->
+
+			<!-- <groups> <run> <include name="Planner"/> </run> </groups> -->
+
+			<!-- <class name="tests.TestPlanner" /> <class name="tests.TestToDo" /> 
+				<class name="tests.TestTeamsChannelPage" /> -->
+		</classes>
+	</test>
+</suite>

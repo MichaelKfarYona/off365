@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="119599" started-at="2019-12-22T12:50:56Z" finished-at="2019-12-22T12:52:55Z">
+    <groups>
+      <group name="Flow">
+        <method signature="TestFlowViaTeams.createNewFlow()[pri:0, instance:tests.TestFlowViaTeams@262b2c86]" name="createNewFlow" class="tests.TestFlowViaTeams"/>
+      </group> <!-- Flow -->
+    </groups>
+    <test name="Default test" duration-ms="119599" started-at="2019-12-22T12:50:56Z" finished-at="2019-12-22T12:52:55Z">
+      <class name="tests.TestFlowViaTeams">
+        <test-method status="PASS" signature="ReportSetup()[pri:0, instance:tests.TestFlowViaTeams@262b2c86]" name="ReportSetup" is-config="true" duration-ms="322" started-at="2019-12-22T12:50:56Z" finished-at="2019-12-22T12:50:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ReportSetup -->
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestFlowViaTeams@262b2c86]" name="Setup" is-config="true" duration-ms="6061" started-at="2019-12-22T12:50:56Z" finished-at="2019-12-22T12:51:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="createNewFlow()[pri:0, instance:tests.TestFlowViaTeams@262b2c86]" name="createNewFlow" duration-ms="110730" started-at="2019-12-22T12:51:02Z" description="Create Flow via Teams" finished-at="2019-12-22T12:52:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNewFlow -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestFlowViaTeams@262b2c86]" name="tearDown" is-config="true" duration-ms="1987" started-at="2019-12-22T12:52:53Z" finished-at="2019-12-22T12:52:55Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=createNewFlow status=SUCCESS method=TestFlowViaTeams.createNewFlow()[pri:0, instance:tests.TestFlowViaTeams@262b2c86] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="tearDownAll()[pri:0, instance:tests.TestFlowViaTeams@262b2c86]" name="tearDownAll" is-config="true" duration-ms="469" started-at="2019-12-22T12:52:55Z" finished-at="2019-12-22T12:52:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownAll -->
+      </class> <!-- tests.TestFlowViaTeams -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Office365TestProject by groups]">
+  <test thread-count="5" name="GRP-Forms,ToDo(failed)">
+    <groups>
+      <run>
+        <include name="Forms"/>
+        <include name="ToDo"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="tests.TestsToDo">
+        <methods>
+          <include name="toDoApp"/>
+        </methods>
+      </class> <!-- tests.TestsToDo -->
+      <class name="tests.TestForms">
+        <methods>
+          <include name="formsMainFunctionality"/>
+        </methods>
+      </class> <!-- tests.TestForms -->
+    </classes>
+  </test> <!-- GRP-Forms,ToDo(failed) -->
+</suite> <!-- Failed suite [Office365TestProject by groups] -->

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="My test suite">
+	<test name="testing">
+		<classes>
+
+			<!-- Teams -->
+			<class name="tests.TestTeamsChannelPage">
+				<methods>
+					<include name="createNewTeam" />
+					<include name="checkNewTeam" />
+					<include name="addNewMeeting" />
+					<include name="addNewTabWeb" />
+					<include name="assignRoleValidation" />
+				</methods>
+			</class>
+
+			<class name="tests.TestPowerAutomate">
+				<methods>
+					<include name="createNewFlow" />
+				</methods>
+			</class>
+
+			<class name="tests.TestOneDrive">
+				<methods>
+					<include name="addNewFolderOneDrive" />
+				</methods>
+			</class>
+			<class name="tests.TestForms">
+				<methods>
+					<include name="formsMainFunctionality" />
+				</methods>
+			</class>
+
+
+			<class name="tests.TestPlanner">
+				<methods>
+					<include name="creationAndVerificationOfNewPlan" />
+				</methods>
+			</class>
+
+			<class name="tests.TestsToDo">
+				<methods>
+					<include name="toDoApp" />
+				</methods>
+
+			</class>
+
+			<class name="tests.TestPlannerViaTeams">
+				<methods>
+					<include name="addPlannerViaTeams" />
+				</methods>
+			</class>
+
+
+			<class name="tests.TestFormViaTeams">
+				<methods>
+					<include name="addFormsViaTeams" />
+				</methods>
+			</class>
+
+			<!-- Run by groups -->
+
+			<!-- <groups> <run> <include name="Planner"/> </run> </groups> -->
+
+			<!-- <class name="tests.TestPlanner" /> <class name="tests.TestToDo" /> 
+				<class name="tests.TestTeamsChannelPage" /> -->
+		</classes>
+	</test>
+</suite>
