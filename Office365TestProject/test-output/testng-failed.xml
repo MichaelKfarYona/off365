@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
-  <test thread-count="5" name="Default test(failed)">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [My test suite]">
+  <test thread-count="5" name="testing(failed)">
     <classes>
-      <class name="tests.TestFlowViaTeams">
+      <class name="tests.TestTeamsChannelPage">
         <methods>
-          <include name="createNewFlow"/>
+          <include name="assignRoleValidation"/>
+          <include name="createNewTeam"/>
           <include name="ReportSetup"/>
           <include name="tearDownAll"/>
           <include name="Setup"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- tests.TestFlowViaTeams -->
+      </class> <!-- tests.TestTeamsChannelPage -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- testing(failed) -->
+</suite> <!-- Failed suite [My test suite] -->

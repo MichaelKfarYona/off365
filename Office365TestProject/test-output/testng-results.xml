@@ -1,43 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" ignored="8" total="10" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="119599" started-at="2019-12-22T12:50:56Z" finished-at="2019-12-22T12:52:55Z">
+  <suite name="My test suite" duration-ms="140745" started-at="2019-12-23T11:44:55Z" finished-at="2019-12-23T11:47:16Z">
     <groups>
-      <group name="Flow">
-        <method signature="TestFlowViaTeams.createNewFlow()[pri:0, instance:tests.TestFlowViaTeams@262b2c86]" name="createNewFlow" class="tests.TestFlowViaTeams"/>
-      </group> <!-- Flow -->
+      <group name="Teams">
+        <method signature="TestTeamsChannelPage.assignRoleValidation()[pri:1, instance:tests.TestTeamsChannelPage@63440df3]" name="assignRoleValidation" class="tests.TestTeamsChannelPage"/>
+        <method signature="TestTeamsChannelPage.createNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@63440df3]" name="createNewTeam" class="tests.TestTeamsChannelPage"/>
+      </group> <!-- Teams -->
     </groups>
-    <test name="Default test" duration-ms="119599" started-at="2019-12-22T12:50:56Z" finished-at="2019-12-22T12:52:55Z">
-      <class name="tests.TestFlowViaTeams">
-        <test-method status="PASS" signature="ReportSetup()[pri:0, instance:tests.TestFlowViaTeams@262b2c86]" name="ReportSetup" is-config="true" duration-ms="322" started-at="2019-12-22T12:50:56Z" finished-at="2019-12-22T12:50:56Z">
+    <test name="testing" duration-ms="140745" started-at="2019-12-23T11:44:55Z" finished-at="2019-12-23T11:47:16Z">
+      <class name="tests.TestTeamsChannelPage">
+        <test-method status="PASS" signature="ReportSetup()[pri:0, instance:tests.TestTeamsChannelPage@63440df3]" name="ReportSetup" is-config="true" duration-ms="344" started-at="2019-12-23T11:44:55Z" finished-at="2019-12-23T11:44:56Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- ReportSetup -->
-        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestFlowViaTeams@262b2c86]" name="Setup" is-config="true" duration-ms="6061" started-at="2019-12-22T12:50:56Z" finished-at="2019-12-22T12:51:02Z">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestTeamsChannelPage@63440df3]" name="Setup" is-config="true" duration-ms="9905" started-at="2019-12-23T11:44:56Z" finished-at="2019-12-23T11:45:06Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="createNewFlow()[pri:0, instance:tests.TestFlowViaTeams@262b2c86]" name="createNewFlow" duration-ms="110730" started-at="2019-12-22T12:51:02Z" description="Create Flow via Teams" finished-at="2019-12-22T12:52:53Z">
+        <test-method status="PASS" signature="createNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@63440df3]" name="createNewTeam" duration-ms="65380" started-at="2019-12-23T11:45:06Z" description="Create a new Team Online" finished-at="2019-12-23T11:46:11Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- createNewFlow -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestFlowViaTeams@262b2c86]" name="tearDown" is-config="true" duration-ms="1987" started-at="2019-12-22T12:52:53Z" finished-at="2019-12-22T12:52:55Z">
+        </test-method> <!-- createNewTeam -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestTeamsChannelPage@63440df3]" name="tearDown" is-config="true" duration-ms="1822" started-at="2019-12-23T11:46:11Z" finished-at="2019-12-23T11:46:13Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=createNewFlow status=SUCCESS method=TestFlowViaTeams.createNewFlow()[pri:0, instance:tests.TestFlowViaTeams@262b2c86] output={null}]]]>
+                <![CDATA[[TestResult name=createNewTeam status=SUCCESS method=TestTeamsChannelPage.createNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@63440df3] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="tearDownAll()[pri:0, instance:tests.TestFlowViaTeams@262b2c86]" name="tearDownAll" is-config="true" duration-ms="469" started-at="2019-12-22T12:52:55Z" finished-at="2019-12-22T12:52:55Z">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestTeamsChannelPage@63440df3]" name="Setup" is-config="true" duration-ms="4866" started-at="2019-12-23T11:46:13Z" finished-at="2019-12-23T11:46:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="assignRoleValidation()[pri:1, instance:tests.TestTeamsChannelPage@63440df3]" name="assignRoleValidation" duration-ms="55829" started-at="2019-12-23T11:46:18Z" description="Teams : Assign role validation" finished-at="2019-12-23T11:47:14Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- assignRoleValidation -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestTeamsChannelPage@63440df3]" name="tearDown" is-config="true" duration-ms="1847" started-at="2019-12-23T11:47:14Z" finished-at="2019-12-23T11:47:15Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=assignRoleValidation status=SUCCESS method=TestTeamsChannelPage.assignRoleValidation()[pri:1, instance:tests.TestTeamsChannelPage@63440df3] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="tearDownAll()[pri:0, instance:tests.TestTeamsChannelPage@63440df3]" name="tearDownAll" is-config="true" duration-ms="618" started-at="2019-12-23T11:47:15Z" finished-at="2019-12-23T11:47:16Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownAll -->
-      </class> <!-- tests.TestFlowViaTeams -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+      </class> <!-- tests.TestTeamsChannelPage -->
+    </test> <!-- testing -->
+  </suite> <!-- My test suite -->
 </testng-results>

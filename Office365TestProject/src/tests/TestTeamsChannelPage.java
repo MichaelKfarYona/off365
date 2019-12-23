@@ -135,7 +135,7 @@ public class TestTeamsChannelPage extends Settings {
 	
 //*********************************************************************************************************
 //************************************ Assign role validation **********************************************
-//*********************************************************************************************************
+//********************************************************************************************************* 
 	@Test(enabled = true, priority = 1, description = "Teams : Assign role validation", groups = { "Teams" })
 	public void assignRoleValidation() throws Exception {
 		testLog = extent.createTest(getClass().getName());
