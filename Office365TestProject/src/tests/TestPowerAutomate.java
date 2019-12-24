@@ -34,6 +34,7 @@ public class TestPowerAutomate extends Settings{
 	
 	@Test(enabled = true, priority = 0, description = "Create a new Flow", groups = { "Flow" })
 	public void createNewFlow() throws Exception {
+		System.out.println("TestPowerAutomate -> createNewFlow");
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Create new team: Started");
 		loginAsAmdocsUserSettings(ApplicationName.POWER_AUTOMATE); // Settings.class method

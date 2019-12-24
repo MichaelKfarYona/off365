@@ -70,5 +70,6 @@
 	<classpathentry kind="lib" path="C:/DRIVERS/Winium/xercesImpl-2.11.0.jar"/>
 	<classpathentry kind="lib" path="C:/DRIVERS/Winium/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="lib" path="C:/DRIVERS/extentreports-2.05.jar"/>
+	<classpathentry kind="lib" path="C:/DRIVERS/mysql-connector-java-5.1.48.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

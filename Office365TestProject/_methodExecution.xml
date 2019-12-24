@@ -3,18 +3,26 @@
 <suite name="My test suite">
 	<test name="testing">
 		<classes>
-			 
-			<!-- Teams -->
+			
+			
 			<class name="tests.TestTeamsChannelPage">
 				<methods>
+				 
 					<include name="createNewTeam"/>
-					<include name="assignRoleValidation"/>
-					
+					<include name="checkNewTeam"/>
+				
+					<!--	<include name="assignRoleValidation"/> -->
 					
 				</methods>
 			</class>
- 
-	
+			
+			 <!--
+ <class name="tests.TestForms">
+				<methods>
+					<include name="formsMainFunctionality" />
+				</methods>
+			</class>
+	-->
 			<!-- Run by groups -->
 
 			<!-- <groups> <run> <include name="Planner"/> </run> </groups> -->

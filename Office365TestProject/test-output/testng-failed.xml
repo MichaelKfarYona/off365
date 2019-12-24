@@ -6,7 +6,6 @@
       <class name="tests.TestTeamsChannelPage">
         <methods>
           <include name="assignRoleValidation"/>
-          <include name="createNewTeam"/>
           <include name="ReportSetup"/>
           <include name="tearDownAll"/>
           <include name="Setup"/>

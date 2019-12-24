@@ -42,13 +42,15 @@ public class TestTeamsChannelPage extends Settings {
 	@Test(enabled = true, priority = 0, description = "Create a new Team Online", groups = { "Teams" })
 	public void createNewTeam() throws Exception {
 		testLog = extent.createTest(getClass().getName());
-		testLog.log(Status.INFO, "Create new team: Started");
+		testLog.log(Status.INFO, "Create new team: started");
 		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
 		//loginAsAmdocsUser("Teams");
+		testLog.log(Status.INFO, "Open Teams page");
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 		teamsPage.clickTeamsTab();
 		Thread.sleep(3000);
 		teamsPage.createTeam(); Thread.sleep(2000);
+		testLog.log(Status.INFO, "Attempt to create a team");
 		teamsPage.buildATeamFromScratch(KindOfTeam.PUBLIC, newTeamName, teamNumber);
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		testLog.pass("The New Team has been created! You can run 'checkNewTeam' or/and 'deleteNewTeam' method!");
@@ -65,9 +67,10 @@ public class TestTeamsChannelPage extends Settings {
 		testLog.log(Status.INFO, "Checking the existence of the team");
 		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
 		//loginAsAmdocsUser("Teams");
-		testLog.log(Status.INFO, "Logged in to the Teams");
+		testLog.log(Status.INFO, "Open Teams page");
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 		teamsPage.clickTeamsTab();
+		testLog.log(Status.INFO, "Check the existence of the group.");
 		teamsPage.teamCheck(newTeamName, teamNumber);
 		boolean element = teamsPage.elementIsNotPresent("//div[@class='filter-list-no-results']");
 		if(element==true) {testLog.pass("The team " + newTeamName + teamNumber + " is on the list.");}
@@ -79,7 +82,7 @@ public class TestTeamsChannelPage extends Settings {
 	/*********************************************************************************************************
 	********************************************* Deleting the team ******************************************
 	*********************************************************************************************************/
-		@Test(enabled = true, priority = 4, description = "Delete the team", groups = { "Teams" })
+		@Test(enabled = true, priority = 5, description = "Delete the team", groups = { "Teams" })
 		public void deleteNewTeam() throws Exception {
 			testLog = extent.createTest(getClass().getName());
 			testLog.log(Status.INFO, "Checking the existence of the team");
@@ -90,6 +93,7 @@ public class TestTeamsChannelPage extends Settings {
 			teamsPage.clickTeamsTab();
 			String teamToDelete = newTeamName+teamNumber;
 			//teamsPage.teamCheck(newTeamName, teamNumber);
+			testLog.log(Status.INFO, "Deleting the Team");
 			teamsPage.openTeamSettingsDot(teamToDelete, TeamsMenuItemPopUp.DELETE_THE_TEAM);
 			
 			boolean element = teamsPage.elementIsNotPresent("//div[@class='filter-list-no-results']");
@@ -101,7 +105,7 @@ public class TestTeamsChannelPage extends Settings {
 
 	
 	/*****************************************************************
-	***************** * Chat attachment. OneDrive * ***************** dodelat
+	***************** * Chat attachment. OneDrive * *****************      													dodelat
 	 *****************************************************************/
 		@Test(enabled = false, priority = 1, description = "Attachment_OdeDrive", groups = { "Teams" })
 		public void chatAttachmentOneDrive() throws Exception {
@@ -117,7 +121,7 @@ public class TestTeamsChannelPage extends Settings {
 		}
 	
 	/*************************************************** 
-	***************** * Change status * ***************** dodelat
+	***************** * Change status * ***************** 																	dodelat
 	 ***************************************************/
 		@Test(enabled = false, priority = 1, description = "Change status", groups = { "Teams" })
 		public void setStatusInTeams() throws Exception {
@@ -125,32 +129,37 @@ public class TestTeamsChannelPage extends Settings {
 			testLog.log(Status.INFO, "Change status in Teams");
 			loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
 			//loginAsAmdocsUser("Teams");
+			testLog.log(Status.INFO, "Open Teams page");
 			TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 			teamsPage.clickTeamsTab();
+			testLog.log(Status.INFO, "Change status");
 			String statusName = teamsPage.chooseStatus(UserStatus.APPEAR_AWAY);
 			if(statusName.equals("Appear away") == true) {testLog.pass("Status changed successfully!");}
 			else {testLog.fail("Status not changed.");}
 			
 		}
 	
-//*********************************************************************************************************
-//************************************ Assign role validation **********************************************
-//********************************************************************************************************* 
+//**************************************************************************************************************************
+//*******	 Assign role validation. This test needs to be run after the team is created. In the same test group	 *******
+//**************************************************************************************************************************
 	@Test(enabled = true, priority = 1, description = "Teams : Assign role validation", groups = { "Teams" })
 	public void assignRoleValidation() throws Exception {
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Assign role validation");
 		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
 		//loginAsAmdocsUser("Teams");
+		testLog.log(Status.INFO, "Open Teams page");
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 		teamsPage.clickTeamsTab();
+		testLog.log(Status.INFO, "Open TeamMembers menu");
+		//teamsPage.openTeamMembersSettingsDot("AUTOMATION_TEST_TEAM_109");
 		teamsPage.openTeamMembersSettingsDot(newTeamName+teamNumber);
 		teamsPage.collapseExpandMembersAndGuests();
 		testLog.log(Status.INFO, "Owner users check");
 		Map<String, String> mapOwnersUsers = new HashMap<String, String>(teamsPage.checkOwnerOrMember());
 		for (Map.Entry<String, String> entry : mapOwnersUsers.entrySet()) {
-			Assert.assertEquals(entry.getKey(), "Michael Prudnikov");
-			Assert.assertEquals(entry.getValue(), "Owner");
+			Assert.assertEquals(entry.getKey(), "Michael Prudnikov"); 
+			Assert.assertEquals(entry.getValue(), "Owner"); 
 			// System.out.println(entry.getKey() + " - " + entry.getValue());
 		}
 		testLog.log(Status.INFO, "Guest users check");
@@ -200,19 +209,7 @@ public class TestTeamsChannelPage extends Settings {
 									  (InterruptedException e) {e.printStackTrace(); }  testLog.log(Status.INFO,
 									  "Logged in as User - "+ loginName); }
 									 
-	/*
-	 * //******************************************FLOW
-	 * TAB***********************************************
-	 * 
-	 * @Test(priority=2, description = "Add Flow tab") public void addNewFlowTab()
-	 * throws Exception, IOException { String element = "Flow";
-	 * loginAsAmdocsUser("Teams"); TeamsChannelPage teamsPage = new
-	 * TeamsChannelPage(driver); teamsPage.clickTeamsTab(); Thread.sleep(1000);
-	 * teamsPage.clickAddATabButton(); Thread.sleep(5000);
-	 * teamsPage.chooseElementFromAddATab(element);
-	 * 
-	 * }
-	 */
+	
 	  
 	  
 	/*****************************************************************************************

@@ -36,6 +36,7 @@ public class TestPlanner extends Settings{
 	
 	@Test(priority = 1, groups = { "Planner" })
 	public void creationAndVerificationOfNewPlan() throws Exception {
+		System.out.println("TestPlanner -> creationAndVerificationOfNewPlan");
 		testLog = extent.createTest(getClass().getName());
     	testLog.log(Status.INFO, "Start Planner app");
     	try {

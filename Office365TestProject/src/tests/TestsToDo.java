@@ -31,6 +31,7 @@ public class TestsToDo extends Settings{
 
 	 @Test(enabled = true, priority = 4, groups = { "ToDo" })
 	    public void toDoApp() throws InterruptedException, IOException {
+		 System.out.println("TestsToDo - > toDoApp");
 	    	testLog = extent.createTest(getClass().getName());
 	    	testLog.log(Status.INFO, "Start: ToDo app");
 	    	try {

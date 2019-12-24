@@ -32,6 +32,7 @@ public class TestForms extends Settings{
 	ExtentTest testLogger = null;
 
 	  public void loginAsAmdocsUser(String appName) throws InterruptedException, IOException{
+		  
 	    	testLogger.log(Status.INFO, "Login as User");
 	        MainPage mainPage = new MainPage(driver);Thread.sleep(2000);
 	        mainPage.setLogin(loginName); 
@@ -65,6 +66,7 @@ public class TestForms extends Settings{
 	//********************************************************************************************************
 	    @Test(enabled = true, priority = 1, groups = { "Forms" })
 	    public void formsMainFunctionality() throws InterruptedException, IOException {
+	    	System.out.println("TestForms->formsMainFunctionality");
 	    	testLogger = extent.createTest(getClass().getName());
 	    	testLogger.log(Status.INFO, "Start Forms app");
 	    	try {

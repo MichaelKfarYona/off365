@@ -10,22 +10,22 @@
 					<include name="createNewTeam" />
 					<include name="checkNewTeam" />
 					<include name="addNewMeeting" />
-					<include name="addNewTabWeb" />
-					<include name="assignRoleValidation" />
+					
 				</methods>
 			</class>
-
+<!-- 
 			<class name="tests.TestPowerAutomate">
 				<methods>
 					<include name="createNewFlow" />
 				</methods>
 			</class>
-
+ -->
 			<class name="tests.TestOneDrive">
 				<methods>
 					<include name="addNewFolderOneDrive" />
 				</methods>
 			</class>
+			
 			<class name="tests.TestForms">
 				<methods>
 					<include name="formsMainFunctionality" />

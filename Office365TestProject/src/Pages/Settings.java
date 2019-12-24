@@ -13,7 +13,9 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import Pages.OneDrive.LeftMenuItem;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -55,7 +57,8 @@ public class Settings {
 			leftMenuItemElement.click();
 		}
 	protected static ExtentReports extent;
-	
+	static long timeSpent = 0;
+	static long start = 0;
     private static ThreadLocal parentTest = new ThreadLocal();
     private static ThreadLocal test = new ThreadLocal();
 	ExtentHtmlReporter htmlReporter;
@@ -76,10 +79,11 @@ public class Settings {
     	
     	extent.attachReporter(htmlReporter);
     }
+    @BeforeSuite
+    public void setTimePoint() {start = System.currentTimeMillis();}
     @BeforeMethod
     public void Setup(){
     	ChromeOptions options = new ChromeOptions();
-    	
     	options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.DISMISS);
     	
     	options.addArguments("--disable-notifications");
@@ -105,27 +109,36 @@ public class Settings {
         driver.close();
         driver.quit();
     }
+    @AfterSuite
+    public void timeSpent() {
+    	timeSpent = System.currentTimeMillis() - start;
+    	Calendar cal = Calendar.getInstance();
+    	cal.setTimeInMillis(timeSpent);
+    	SimpleDateFormat format = new SimpleDateFormat("mm:ss");
+    	System.out.println("Spent on scripting: "+format.format(cal.getTime()));
+    }
     @AfterTest
     public static void tearDownAll() {
     	
-        
+    	
+    	
     	extent.flush();
     	
     }
     
     
     public void loginAsAmdocsUserSettings(ApplicationName appName) throws InterruptedException, IOException{
-    	testLogger = extent.createTest(getClass().getName());
-    	testLogger.log(Status.INFO, "Login as User");
+    	//testLogger = extent.createTest(getClass().getName());
+    	//testLogger.log(Status.INFO, "Login as User");
         MainPage mainPage = new MainPage(driver);
 		Thread.sleep(3000);
         mainPage.setLogin(loginName); 
         if(loginName.equals("Michael@msglab.tech")) {mainPage.setPassword(password); mainPage.signInNo();}
-        testLogger.log(Status.INFO, "Open Office 365");
+        //testLogger.log(Status.INFO, "Open Office 365");
         Office365Page officePage = new Office365Page(driver);
         System.out.println("OFFICE 365");
         Thread.sleep(2000);
-        testLogger.log(Status.INFO, "Click Teams link ");
+        //testLogger.log(Status.INFO, "Click Teams link ");
         chooseApplicationByName(appName);
        // officePage.chooseApplication(appName);
         /************************

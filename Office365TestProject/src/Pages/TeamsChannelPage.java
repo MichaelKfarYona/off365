@@ -216,7 +216,7 @@ public class TeamsChannelPage {
 		
 		HashMap<String, String> mapOfAllMembers = new HashMap<String, String>();
 		for (iterator=0; iterator < listOfOwners.size();iterator++) {
-		mapOfAllMembers.put(listOfOwners.get(iterator).findElement(By.xpath("//div[@class='td-member-display-name']"))
+		mapOfAllMembers.put(listOfOwners.get(iterator).findElement(By.xpath("//div[@class='td-member-display-name']/span"))
 				.getText(), listOfOwners.get(iterator).findElement(By.xpath("//span[@data-tid='selectedText']")).getText());}
 		
 		return mapOfAllMembers;

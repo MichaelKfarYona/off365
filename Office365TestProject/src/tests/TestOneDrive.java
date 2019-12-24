@@ -40,6 +40,7 @@ public class TestOneDrive extends Settings{
 	//********** Add new folder **********
 	@Test(enabled = true, priority = 0, description = "Add new Folder", groups = { "OneDrive" })
 	public void addNewFolderOneDrive() throws Exception {
+		System.out.println("TestOneDrive - > addNewFolderOneDrive");
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Create new folder: Started");
 		loginAsAmdocsUserSettings(ApplicationName.ONEDRIVE); // Settings.class method
@@ -61,6 +62,7 @@ public class TestOneDrive extends Settings{
 	//***********************************************
 	@Test(enabled = true, priority = 0, description = "Add new Link", groups = { "OneDrive" })
 	public void createNewLink() throws InterruptedException, IOException {
+		System.out.println("TestOneDrive - > createNewLink");
 	testLog = extent.createTest(getClass().getName());
 	testLog.log(Status.INFO, "Create new link: Started");
 	//String myString = randomStringGneration();

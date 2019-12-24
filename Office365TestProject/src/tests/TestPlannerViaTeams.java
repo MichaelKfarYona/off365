@@ -25,6 +25,7 @@ public class TestPlannerViaTeams extends Settings{
 	//ExtentTest logger;
 	@Test(priority = 1, groups = { "PlannerViaTeams" })
 	public void addPlannerViaTeams() throws Exception {
+		System.out.println("TestPlannerViaTeams -> addPlannerViaTeams");
 		testLog = extent.createTest(getClass().getName());
     	testLog.log(Status.INFO, "Start Browser");
     	loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method

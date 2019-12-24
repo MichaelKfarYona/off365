@@ -32,6 +32,7 @@ public class TestFlowViaTeams extends Settings{
 
 	@Test(enabled = true, priority = 0, description = "Create Flow via Teams", groups = { "Flow" })
 	public void createNewFlow() throws Exception {
+		System.out.println("TestFlowViaTeams->createNewFlow");
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Create new Flow: Started");
 		//loginAsAmdocsUser("Teams"); // this.class method

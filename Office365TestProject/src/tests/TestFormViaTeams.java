@@ -32,6 +32,7 @@ public class TestFormViaTeams extends Settings {
 	
 	@Test(priority = 1, groups = { "FormsViaTeams" })
 	public void addFormsViaTeams() throws Exception {
+		System.out.println("TestFormsViaTeams - > addFormsViaTeams");
 		testLog = extent.createTest(getClass().getName());
 		String element = "Forms";
 		String nameF = formName + getRandom();
