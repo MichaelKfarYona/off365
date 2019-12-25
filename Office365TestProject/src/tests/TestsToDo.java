@@ -28,7 +28,7 @@ public class TestsToDo extends Settings{
 	int teamNumber = getRandom();
 	ExtentTest testLog = null;
 	
-
+ 
 	 @Test(enabled = true, priority = 4, groups = { "ToDo" })
 	    public void toDoApp() throws InterruptedException, IOException {
 		 System.out.println("TestsToDo - > toDoApp");

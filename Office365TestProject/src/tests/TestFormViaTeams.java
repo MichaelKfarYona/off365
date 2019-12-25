@@ -17,7 +17,7 @@ import Pages.Office365Page;
 import Pages.Settings;
 import Pages.TeamsChannelPage;
 import Pages.Settings.ApplicationName;
-
+ 
 public class TestFormViaTeams extends Settings {
 
 	ExtentHtmlReporter htmlReporter;

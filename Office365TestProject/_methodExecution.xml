@@ -12,7 +12,7 @@
 					<include name="checkNewTeam"/>
 				
 					<!--	<include name="assignRoleValidation"/> -->
-					
+					 
 				</methods>
 			</class>
 			

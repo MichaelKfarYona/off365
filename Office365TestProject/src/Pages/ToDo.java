@@ -30,7 +30,7 @@ public class ToDo {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-	
+	 
 	public void chooseleftItem(LeftMenuItems leftMenuItem) {
 		switch(leftMenuItem) { case MY_DAY: myDay = driver.findElement(By.xpath("//div[@class='todayToolbar-inner']"));myDay.click(); break;
 		case IMPORTANT: important = driver.findElement(By.xpath("//div[@id='important']")); important.click(); break;

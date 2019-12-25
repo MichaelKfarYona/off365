@@ -21,7 +21,7 @@ public class ExtentReportWithTestNG {
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
 	}
-	
+	 
 	@Test
 	public void test0001() throws Exception {
 		ExtentTest test = extent.createTest("MyFirstTest", "Sample description");

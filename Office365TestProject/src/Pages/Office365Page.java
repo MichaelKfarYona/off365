@@ -27,7 +27,7 @@ public class Office365Page {
     
    @FindBy(xpath = "//span[@class='ms-ohp-svg-Icon ms-ohp-Icon ms-ohp-Icon--teamsLogo ms-ohp-Icon--teamsLogoFill ng-star-inserted']")
     public WebElement teamsLink;
-
+ 
 	/*****************************************
 	 * Choose application on Office 365 page * 
 	 * @throws InterruptedException 

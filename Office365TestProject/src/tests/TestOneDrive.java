@@ -36,7 +36,7 @@ public class TestOneDrive extends Settings{
 	final String ownerName = "Michael Prudnikov";
 	int teamNumber = getRandom();
 	ExtentTest testLog = null;
-
+ 
 	//********** Add new folder **********
 	@Test(enabled = true, priority = 0, description = "Add new Folder", groups = { "OneDrive" })
 	public void addNewFolderOneDrive() throws Exception {

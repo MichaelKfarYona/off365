@@ -21,7 +21,7 @@ import Pages.Settings.ApplicationName;
 import Pages.Settings;
 import Pages.TeamsChannelPage;
 
-
+ 
 public class TestPlanner extends Settings{
 
 	ExtentHtmlReporter htmlReporter;

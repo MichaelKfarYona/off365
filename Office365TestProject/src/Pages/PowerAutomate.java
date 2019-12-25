@@ -26,7 +26,7 @@ public class PowerAutomate {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-	
+	 
 	public void clickByLeftMenuItem(LeftMenuItemPowerAutomate item) throws InterruptedException {
 		String parametrListItem = null;
 		switch(item) { 

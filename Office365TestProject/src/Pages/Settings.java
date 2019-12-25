@@ -98,13 +98,7 @@ public class Settings {
 
     @AfterMethod
     public static void tearDown(ITestResult results){
-		/*
-		 * if (results.getStatus() == ITestResult.FAILURE) { testLogger.log(Status.FAIL,
-		 * "Test case failed: " +results.getName()); testLogger.log(Status.FAIL,
-		 * "Test case failed: " +results.getThrowable()); } else if(results.getStatus()
-		 * == ITestResult.SKIP) {testLogger.log(Status.SKIP,
-		 * "Test case skipped is: "+results.getName()); }
-		 */
+		
 		//extent.flush();
         driver.close();
         driver.quit();

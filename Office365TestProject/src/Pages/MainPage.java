@@ -22,7 +22,7 @@ public class MainPage {
     
     @FindBy(xpath = "//input[@type='email']")
     private WebElement loginField;
-
+ 
     @FindBy(xpath = "//input[@type='submit']")
     public WebElement submitButton;
 

@@ -24,7 +24,7 @@ public class Planner {
 	public Planner(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
-    }
+    } 
 	/* 1 */
 	public String createANewPlan(String newPlanName) {
 		newPlan = driver.findElement(By.xpath("//li[@class='createplan_teachingCallout']"));

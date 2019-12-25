@@ -56,7 +56,7 @@ public class TestTeamsChannelPage extends Settings {
 		testLog.pass("The New Team has been created! You can run 'checkNewTeam' or/and 'deleteNewTeam' method!");
 		Thread.sleep(3000);
 	}
-
+ 
 //*********************************************************************************************************
 //************************************* Checking the existence of the team *********************************
 //*********************************************************************************************************

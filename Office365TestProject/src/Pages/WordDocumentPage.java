@@ -17,10 +17,6 @@ public class WordDocumentPage {
     }
 	public void specifyText() {
 		
-		/*
-		 * linkFile = driver.findElement(By.xpath("//span[contains(text(),'File')]"));
-		 * linkFile.click();
-		 */
 		txtMainParagraph = (new WebDriverWait(driver, 15)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[@class='Paragraph']")));
 		txtMainParagraph.sendKeys("TEXT_TEST_TEXT_TEST_TEXT_TEST_TEXT_TEST_TEXT_TEST_TEXT_TEST_");
 	}

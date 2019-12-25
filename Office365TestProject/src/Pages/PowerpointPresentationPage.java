@@ -30,7 +30,7 @@ public class PowerpointPresentationPage {
 		case REVIEW: parametrTopMenuItem = "Review";  break;
 		case VIEW: parametrTopMenuItem = "View";  break;
 		case HELP: parametrTopMenuItem = "Help";  break;
-	}
+	} 
 		menuTabElement = (new WebDriverWait(driver, 15)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div//button//*[contains(text(),'"+parametrTopMenuItem+"')]")));
 		menuTabElement.click();
 	}	

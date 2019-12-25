@@ -14,7 +14,7 @@ import Pages.Office365Page;
 import Pages.Settings;
 import Pages.TeamsChannelPage;
 import Pages.Settings.ApplicationName;
-
+ 
 public class TestPlannerViaTeams extends Settings{
 	final String APP_NAME = "Teams";
 	final String PLANNER = "Planner";

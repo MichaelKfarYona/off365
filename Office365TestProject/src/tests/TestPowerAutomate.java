@@ -31,7 +31,7 @@ public class TestPowerAutomate extends Settings{
 	final String SUBJECT = "TEST_AUTOMATION_";
 	final String MAIL_BODY = "TEST_";
 	
-	
+	 
 	@Test(enabled = true, priority = 0, description = "Create a new Flow", groups = { "Flow" })
 	public void createNewFlow() throws Exception {
 		System.out.println("TestPowerAutomate -> createNewFlow");

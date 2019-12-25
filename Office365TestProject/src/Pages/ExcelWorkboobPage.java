@@ -12,7 +12,7 @@ import Pages.OneDrive.LeftMenuItem;
 public class ExcelWorkboobPage {
 	public enum TopMenuTab{
 		HOME, INSERT, DATA, REVIEW, VIEW, HELP
-	}
+	} 
 	WebDriver driver;
 	private WebElement txtField, linkFile, menuTabElement = null;
 	public ExcelWorkboobPage(WebDriver driver){

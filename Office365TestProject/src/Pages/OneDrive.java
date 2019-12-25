@@ -28,7 +28,7 @@ public class OneDrive {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-	
+	 
 	// Proverka suchestvovaniya elementa v spiske OneDrive
 	public boolean checkingElementExistence(String elementIn) throws InterruptedException {
 		Thread.sleep(3000);

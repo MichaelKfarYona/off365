@@ -15,7 +15,7 @@ public class Forms {
 		TEXT,
 		RATING,
 		DATE
-		}
+		} 
 	WebDriver driver;
 	private WebElement btnCreateANewForm, linkFormsMainFormsPage = null;
 	private WebElement btnAddNew,newFormTitle,searchBoxField = null;

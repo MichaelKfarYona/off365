@@ -34,7 +34,7 @@ public class DataBaseProcessor {
 		return connection;
 	}
 	
-
+ 
 
 // v testovom classe nuzno sozdat DataBaseProcessor db = new DataBaseProcessor();
 //Connection conn = db.getConnection(URL, USER, PASSWORD);

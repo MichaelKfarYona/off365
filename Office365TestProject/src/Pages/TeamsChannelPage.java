@@ -151,7 +151,7 @@ public class TeamsChannelPage {
 	public String checkNewTabAdded(String tabElementName) {
 		upperTabElement = driver.findElement(By.xpath("//div//span/span[contains(text(), '"+tabElementName+"')]"));
 		return upperTabElement.getText();
-	}
+	} 
 	//***************************
 	//Open Team Members settings
 	//***************************
