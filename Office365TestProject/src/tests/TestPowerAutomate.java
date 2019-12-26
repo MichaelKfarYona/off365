@@ -12,14 +12,14 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
-import Pages.MainPage;
-import Pages.Office365Page;
-import Pages.PowerAutomate;
-import Pages.PowerAutomate.LeftMenuItemPowerAutomate;
-import Pages.Settings.ApplicationName;
-import Pages.Settings;
-import Pages.TeamsChannelPage;
-import Pages.TeamsChannelPage.KindOfTeam;
+import pages.MainPage;
+import pages.Office365Page;
+import pages.PowerAutomate;
+import pages.Settings;
+import pages.TeamsChannelPage;
+import pages.PowerAutomate.LeftMenuItemPowerAutomate;
+import pages.Settings.ApplicationName;
+import pages.TeamsChannelPage.KindOfTeam;
 
 public class TestPowerAutomate extends Settings{
 

@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 
 import java.io.IOException;
@@ -27,9 +27,9 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
-import Pages.Forms.FormType;
-import Pages.TeamsChannelPage.KindOfTeam;
-import Pages.ToDo.LeftMenuItems;
+import pages.Forms.FormType;
+import pages.TeamsChannelPage.KindOfTeam;
+import pages.ToDo.LeftMenuItems;
 
 
 public class TestClass extends Settings{

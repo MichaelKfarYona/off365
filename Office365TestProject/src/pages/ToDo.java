@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 import java.util.List;
 import java.util.Random;
@@ -51,7 +51,7 @@ public class ToDo {
 	}
 
 	/************************************
-	 * Zаполняем таск-лист всякой х**ней *
+	 * Zаполн�?ем та�?к-ли�?т в�?�?кой х**ней *
 	 ************************************/
 	public void addTaskToTheList(String taskName, int linesNumber) {
 		int i=0;

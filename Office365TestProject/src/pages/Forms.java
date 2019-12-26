@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 import java.util.List;
 import java.util.Random;
@@ -33,12 +33,37 @@ public class Forms {
     }
 	public void createNewFormEnteranceWindow(String formName) {
 		try {
+			List<WebElement> firstPageList = driver.findElements(By.xpath("//div[@class='button-content' and contains(text(), 'Create a new form')]"));
+			firstPageList.get(0).click();
+	/*
 		btnCreateANewForm = driver.findElement(By.xpath("//div[@class='button-content' and contains(text(), 'Create a new form')]"));
-		btnCreateANewForm.click();}
+		btnCreateANewForm.click();
+	*/
+		}
 		catch(Exception exception) {System.out.println("There is no 'Create a new form' window . Check createNewFormEnteranceWindow method!");}
 		
 		getFormTitle(formName);
 	}
+	
+	public void closeNewFormEnteranceWindow() {
+		try {
+			List<WebElement> closeSign = driver.findElements(By.xpath("//div[@class='button-content']/i"));
+			closeSign.get(0).click();
+	/*
+		btnCreateANewForm = driver.findElement(By.xpath("//div[@class='button-content' and contains(text(), 'Create a new form')]"));
+		btnCreateANewForm.click();
+	*/
+		}
+		catch(Exception exception) {System.out.println("There is no 'Create a new form' window . Check createNewFormEnteranceWindow method!");}
+		
+		
+	}
+	
+	public void clickByNewQuiz() {
+		WebElement btnNewQuiz = driver.findElement(By.xpath("//button[@title='New Quiz']"));
+		btnNewQuiz.click();
+	}
+	
 	private void getFormTitle(String formTitle) {
 		newFormName = driver.findElement(By.xpath("//div[@class='office-form-title heading-1']"));
 		newFormName.click(); 

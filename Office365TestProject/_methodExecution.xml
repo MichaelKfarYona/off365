@@ -5,11 +5,10 @@
 		<classes>
 			
 			
-			<class name="tests.TestTeamsChannelPage">
+			<class name="tests.TestOutlook">
 				<methods>
 				 
-					<include name="createNewTeam"/>
-					<include name="checkNewTeam"/>
+					<include name="sendMessageWeb"/>
 				
 					<!--	<include name="assignRoleValidation"/> -->
 					 

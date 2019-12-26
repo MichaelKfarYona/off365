@@ -12,11 +12,11 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
-import Pages.MainPage;
-import Pages.Office365Page;
-import Pages.Settings;
-import Pages.TeamsChannelPage;
-import Pages.Settings.ApplicationName;
+import pages.MainPage;
+import pages.Office365Page;
+import pages.Settings;
+import pages.TeamsChannelPage;
+import pages.Settings.ApplicationName;
  
 public class TestFormViaTeams extends Settings {
 

@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import Pages.OneDrive.LeftMenuItem;
+import pages.OneDrive.LeftMenuItem;
 
 public class PowerAutomate {
 	public enum LeftMenuItemPowerAutomate{

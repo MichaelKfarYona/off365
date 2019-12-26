@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-import Pages.OneDrive.LeftMenuItem;
+import pages.OneDrive.LeftMenuItem;
 
 public class TeamsChannelPage {
 	public enum KindOfTeam {PRIVATE, PUBLIC}
@@ -90,8 +90,8 @@ public class TeamsChannelPage {
 		createButton.click();Thread.sleep(7000);
 		Actions builder = new Actions(driver);
         builder.sendKeys(Keys.chord(Keys.ESCAPE)).perform();
-			skipButton = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@role='button']")));
-			 skipButton.click();
+		//	skipButton = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@role='button']")));
+		//	 skipButton.click();
 		
 	}
 	/*************************
@@ -652,7 +652,7 @@ public class TeamsChannelPage {
 		case CALLS: parametrListItem = "app-bar-20c3440d-c67e-4420-9f80-0e50c39693df";  break;
 		case FILES: parametrListItem = "app-bar-5af6a76b-40fc-4ba1-af29-8f49b08e44fd";  break;
 		}
-		WebElement leftMenuItemElement = driver.findElement(By.xpath("//*[@id='"+parametrListItem+"']"));
+		WebElement leftMenuItemElement = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='"+parametrListItem+"']")));
 		leftMenuItemElement.click();
 	}
     // the main idea is to compare lists (Files -> OneDrive) not finished

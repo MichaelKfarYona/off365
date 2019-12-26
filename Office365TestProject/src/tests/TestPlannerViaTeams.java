@@ -9,11 +9,11 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
-import Pages.MainPage;
-import Pages.Office365Page;
-import Pages.Settings;
-import Pages.TeamsChannelPage;
-import Pages.Settings.ApplicationName;
+import pages.MainPage;
+import pages.Office365Page;
+import pages.Settings;
+import pages.TeamsChannelPage;
+import pages.Settings.ApplicationName;
  
 public class TestPlannerViaTeams extends Settings{
 	final String APP_NAME = "Teams";

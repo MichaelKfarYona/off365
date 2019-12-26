@@ -13,13 +13,13 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
-import Pages.MainPage;
-import Pages.Office365Page;
-import Pages.Planner;
-import Pages.Planner.Privacy;
-import Pages.Settings.ApplicationName;
-import Pages.Settings;
-import Pages.TeamsChannelPage;
+import pages.MainPage;
+import pages.Office365Page;
+import pages.Planner;
+import pages.Settings;
+import pages.TeamsChannelPage;
+import pages.Planner.Privacy;
+import pages.Settings.ApplicationName;
 
  
 public class TestPlanner extends Settings{

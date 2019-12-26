@@ -10,13 +10,13 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
-import Pages.Forms;
-import Pages.MainPage;
-import Pages.Office365Page;
-import Pages.Forms.FormType;
-import Pages.Settings.ApplicationName;
-import Pages.Settings;
-import Pages.TeamsChannelPage;
+import pages.Forms;
+import pages.MainPage;
+import pages.Office365Page;
+import pages.Settings;
+import pages.TeamsChannelPage;
+import pages.Forms.FormType;
+import pages.Settings.ApplicationName;
 
 
 public class TestForms extends Settings{
@@ -92,5 +92,38 @@ public class TestForms extends Settings{
 	    	//Assert.assertEquals(formsPage.searchFormByName(myParam), true); 
 	    }
 
+	//********************************************************************************************************
+	//*************************************** Forms: Create a new Quiz ***************************************
+	//********************************************************************************************************
+		    @Test(enabled = true, priority = 1, groups = { "Forms" })
+		    public void createQuiz() throws InterruptedException, IOException {
+		    	System.out.println("TestForms -> createQuiz");
+		    	testLogger = extent.createTest(getClass().getName());
+		    	testLogger.log(Status.INFO, "Start Forms app");
+		    	try {
+		    		//loginAsAmdocsUserSettings(ApplicationName.FORMS); // Settings.class method
+		    	loginAsAmdocsUser("Forms");
+		    	String myParam = "Test_Form_Name_"+getRandom();
+		    	Thread.sleep(2000);
+		    	Forms formsPage = new Forms(driver);
+		    	
+		    	formsPage.closeNewFormEnteranceWindow();
+		    	formsPage.clickByNewQuiz();
+		    	
+		    	formsPage.addNewForm(FormType.CHOICE);
+		    	Thread.sleep(3000);
+		    	formsPage.fillTheChoiceForm("Your question could be here ...", 2);
+		    	Thread.sleep(3000);
+		    	//formsPage.addNewQuestion();
+		    	formsPage.goToFormsMainPage();
+		    	testLogger.log(Status.INFO,"Quiz has been created!");
+		    	//formsPage.deleteOptions();
+		    	Thread.sleep(5000);
+		    	if(formsPage.searchFormByName(myParam) == true) {testLogger.pass("The Quiz '"+myParam+"' is exists!");}
+		    	else {testLogger.fail("The Form '"+myParam+"' is not exists!");}
+		    	}
+		    	catch(Exception exception) {testLogger.fatal("ERROR! " + exception.toString());}
+		    	//Assert.assertEquals(formsPage.searchFormByName(myParam), true); 
+		    }
 	    }
 

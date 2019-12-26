@@ -14,16 +14,17 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
-import Pages.MainPage;
-import Pages.Office365Page;
-import Pages.Settings;
-import Pages.TeamsChannelPage;
-import Pages.Settings.ApplicationName;
-import Pages.TeamsChannelPage.KindOfTeam;
-import Pages.TeamsChannelPage.LeftMenuTeams;
-import Pages.TeamsChannelPage.MessageTypeInConversationsTeamsTab;
-import Pages.TeamsChannelPage.TeamsMenuItemPopUp;
-import Pages.TeamsChannelPage.UserStatus;
+import pages.MainPage;
+import pages.Office365Page;
+import pages.OutlookPage;
+import pages.Settings;
+import pages.TeamsChannelPage;
+import pages.Settings.ApplicationName;
+import pages.TeamsChannelPage.KindOfTeam;
+import pages.TeamsChannelPage.LeftMenuTeams;
+import pages.TeamsChannelPage.MessageTypeInConversationsTeamsTab;
+import pages.TeamsChannelPage.TeamsMenuItemPopUp;
+import pages.TeamsChannelPage.UserStatus;
 
 public class TestTeamsChannelPage extends Settings {
 
@@ -176,7 +177,7 @@ public class TestTeamsChannelPage extends Settings {
 	public void addNewMeeting() throws InterruptedException, IOException {
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Assign role validation");
-		String[] invitePeople = {"prudnikov.michael@aol.com"}; // You can add as many users as you like "Dolphie.Lobo@amdocs.com"
+		String[] invitePeople = {"michael.prudnikov@amdocs.com"}; // You can add as many users as you like "Dolphie.Lobo@amdocs.com" "prudnikov.michael@aol.com", "michael.prudnikov@amdocs.com"
 		
 		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
 		//loginAsAmdocsUser("Teams");
@@ -185,7 +186,21 @@ public class TestTeamsChannelPage extends Settings {
 		String newMeetingTitle = meetingTitle+getRandom();
 		Assert.assertEquals(newMeetingTitle, teamsPage.createNewMeetingInCalendar(newMeetingTitle, invitePeople)); 
 		testLog.pass("New meeting has been created: "+ newMeetingTitle);
-		Thread.sleep(3000);
+		Thread.sleep(2000);
+		
+		// check email in the Outlook
+		/*
+		 * ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		 * driver.switchTo().window(tabs.get(0)); Office365Page officePage = new
+		 * Office365Page(driver);
+		 * officePage.chooseApplicationByName(pages.Office365Page.ApplicationName.
+		 * OUTLOOK); OutlookPage outlook = new OutlookPage(driver); switchTab(2);
+		 * Thread.sleep(2000); boolean isPresent =
+		 * outlook.checkRecievedMail(newMeetingTitle); if (isPresent==true)
+		 * {testLog.pass("Meeting invitation has been recieved!");} else
+		 * {testLog.fail("Meeting invitation has not been recieved!");}
+		 */
+		  
 	}
 	
 
@@ -275,5 +290,9 @@ public class TestTeamsChannelPage extends Settings {
 		teamsPage.clickTeamsTab();
 		teamsPage.sendMessageInTeamsConversations(MessageTypeInConversationsTeamsTab.EMOJI);
 		Thread.sleep(3000);
+	}
+	public void switchTab(int tabNumber) {
+		ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+		  driver.switchTo().window(tabs2.get(tabNumber));
 	}
 }

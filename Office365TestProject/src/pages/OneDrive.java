@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 import java.util.Random;
 
@@ -66,7 +66,7 @@ public class OneDrive {
 		case FORMS_FOR_EXCEL: parametrListItem = "Forms for Excel";  break;
 		case LINK: parametrListItem = "Link";  break;
 		}
-		WebElement folder = driver.findElement(By.xpath("//span[contains(text(), '"+parametrListItem+"')]"));
+		WebElement folder = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), '"+parametrListItem+"')]")));
 		folder.click();
 	}
 	public void specifyNewFolderName(String fn) {

@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -50,7 +50,7 @@ public class MainPage {
     	        
     }
     public void setPassword(String pass) throws InterruptedException {
-    	Thread.sleep(3000);
+    	Thread.sleep(2000);
     	enterPasswordField.clear();
     	enterPasswordField.sendKeys(pass);
     	signInButton.click();

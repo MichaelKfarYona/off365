@@ -10,13 +10,13 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
-import Pages.MainPage;
-import Pages.Office365Page;
-import Pages.Settings;
-import Pages.TeamsChannelPage;
-import Pages.ToDo;
-import Pages.Settings.ApplicationName;
-import Pages.ToDo.LeftMenuItems;
+import pages.MainPage;
+import pages.Office365Page;
+import pages.Settings;
+import pages.TeamsChannelPage;
+import pages.ToDo;
+import pages.Settings.ApplicationName;
+import pages.ToDo.LeftMenuItems;
 
 public class TestsToDo extends Settings{
 	ExtentHtmlReporter htmlReporter;

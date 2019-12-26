@@ -11,15 +11,14 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
-import Pages.MainPage;
-import Pages.Office365Page;
-
-import Pages.Planner;
-import Pages.PowerAutomate;
-import Pages.Settings;
-import Pages.TeamsChannelPage;
-import Pages.TeamsChannelPage.FlowNewMenuItem;
-import Pages.PowerAutomate.LeftMenuItemPowerAutomate;
+import pages.MainPage;
+import pages.Office365Page;
+import pages.Planner;
+import pages.PowerAutomate;
+import pages.Settings;
+import pages.TeamsChannelPage;
+import pages.PowerAutomate.LeftMenuItemPowerAutomate;
+import pages.TeamsChannelPage.FlowNewMenuItem;
 
 public class TestFlowViaTeams extends Settings{
 	ExtentHtmlReporter htmlReporter;final String newTeamName = "AUTOMATION_TEST_TEAM_";

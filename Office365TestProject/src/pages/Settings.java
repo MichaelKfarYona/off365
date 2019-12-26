@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 
 import org.testng.ITestResult;
@@ -9,8 +9,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
-
-import Pages.OneDrive.LeftMenuItem;
+import pages.OneDrive.LeftMenuItem;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

@@ -12,17 +12,17 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
-import Pages.ExcelWorkboobPage;
-import Pages.MainPage;
-import Pages.Office365Page;
-import Pages.OneDrive;
-import Pages.OneDrive.LeftMenuItem;
-import Pages.OneDrive.NewMenuItem;
-import Pages.Settings.ApplicationName;
-import Pages.Settings;
-import Pages.TeamsChannelPage;
-import Pages.WordDocumentPage;
-import Pages.ExcelWorkboobPage.TopMenuTab;
+import pages.ExcelWorkboobPage;
+import pages.MainPage;
+import pages.Office365Page;
+import pages.OneDrive;
+import pages.Settings;
+import pages.TeamsChannelPage;
+import pages.WordDocumentPage;
+import pages.ExcelWorkboobPage.TopMenuTab;
+import pages.OneDrive.LeftMenuItem;
+import pages.OneDrive.NewMenuItem;
+import pages.Settings.ApplicationName;
 
 public class TestOneDrive extends Settings{
 
