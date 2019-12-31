@@ -2,31 +2,31 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="My test suite" duration-ms="43493" started-at="2019-12-26T10:35:40Z" finished-at="2019-12-26T10:36:24Z">
+  <suite name="My test suite" duration-ms="45929" started-at="2019-12-29T10:57:49Z" finished-at="2019-12-29T10:58:35Z">
     <groups>
       <group name="Outlook">
         <method signature="TestOutlook.sendMessageWeb()[pri:1, instance:tests.TestOutlook@76a3e297]" name="sendMessageWeb" class="tests.TestOutlook"/>
       </group> <!-- Outlook -->
     </groups>
-    <test name="testing" duration-ms="43493" started-at="2019-12-26T10:35:40Z" finished-at="2019-12-26T10:36:24Z">
+    <test name="testing" duration-ms="45929" started-at="2019-12-29T10:57:49Z" finished-at="2019-12-29T10:58:35Z">
       <class name="tests.TestOutlook">
-        <test-method status="PASS" signature="setTimePoint()[pri:0, instance:tests.TestOutlook@76a3e297]" name="setTimePoint" is-config="true" duration-ms="24" started-at="2019-12-26T10:35:40Z" finished-at="2019-12-26T10:35:40Z">
+        <test-method status="PASS" signature="setTimePoint()[pri:0, instance:tests.TestOutlook@76a3e297]" name="setTimePoint" is-config="true" duration-ms="30" started-at="2019-12-29T10:57:49Z" finished-at="2019-12-29T10:57:49Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setTimePoint -->
-        <test-method status="PASS" signature="ReportSetup()[pri:0, instance:tests.TestOutlook@76a3e297]" name="ReportSetup" is-config="true" duration-ms="213" started-at="2019-12-26T10:35:40Z" finished-at="2019-12-26T10:35:41Z">
+        <test-method status="PASS" signature="ReportSetup()[pri:0, instance:tests.TestOutlook@76a3e297]" name="ReportSetup" is-config="true" duration-ms="244" started-at="2019-12-29T10:57:49Z" finished-at="2019-12-29T10:57:49Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- ReportSetup -->
-        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestOutlook@76a3e297]" name="Setup" is-config="true" duration-ms="7991" started-at="2019-12-26T10:35:41Z" finished-at="2019-12-26T10:35:49Z">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestOutlook@76a3e297]" name="Setup" is-config="true" duration-ms="6387" started-at="2019-12-29T10:57:49Z" finished-at="2019-12-29T10:57:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="sendMessageWeb()[pri:1, instance:tests.TestOutlook@76a3e297]" name="sendMessageWeb" duration-ms="33268" started-at="2019-12-26T10:35:49Z" finished-at="2019-12-26T10:36:22Z">
+        <test-method status="PASS" signature="sendMessageWeb()[pri:1, instance:tests.TestOutlook@76a3e297]" name="sendMessageWeb" duration-ms="37109" started-at="2019-12-29T10:57:55Z" finished-at="2019-12-29T10:58:33Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- sendMessageWeb -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestOutlook@76a3e297]" name="tearDown" is-config="true" duration-ms="1625" started-at="2019-12-26T10:36:22Z" finished-at="2019-12-26T10:36:24Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestOutlook@76a3e297]" name="tearDown" is-config="true" duration-ms="1682" started-at="2019-12-29T10:58:33Z" finished-at="2019-12-29T10:58:34Z">
           <params>
             <param index="0">
               <value>
@@ -37,11 +37,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="tearDownAll()[pri:0, instance:tests.TestOutlook@76a3e297]" name="tearDownAll" is-config="true" duration-ms="372" started-at="2019-12-26T10:36:24Z" finished-at="2019-12-26T10:36:24Z">
+        <test-method status="PASS" signature="tearDownAll()[pri:0, instance:tests.TestOutlook@76a3e297]" name="tearDownAll" is-config="true" duration-ms="482" started-at="2019-12-29T10:58:34Z" finished-at="2019-12-29T10:58:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownAll -->
-        <test-method status="PASS" signature="timeSpent()[pri:0, instance:tests.TestOutlook@76a3e297]" name="timeSpent" is-config="true" duration-ms="1" started-at="2019-12-26T10:36:24Z" finished-at="2019-12-26T10:36:24Z">
+        <test-method status="PASS" signature="timeSpent()[pri:0, instance:tests.TestOutlook@76a3e297]" name="timeSpent" is-config="true" duration-ms="1" started-at="2019-12-29T10:58:35Z" finished-at="2019-12-29T10:58:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- timeSpent -->

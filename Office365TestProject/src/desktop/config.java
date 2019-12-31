@@ -3,8 +3,10 @@ package desktop;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,15 +18,21 @@ public class config {
 	public static void main(String[] args) throws MalformedURLException, Exception {
 		DesktopOptions options = new DesktopOptions();
 		WiniumDriver winiumDriver;
-		//options.setApplicationPath("C:\\Users\\michapru\\AppData\\Local\\Microsoft\\Teams\\current\\Teams.exe");
-		options.setApplicationPath("C:\\Program Files (x86)\\Microsoft Office\\Office16\\outlook.exe");
+		options.setApplicationPath("C:\\Users\\michapru\\AppData\\Local\\Microsoft\\Teams\\current\\Teams.exe");
+		//options.setApplicationPath("C:\\Program Files (x86)\\Microsoft Office\\Office16\\outlook.exe");
 		
-		winiumDriver = new WiniumDriver(new URL("http://localhost:9950"),options);
+		winiumDriver = new WiniumDriver(new URL("http://localhost:9999"),options);
 		
 		
-		Thread.sleep(5000);
-		WebElement tewv = winiumDriver.findElement(By.name("Calendar")); 
-		tewv.click();
+		Thread.sleep(2000);
+		List<WebElement> list = winiumDriver.findElementsByXPath("//*");
+		System.out.println("List size - "+list.size());
+		list.get(0).sendKeys(Keys.F1);
+		//list.get(0).sendKeys(Keys.chord(Keys.CONTROL, "c"));
+		
+		//WebElement tewv = winiumDriver.findElement(By.name("Calendar")); 
+		//tewv.click();
+		
 		/*
 		WebElement elementT = (new WebDriverWait(winiumDriver, 15)).until(ExpectedConditions.presenceOfElementLocated(By.name("Calendar")));
 		elementT.click();

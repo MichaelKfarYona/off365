@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -103,18 +105,25 @@ public class OutlookPage {
 		txtMailBody.sendKeys(mailBody, Keys.ENTER);
 	}
 
-	public void createNewMessage(String mail, String subject, String mailBody) {
+	public void createNewMessage(String mail, String subject, String mailBody) throws InterruptedException {
 		clickByCreateNewMessageButton();
 		specifyToSubjectMailBody(mail, subject, mailBody);
 
 		System.out.println("click send");
 		btnSend = driver.findElement(By.xpath("//button[@aria-label='Send']"));
 		btnSend.click();
-		
-		
-
+		Thread.sleep(2000);
 	}
 
+	public boolean verificationOfTheSentLetter(String subject) {
+		clickByLeftMenuElement(LeftMenuItem.SENT_ITEMS);
+		List<WebElement> itemBySubject = driver.findElements(By.xpath("//div/div/div/div[2]/div[2]/div/span[contains(text(),'"+subject+"')]"));
+		if (itemBySubject.size()>0) {return true;}
+		else {return false;}
+				
+	}
+	
+	
 	public boolean checkRecievedMail(String reminderName) throws InterruptedException {
 		WebElement txtSearch = (new WebDriverWait(driver, 25)).until(ExpectedConditions
 				.presenceOfElementLocated(By.xpath("//span/div/div/div[contains(text(),'" + reminderName + "')]")));
