@@ -6,7 +6,7 @@
       <class name="tests.TestOutlook">
         <methods>
           <include name="timeSpent"/>
-          <include name="sendMessageWeb"/>
+          <include name="createNewMeeting"/>
           <include name="Setup"/>
           <include name="tearDown"/>
           <include name="tearDownAll"/>

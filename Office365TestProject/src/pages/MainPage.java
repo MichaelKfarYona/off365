@@ -20,7 +20,7 @@ public class MainPage {
     @FindBy(xpath = "//input[@name='passwd']")
     public WebElement enterPasswordField;
     
-    @FindBy(xpath = "//input[@type='email']")
+    //@FindBy(xpath = "//input[@type='email']")
     private WebElement loginField;
  
     @FindBy(xpath = "//input[@type='submit']")
@@ -39,9 +39,8 @@ public class MainPage {
     	staySignedIn_No.click();
     }
     public void setLogin(String word) throws InterruptedException{
-    	
-    	
-    	Thread.sleep(2000);
+
+    	//Thread.sleep(1000);
     	
     	loginField = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='email']"))); 
     	loginField.sendKeys(word); 
@@ -57,7 +56,6 @@ public class MainPage {
     }
     public String PageTitle(){
         String title = driver.getTitle();
-        //System.out.println("*** "+title);
         return title;
     }
 }

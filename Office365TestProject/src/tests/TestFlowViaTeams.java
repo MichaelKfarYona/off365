@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
@@ -31,7 +32,7 @@ public class TestFlowViaTeams extends Settings{
 
 	@Test(enabled = true, priority = 0, description = "Create Flow via Teams", groups = { "Flow" })
 	public void createNewFlow() throws Exception {
-		System.out.println("TestFlowViaTeams->createNewFlow");
+		System.out.println("TestFlowViaTeams -> createNewFlow");
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Create new Flow: Started");
 		//loginAsAmdocsUser("Teams"); // this.class method
@@ -75,7 +76,7 @@ public class TestFlowViaTeams extends Settings{
 		  teamsPage.chooseTopMenuItem("Posts");
 		  
 		  if(teamsPage.checkMessageByText(checkList.get(1)) == true) {testLog.pass("Flow works properly!");}
-	    	else {testLog.fail("Smthing wrong!..");}
+	    	else {testLog.fail("Smthing wrong!..", MediaEntityBuilder.createScreenCaptureFromPath("TestFlowViaTeams.png").build());}
 	    	
 	    	
 		  

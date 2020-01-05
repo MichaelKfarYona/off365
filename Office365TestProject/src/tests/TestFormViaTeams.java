@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
@@ -53,7 +54,7 @@ public class TestFormViaTeams extends Settings {
 		teamsPage.fillTheFormViaTeams(nameF);
 		testLog.log(Status.INFO, "The form is filled");
 		if(teamsPage.searchTabByName(nameF)==true) {testLog.pass("The new form has been created and checked successfully! - " + nameF);}
-		else {testLog.fail("Error checking form existence! - " + nameF);}
+		else {testLog.fail("Error checking form existence! - " + nameF, MediaEntityBuilder.createScreenCaptureFromPath(nameF+".png").build());}
 		}
 		catch(Exception exc) {System.out.println("Something went wrong! "+exc.toString());}
 		//Assert.assertTrue(teamsPage.searchTabByName(nameF));

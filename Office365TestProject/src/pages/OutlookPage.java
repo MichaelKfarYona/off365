@@ -10,20 +10,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.aventstack.extentreports.Status;
-
 public class OutlookPage {
 
-	public enum LeftMenuItem {
-		INBOX, SENT_ITEMS, DRAFTS, DELETED_ITEMS, JUNC_EMAIL, ARCHIVE
-	}
-
-	public enum LeftBottomMenuItem {
-		MAIL, CALENDAR, PEOPLE, TO_DO
-	}
+	public enum LeftMenuItem {INBOX, SENT_ITEMS, DRAFTS, DELETED_ITEMS, JUNC_EMAIL, ARCHIVE}
+	public enum LeftBottomMenuItem {MAIL, CALENDAR, PEOPLE, TO_DO}
 
 	WebDriver driver;
 	WebElement btnNewMessage, txtTo, txtSubject, txtMailBody, btnSend = null;
+	WebElement btnNewEvent, txtAddATitle, txtInviteAttendees, btnSave, btnDiscard, btnSchedulingAssistant, btnBusy, btnCategorize, btnResponseOptions = null;
+	WebElement txtDate, txtTimeStart, txtTimeFinish, tableDate, txtTimeStartPicker, txtTimeEndPicker, txtSearchField, btnSendCalend = null;
 	private WebElement appLauncher = null;
 
 	public OutlookPage(WebDriver driver) {
@@ -31,25 +26,100 @@ public class OutlookPage {
 		PageFactory.initElements(driver, this);
 
 	}
+	public void addInviteesMail(String str) throws InterruptedException {
+		txtInviteAttendees = (new WebDriverWait(driver, 5))
+				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@aria-label='Invite attendees']")));
+		txtInviteAttendees.sendKeys(str); Thread.sleep(1000); txtInviteAttendees.sendKeys(Keys.ENTER); 
+	} 
+	//Filling out a meeting form
+	public void specifyCalendarProperties(String eventTitle, List<String> attendeesList) {
+		txtAddATitle = (new WebDriverWait(driver, 10))
+				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder='Add a title']")));
+		txtAddATitle.sendKeys(eventTitle);
+		attendeesList.forEach((item) -> {try {addInviteesMail(item);} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		});
+	}
+	public boolean checkCalendar(String calendarName) throws InterruptedException {
+		txtSearchField = driver.findElement(By.xpath("//input[@placeholder='Search']"));
+		txtSearchField.sendKeys(calendarName, Keys.ENTER); Thread.sleep(1000);
+		List<WebElement> eventList = driver.findElements(By.xpath("//div[@title='"+calendarName+"']"));
+		if(eventList.size()>0) {return true;}
+		else {return false;}
+		
+		
+	}
+	// specify non default Date and time
+	public void specifyNewDateAndTimeMeeting(String newDate, String timeOne, String timeTwo) throws InterruptedException {
+		
+		txtTimeStart = driver.findElement(By.xpath("//input[@aria-label='Start time']"));
+		txtTimeStart.sendKeys(Keys.END); 
+		for(int i=0; i<5;i++) {
+		txtTimeStart.sendKeys(Keys.BACK_SPACE);}
+		txtTimeStart.sendKeys(timeOne);
+		
+		txtTimeFinish = driver.findElement(By.xpath("//input[@aria-label='End time']"));
+		txtTimeFinish.sendKeys(Keys.END); 
+		for(int i=0; i<5;i++) {
+		txtTimeFinish.sendKeys(Keys.BACK_SPACE);}
+		txtTimeFinish.sendKeys(timeTwo);
+		
+		
+	}
+	// Form Calendar controls
+	
+	public void clickSaveCalendarButton() {
+		btnSave = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Save')]"))); 
+		btnSave.click();
+	}
+	public void clickSendButton() {
+		btnSendCalend = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Send')]"))); 
+		btnSendCalend.click();
+		
+	}
+	public void clickDiscardButton() {
+		btnDiscard = driver.findElement(By.xpath("//span[contains(text(),'Discard')]"));
+		btnDiscard.click();
+	}
 
+	public void clickSchedulingAssistant() {
+		btnSchedulingAssistant = driver.findElement(By.xpath("//span[contains(text(),'Scheduling Assistant')]"));
+		btnSchedulingAssistant.click();
+	}
+	public void clickBusy() {
+		btnBusy = driver.findElement(By.xpath("//span[contains(text(),'Busy')]"));
+		btnBusy.click();
+	}
+	public void clickCategorize() {
+		btnCategorize = driver.findElement(By.xpath("//span[contains(text(),'Categorize')]"));
+		btnCategorize.click();
+	}
+	
+	public void clickResponseOptions() {
+		btnResponseOptions = driver.findElement(By.xpath("//span[contains(text(),'Response options')]"));
+		btnResponseOptions.click();
+	}
+
+	
+	// Calendar methods
 	public void choosePresentationBottomMenu(LeftBottomMenuItem item) {
-		int clickItem = 0;
+		String clickItem= null;
 		switch (item) {
 		case MAIL:
-			clickItem = 0;
+			clickItem = "//button[@title='Mail']";
 			break;
 		case CALENDAR:
-			clickItem = 1;
+			clickItem = "//a[@aria-label='Calendar']";
 			break;
 		case PEOPLE:
-			clickItem = 2;
+			clickItem = "//a[@aria-label='People']";
 			break;
 		case TO_DO:
-			clickItem = 3;
+			clickItem = "//a[@aria-label='To Do']";
 			break;
 		}
-		WebElement btnBottomLine = driver
-				.findElement(By.xpath("//div[@aria-orientation='horizontal']/div[" + clickItem + "]//span"));
+		WebElement btnBottomLine = driver.findElement(By.xpath(clickItem));
 		btnBottomLine.click();
 	}
 
@@ -83,6 +153,14 @@ public class OutlookPage {
 		leftMenuItemElement.click();
 	}
 
+	// Add new event in calendar
+	public void clickNewEvent() {
+	btnNewEvent = (new WebDriverWait(driver, 10))
+			.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'New event')]")));
+	btnNewEvent.click();
+
+	}
+	
 	public void clickByCreateNewMessageButton() {
 		System.out.println("click btn new msg");
 

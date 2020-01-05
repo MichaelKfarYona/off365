@@ -547,10 +547,10 @@ public class TeamsChannelPage {
 		return randomNum;
 	}
 
-	/*************************
-	 * Add attachment : file * 
-	 * @throws InterruptedException 
-	 *************************/
+	/********************************
+	 * Add attachment : file 		* 
+	 * @throws InterruptedException *
+	 ********************************/
 	public void chooseAttachment_OneDrive_Chat() throws InterruptedException {
 		addAttachment = driver.findElement(By.xpath("//button[@track-summary='Add attachment']"));
 		addAttachment.click();
@@ -691,12 +691,6 @@ public class TeamsChannelPage {
     	filesTab = driver.findElement(By.xpath("//*[@id='app-bar-5af6a76b-40fc-4ba1-af29-8f49b08e44fd']"));
     	filesTab.click();
     }
-	/*
-	 * public void clickByLinkWeb() { WebElement myLink =
-	 * driver.findElement(By.xpath("//a[@class='use-app-lnk']"));
-	 * if(myLink.isDisplayed()) myLink.click(); else {Thread.sleep(1000);} }
-	 */
-    
   
 	/*
 	 * private WebElement myLink =

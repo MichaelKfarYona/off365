@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
@@ -86,7 +87,7 @@ public class TestForms extends Settings{
 	    	//formsPage.deleteOptions();
 	    	Thread.sleep(5000);
 	    	if(formsPage.searchFormByName(myParam) == true) {testLogger.pass("The Form '"+myParam+"' is exists!");}
-	    	else {testLogger.fail("The Form '"+myParam+"' is not exists!");}
+	    	else {testLogger.fail("The Form '"+myParam+"' is not exists!", MediaEntityBuilder.createScreenCaptureFromPath(myParam+".png").build());}
 	    	}
 	    	catch(Exception exception) {testLogger.fatal("ERROR! " + exception.toString());}
 	    	//Assert.assertEquals(formsPage.searchFormByName(myParam), true); 
@@ -120,7 +121,7 @@ public class TestForms extends Settings{
 		    	//formsPage.deleteOptions();
 		    	Thread.sleep(5000);
 		    	if(formsPage.searchFormByName(myParam) == true) {testLogger.pass("The Quiz '"+myParam+"' is exists!");}
-		    	else {testLogger.fail("The Form '"+myParam+"' is not exists!");}
+		    	else {testLogger.fail("The Form '"+myParam+"' is not exists!", MediaEntityBuilder.createScreenCaptureFromPath("Quiz_"+myParam+".png").build());}
 		    	}
 		    	catch(Exception exception) {testLogger.fatal("ERROR! " + exception.toString());}
 		    	//Assert.assertEquals(formsPage.searchFormByName(myParam), true); 

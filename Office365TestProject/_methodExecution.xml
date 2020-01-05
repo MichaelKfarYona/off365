@@ -8,7 +8,7 @@
 			<class name="tests.TestOutlook">
 				<methods>
 				 
-					<include name="sendMessageWeb"/>
+					<include name="createNewMeeting"/>
 				
 					<!--	<include name="assignRoleValidation"/> -->
 					 

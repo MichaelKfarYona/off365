@@ -1,51 +1,259 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" ignored="39" total="49" passed="10">
   <reporter-output>
   </reporter-output>
-  <suite name="My test suite" duration-ms="45929" started-at="2019-12-29T10:57:49Z" finished-at="2019-12-29T10:58:35Z">
+  <suite name="My test suite" duration-ms="608273" started-at="2020-01-05T12:32:15Z" finished-at="2020-01-05T12:42:23Z">
     <groups>
-      <group name="Outlook">
-        <method signature="TestOutlook.sendMessageWeb()[pri:1, instance:tests.TestOutlook@76a3e297]" name="sendMessageWeb" class="tests.TestOutlook"/>
-      </group> <!-- Outlook -->
+      <group name="Forms">
+        <method signature="TestForms.formsMainFunctionality()[pri:1, instance:tests.TestForms@1b26f7b2]" name="formsMainFunctionality" class="tests.TestForms"/>
+      </group> <!-- Forms -->
+      <group name="ToDo">
+        <method signature="TestsToDo.toDoApp()[pri:4, instance:tests.TestsToDo@74ad1f1f]" name="toDoApp" class="tests.TestsToDo"/>
+      </group> <!-- ToDo -->
+      <group name="OneDrive">
+        <method signature="TestOneDrive.addNewFolderOneDrive()[pri:0, instance:tests.TestOneDrive@e720b71]" name="addNewFolderOneDrive" class="tests.TestOneDrive"/>
+      </group> <!-- OneDrive -->
+      <group name="PlannerViaTeams">
+        <method signature="TestPlannerViaTeams.addPlannerViaTeams()[pri:1, instance:tests.TestPlannerViaTeams@6a1aab78]" name="addPlannerViaTeams" class="tests.TestPlannerViaTeams"/>
+      </group> <!-- PlannerViaTeams -->
+      <group name="Teams">
+        <method signature="TestTeamsChannelPage.addNewMeeting()[pri:2, instance:tests.TestTeamsChannelPage@612679d6]" name="addNewMeeting" class="tests.TestTeamsChannelPage"/>
+        <method signature="TestTeamsChannelPage.checkNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@612679d6]" name="checkNewTeam" class="tests.TestTeamsChannelPage"/>
+        <method signature="TestTeamsChannelPage.createNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@612679d6]" name="createNewTeam" class="tests.TestTeamsChannelPage"/>
+      </group> <!-- Teams -->
+      <group name="FormsViaTeams">
+        <method signature="TestFormViaTeams.addFormsViaTeams()[pri:1, instance:tests.TestFormViaTeams@462d5aee]" name="addFormsViaTeams" class="tests.TestFormViaTeams"/>
+      </group> <!-- FormsViaTeams -->
+      <group name="Planner">
+        <method signature="TestPlanner.creationAndVerificationOfNewPlan()[pri:1, instance:tests.TestPlanner@491cc5c9]" name="creationAndVerificationOfNewPlan" class="tests.TestPlanner"/>
+      </group> <!-- Planner -->
+      <group name="Flow">
+        <method signature="TestPowerAutomate.createNewFlow()[pri:0, instance:tests.TestPowerAutomate@11758f2a]" name="createNewFlow" class="tests.TestPowerAutomate"/>
+      </group> <!-- Flow -->
     </groups>
-    <test name="testing" duration-ms="45929" started-at="2019-12-29T10:57:49Z" finished-at="2019-12-29T10:58:35Z">
-      <class name="tests.TestOutlook">
-        <test-method status="PASS" signature="setTimePoint()[pri:0, instance:tests.TestOutlook@76a3e297]" name="setTimePoint" is-config="true" duration-ms="30" started-at="2019-12-29T10:57:49Z" finished-at="2019-12-29T10:57:49Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setTimePoint -->
-        <test-method status="PASS" signature="ReportSetup()[pri:0, instance:tests.TestOutlook@76a3e297]" name="ReportSetup" is-config="true" duration-ms="244" started-at="2019-12-29T10:57:49Z" finished-at="2019-12-29T10:57:49Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- ReportSetup -->
-        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestOutlook@76a3e297]" name="Setup" is-config="true" duration-ms="6387" started-at="2019-12-29T10:57:49Z" finished-at="2019-12-29T10:57:55Z">
+    <test name="testing" duration-ms="608273" started-at="2020-01-05T12:32:15Z" finished-at="2020-01-05T12:42:23Z">
+      <class name="tests.TestsToDo">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestsToDo@74ad1f1f]" name="Setup" is-config="true" duration-ms="6563" started-at="2020-01-05T12:41:34Z" finished-at="2020-01-05T12:41:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="sendMessageWeb()[pri:1, instance:tests.TestOutlook@76a3e297]" name="sendMessageWeb" duration-ms="37109" started-at="2019-12-29T10:57:55Z" finished-at="2019-12-29T10:58:33Z">
+        <test-method status="PASS" signature="toDoApp()[pri:4, instance:tests.TestsToDo@74ad1f1f]" name="toDoApp" duration-ms="40360" started-at="2020-01-05T12:41:41Z" finished-at="2020-01-05T12:42:21Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- sendMessageWeb -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestOutlook@76a3e297]" name="tearDown" is-config="true" duration-ms="1682" started-at="2019-12-29T10:58:33Z" finished-at="2019-12-29T10:58:34Z">
+        </test-method> <!-- toDoApp -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestsToDo@74ad1f1f]" name="tearDown" is-config="true" duration-ms="1437" started-at="2020-01-05T12:42:21Z" finished-at="2020-01-05T12:42:23Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=sendMessageWeb status=SUCCESS method=TestOutlook.sendMessageWeb()[pri:1, instance:tests.TestOutlook@76a3e297] output={null}]]]>
+                <![CDATA[[TestResult name=toDoApp status=SUCCESS method=TestsToDo.toDoApp()[pri:4, instance:tests.TestsToDo@74ad1f1f] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="tearDownAll()[pri:0, instance:tests.TestOutlook@76a3e297]" name="tearDownAll" is-config="true" duration-ms="482" started-at="2019-12-29T10:58:34Z" finished-at="2019-12-29T10:58:35Z">
+      </class> <!-- tests.TestsToDo -->
+      <class name="tests.TestFormViaTeams">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestFormViaTeams@462d5aee]" name="Setup" is-config="true" duration-ms="7260" started-at="2020-01-05T12:39:23Z" finished-at="2020-01-05T12:39:30Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="addFormsViaTeams()[pri:1, instance:tests.TestFormViaTeams@462d5aee]" name="addFormsViaTeams" duration-ms="62893" started-at="2020-01-05T12:39:30Z" finished-at="2020-01-05T12:40:33Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addFormsViaTeams -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestFormViaTeams@462d5aee]" name="tearDown" is-config="true" duration-ms="2069" started-at="2020-01-05T12:40:33Z" finished-at="2020-01-05T12:40:35Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addFormsViaTeams status=SUCCESS method=TestFormViaTeams.addFormsViaTeams()[pri:1, instance:tests.TestFormViaTeams@462d5aee] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.TestFormViaTeams -->
+      <class name="tests.TestPowerAutomate">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestPowerAutomate@11758f2a]" name="Setup" is-config="true" duration-ms="4801" started-at="2020-01-05T12:34:33Z" finished-at="2020-01-05T12:34:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="createNewFlow()[pri:0, instance:tests.TestPowerAutomate@11758f2a]" name="createNewFlow" duration-ms="56656" started-at="2020-01-05T12:34:37Z" description="Create a new Flow" finished-at="2020-01-05T12:35:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNewFlow -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestPowerAutomate@11758f2a]" name="tearDown" is-config="true" duration-ms="1419" started-at="2020-01-05T12:35:34Z" finished-at="2020-01-05T12:35:36Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=createNewFlow status=SUCCESS method=TestPowerAutomate.createNewFlow()[pri:0, instance:tests.TestPowerAutomate@11758f2a] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.TestPowerAutomate -->
+      <class name="tests.TestOneDrive">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestOneDrive@e720b71]" name="Setup" is-config="true" duration-ms="4718" started-at="2020-01-05T12:35:36Z" finished-at="2020-01-05T12:35:40Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="addNewFolderOneDrive()[pri:0, instance:tests.TestOneDrive@e720b71]" name="addNewFolderOneDrive" duration-ms="38737" started-at="2020-01-05T12:35:40Z" description="Add new Folder" finished-at="2020-01-05T12:36:19Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addNewFolderOneDrive -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestOneDrive@e720b71]" name="tearDown" is-config="true" duration-ms="1500" started-at="2020-01-05T12:36:19Z" finished-at="2020-01-05T12:36:20Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addNewFolderOneDrive status=SUCCESS method=TestOneDrive.addNewFolderOneDrive()[pri:0, instance:tests.TestOneDrive@e720b71] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.TestOneDrive -->
+      <class name="tests.TestPlanner">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestPlanner@491cc5c9]" name="Setup" is-config="true" duration-ms="4796" started-at="2020-01-05T12:37:11Z" finished-at="2020-01-05T12:37:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="creationAndVerificationOfNewPlan()[pri:1, instance:tests.TestPlanner@491cc5c9]" name="creationAndVerificationOfNewPlan" duration-ms="51266" started-at="2020-01-05T12:37:16Z" finished-at="2020-01-05T12:38:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- creationAndVerificationOfNewPlan -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestPlanner@491cc5c9]" name="tearDown" is-config="true" duration-ms="1353" started-at="2020-01-05T12:38:08Z" finished-at="2020-01-05T12:38:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=creationAndVerificationOfNewPlan status=SUCCESS method=TestPlanner.creationAndVerificationOfNewPlan()[pri:1, instance:tests.TestPlanner@491cc5c9] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.TestPlanner -->
+      <class name="tests.TestPlannerViaTeams">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestPlannerViaTeams@6a1aab78]" name="Setup" is-config="true" duration-ms="6826" started-at="2020-01-05T12:38:09Z" finished-at="2020-01-05T12:38:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="addPlannerViaTeams()[pri:1, instance:tests.TestPlannerViaTeams@6a1aab78]" name="addPlannerViaTeams" duration-ms="64759" started-at="2020-01-05T12:38:16Z" finished-at="2020-01-05T12:39:20Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addPlannerViaTeams -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestPlannerViaTeams@6a1aab78]" name="tearDown" is-config="true" duration-ms="2163" started-at="2020-01-05T12:39:20Z" finished-at="2020-01-05T12:39:23Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addPlannerViaTeams status=SUCCESS method=TestPlannerViaTeams.addPlannerViaTeams()[pri:1, instance:tests.TestPlannerViaTeams@6a1aab78] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.TestPlannerViaTeams -->
+      <class name="tests.TestForms">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestForms@1b26f7b2]" name="Setup" is-config="true" duration-ms="4720" started-at="2020-01-05T12:36:20Z" finished-at="2020-01-05T12:36:25Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="formsMainFunctionality()[pri:1, instance:tests.TestForms@1b26f7b2]" name="formsMainFunctionality" duration-ms="44832" started-at="2020-01-05T12:36:25Z" finished-at="2020-01-05T12:37:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- formsMainFunctionality -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestForms@1b26f7b2]" name="tearDown" is-config="true" duration-ms="1408" started-at="2020-01-05T12:37:10Z" finished-at="2020-01-05T12:37:11Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=formsMainFunctionality status=SUCCESS method=TestForms.formsMainFunctionality()[pri:1, instance:tests.TestForms@1b26f7b2] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.TestForms -->
+      <class name="tests.TestTeamsChannelPage">
+        <test-method status="PASS" signature="setTimePoint()[pri:0, instance:tests.TestTeamsChannelPage@612679d6]" name="setTimePoint" is-config="true" duration-ms="16" started-at="2020-01-05T12:32:15Z" finished-at="2020-01-05T12:32:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setTimePoint -->
+        <test-method status="PASS" signature="ReportSetup()[pri:0, instance:tests.TestTeamsChannelPage@612679d6]" name="ReportSetup" is-config="true" duration-ms="289" started-at="2020-01-05T12:32:15Z" finished-at="2020-01-05T12:32:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ReportSetup -->
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestTeamsChannelPage@612679d6]" name="Setup" is-config="true" duration-ms="8995" started-at="2020-01-05T12:32:15Z" finished-at="2020-01-05T12:32:24Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="createNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@612679d6]" name="createNewTeam" duration-ms="64836" started-at="2020-01-05T12:32:24Z" description="Create a new Team Online" finished-at="2020-01-05T12:33:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNewTeam -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestTeamsChannelPage@612679d6]" name="tearDown" is-config="true" duration-ms="1718" started-at="2020-01-05T12:33:29Z" finished-at="2020-01-05T12:33:31Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=createNewTeam status=SUCCESS method=TestTeamsChannelPage.createNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@612679d6] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestTeamsChannelPage@612679d6]" name="Setup" is-config="true" duration-ms="4650" started-at="2020-01-05T12:33:31Z" finished-at="2020-01-05T12:33:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="checkNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@612679d6]" name="checkNewTeam" duration-ms="55231" started-at="2020-01-05T12:33:36Z" description="Check New team creation" finished-at="2020-01-05T12:34:31Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkNewTeam -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestTeamsChannelPage@612679d6]" name="tearDown" is-config="true" duration-ms="1864" started-at="2020-01-05T12:34:31Z" finished-at="2020-01-05T12:34:33Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=checkNewTeam status=SUCCESS method=TestTeamsChannelPage.checkNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@612679d6] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestTeamsChannelPage@612679d6]" name="Setup" is-config="true" duration-ms="6278" started-at="2020-01-05T12:40:35Z" finished-at="2020-01-05T12:40:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="addNewMeeting()[pri:2, instance:tests.TestTeamsChannelPage@612679d6]" name="addNewMeeting" duration-ms="51586" started-at="2020-01-05T12:40:41Z" description="Teams : Create new meeting" finished-at="2020-01-05T12:41:33Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addNewMeeting -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestTeamsChannelPage@612679d6]" name="tearDown" is-config="true" duration-ms="1725" started-at="2020-01-05T12:41:33Z" finished-at="2020-01-05T12:41:34Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addNewMeeting status=SUCCESS method=TestTeamsChannelPage.addNewMeeting()[pri:2, instance:tests.TestTeamsChannelPage@612679d6] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="tearDownAll()[pri:0, instance:tests.TestTeamsChannelPage@612679d6]" name="tearDownAll" is-config="true" duration-ms="514" started-at="2020-01-05T12:42:23Z" finished-at="2020-01-05T12:42:23Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownAll -->
-        <test-method status="PASS" signature="timeSpent()[pri:0, instance:tests.TestOutlook@76a3e297]" name="timeSpent" is-config="true" duration-ms="1" started-at="2019-12-29T10:58:35Z" finished-at="2019-12-29T10:58:35Z">
+        <test-method status="PASS" signature="timeSpent()[pri:0, instance:tests.TestTeamsChannelPage@612679d6]" name="timeSpent" is-config="true" duration-ms="0" started-at="2020-01-05T12:42:23Z" finished-at="2020-01-05T12:42:23Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- timeSpent -->
-      </class> <!-- tests.TestOutlook -->
+      </class> <!-- tests.TestTeamsChannelPage -->
     </test> <!-- testing -->
   </suite> <!-- My test suite -->
 </testng-results>
