@@ -260,7 +260,7 @@ public class TestTeamsChannelPage extends Settings {
 	/******************************************************************************************************/
 	/********************************************Add A New Web Tab*****************************************/
 	/******************************************************************************************************/
-	@Test(enabled = false, priority = 2, description = "Add new tab", groups = { "Teams" })
+	@Test(enabled = true, priority = 2, description = "Add new tab", groups = { "Teams" })
 	public void addNewTabWeb() throws Exception, IOException {
 		testLog = extent.createTest(getClass().getName());
 		String element = "Website";
@@ -283,6 +283,20 @@ public class TestTeamsChannelPage extends Settings {
 	/*************************************************************************************************/
 	@Test(enabled = true, priority = 4, description = "Giphy sending")
 	public void sendEmojiGiphyStickerToTheChat() throws Exception {
+		testLog = extent.createTest(getClass().getName());
+		
+		loginAsAmdocsUser("Teams");
+		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
+		teamsPage.clickTeamsTab();
+		teamsPage.sendMessageInTeamsConversations(MessageTypeInConversationsTeamsTab.GIPHY);
+		Thread.sleep(3000);
+	}
+	
+	/*************************************************************************************************/
+	/***************************************** Giphy message *****************************************/
+	/*************************************************************************************************/
+	@Test(enabled = true, priority = 4, description = "Emoji sending")
+	public void sendEmojiStickerToTheChat() throws Exception {
 		testLog = extent.createTest(getClass().getName());
 		
 		loginAsAmdocsUser("Teams");

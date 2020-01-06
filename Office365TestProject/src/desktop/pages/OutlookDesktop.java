@@ -7,6 +7,7 @@ import java.util.Random;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,7 +21,7 @@ public class OutlookDesktop {
 	}
 
 	WiniumDriver driver;
-	private WebElement newAmdocsMeeting, txtTo, txtSubject, btnSend, lblMeetingName = null;
+	private WebElement newAmdocsMeeting, txtTo, txtSubject, btnSend, lblMeetingName, txtLocation, btnNewEmail, txtMessageTo, txtSubjectMessage = null;
 	String TEST_TITLE = "AUTOTEST_"+getRandom();
 
 	public OutlookDesktop(WiniumDriver driver) {
@@ -53,21 +54,28 @@ public class OutlookDesktop {
 		leftBottomItem.click();
 	}
 
-	public void clickNewAmdocsMeeting() {
+	public void clickNewAmdocsMeeting() throws InterruptedException {
 		newAmdocsMeeting = (new WebDriverWait(driver, 10))
 				.until(ExpectedConditions.presenceOfElementLocated(By.name("New Amdocs Meeting")));
-		newAmdocsMeeting.click();
+		newAmdocsMeeting.click();Thread.sleep(4000);
 	}
+	public void clickNewMeeting() throws InterruptedException {newAmdocsMeeting = (new WebDriverWait(driver, 10))
+			.until(ExpectedConditions.presenceOfElementLocated(By.name("New Meeting")));
+	newAmdocsMeeting.click();Thread.sleep(2000);}
 
-	public String specifyMeetingProperties() throws InterruptedException { 
+	public String specifyMeetingProperties(String mail) throws InterruptedException { 
 		txtSubject = (new WebDriverWait(driver, 7)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@AutomationId='4100']")));
 		txtSubject.sendKeys(TEST_TITLE);
-		txtTo = (new WebDriverWait(driver, 7)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@AutomationId='4106']")));
-		txtTo.sendKeys("yoelap@amdocs.com"); Thread.sleep(2000);
+		txtTo = (new WebDriverWait(driver, 2)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@AutomationId='4106']")));
+		txtTo.sendKeys(mail); Thread.sleep(1000); // Dolphie.Lobo@amdocs.com
 		btnSend = driver.findElement(By.name("Send"));
 		btnSend.click();Thread.sleep(2000);
 		return TEST_TITLE;
 
+	}
+	public void specifyLocation(String location) {
+		txtLocation = (new WebDriverWait(driver, 5)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@AutomationId='4102']")));
+		txtLocation.sendKeys(location);
 	}
 	public boolean checkMeetingExistance(String meetingName) {
 		List<WebElement> meetingList = driver.findElements(By.xpath("//*[contains(@Name,'"+meetingName+"')]"));
@@ -82,7 +90,25 @@ public class OutlookDesktop {
 
 		driver.switchTo().frame(1);
 	}
-
+public void clickCreateNewMessage() throws InterruptedException {
+	btnNewEmail = (new WebDriverWait(driver, 3)).until(ExpectedConditions.presenceOfElementLocated(By.name("New Email")));
+	btnNewEmail.click();
+		/*
+		 * Actions builder = new Actions(driver);
+		 * builder.sendKeys(Keys.chord(Keys.CONTROL,"N")).perform();
+		 */ 
+    Thread.sleep(1000);
+}
+public String specifyNewMessageInfo(String recipient) throws InterruptedException {
+	String restTitle = "TEST_SUBJECT_"+getRandom();
+	txtSubjectMessage = (new WebDriverWait(driver, 2)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@AutomationId='4101']")));
+	txtSubjectMessage.sendKeys(restTitle);
+	txtMessageTo = (new WebDriverWait(driver, 2)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@AutomationId='4099']")));
+	txtMessageTo.sendKeys(recipient);
+	btnSend = driver.findElement(By.name("Send"));
+	btnSend.click();Thread.sleep(1000);
+	return restTitle;
+}
 	
 	
 	 /***************** 

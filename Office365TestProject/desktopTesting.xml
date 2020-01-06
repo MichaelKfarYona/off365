@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Desktop suite">
+	<test name="testing">
+		<classes>
+
+			<!-- Outlook Desktop -->
+			<class name="desktop.tests.TestOutlookDesktop">
+				<methods>
+
+					<include name="createNewMessage" />
+					<include name="createNewMeeting" />
+					<include name="createNewAmdocsMeeting" />
+
+
+				</methods>
+			</class>
+
+
+
+		</classes>
+	</test>
+</suite>

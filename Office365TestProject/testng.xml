@@ -10,7 +10,8 @@
 					<include name="createNewTeam" />
 					<include name="checkNewTeam" />
 					<include name="addNewMeeting" />
-					
+					<include name="addNewTabWeb"/>
+					<include name="sendEmojiGiphyStickerToTheChat"/>
 				</methods>
 			</class>
  
