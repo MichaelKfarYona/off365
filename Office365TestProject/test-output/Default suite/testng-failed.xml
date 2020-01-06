@@ -5,7 +5,7 @@
     <classes>
       <class name="desktop.tests.TestOutlookDesktop">
         <methods>
-          <include name="createNewAmdocsMeeting"/>
+          <include name="createNewMessage"/>
           <include name="stopDriver"/>
           <include name="startDriver"/>
           <include name="tearDown"/>
