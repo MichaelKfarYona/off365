@@ -189,18 +189,7 @@ public class TestTeamsChannelPage extends Settings {
 		Thread.sleep(2000);
 		
 		// check email in the Outlook
-		/*
-		 * ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
-		 * driver.switchTo().window(tabs.get(0)); Office365Page officePage = new
-		 * Office365Page(driver);
-		 * officePage.chooseApplicationByName(pages.Office365Page.ApplicationName.
-		 * OUTLOOK); OutlookPage outlook = new OutlookPage(driver); switchTab(2);
-		 * Thread.sleep(2000); boolean isPresent =
-		 * outlook.checkRecievedMail(newMeetingTitle); if (isPresent==true)
-		 * {testLog.pass("Meeting invitation has been recieved!");} else
-		 * {testLog.fail("Meeting invitation has not been recieved!");}
-		 */
-		  
+			  
 	}
 	
 

@@ -22,6 +22,7 @@ import pages.WordDocumentPage;
 import pages.ExcelWorkboobPage.TopMenuTab;
 import pages.OneDrive.LeftMenuItem;
 import pages.OneDrive.NewMenuItem;
+import pages.OneDrive.UploadType;
 import pages.Settings.ApplicationName;
 
 public class TestOneDrive extends Settings{
@@ -37,6 +38,42 @@ public class TestOneDrive extends Settings{
 	int teamNumber = getRandom();
 	ExtentTest testLog = null;
  
+	// Upload Folder
+	@Test(enabled = true, priority = 0, description = "Upload Folder", groups = { "OneDrive" })
+	public void uploadNewFolderOneDrive() throws Exception {
+		System.out.println("TestOneDrive - > uploadNewFolderOneDrive");
+		String fullFileName = "UploadTest";
+		testLog = extent.createTest(getClass().getName());
+		testLog.log(Status.INFO, "Upload folder: Started");
+		loginAsAmdocsUserSettings(ApplicationName.ONEDRIVE); 
+		OneDrive oneDrive = new OneDrive(driver);
+		oneDrive.uploadFileOrFolder(UploadType.FOLDER, "C:\\"+fullFileName);
+		testLog.log(Status.INFO, "Folder uploaded successfully");
+		Thread.sleep(2000);
+		//Method for removing an item from the OneDrive list
+		oneDrive.deleteElementFromTheOneDriveList(fullFileName); //Deleting
+		Thread.sleep(2000);
+	}
+	// Upload File
+		@Test(enabled = true, priority = 0, description = "Upload File", groups = { "OneDrive" })
+		public void uploadNewFileOneDrive() throws Exception {
+			String fullFileName = "UploadTest_2.txt";
+			System.out.println("TestOneDrive - > uploadNewFileOneDrive");
+			testLog = extent.createTest(getClass().getName());
+			testLog.log(Status.INFO, "Upload file: Started");
+			loginAsAmdocsUserSettings(ApplicationName.ONEDRIVE); 
+			OneDrive oneDrive = new OneDrive(driver);
+			oneDrive.uploadFileOrFolder(UploadType.FILES, "C:\\UploadTest_2\\"+fullFileName);
+		
+			testLog.log(Status.INFO, "File uploaded successfully!"); 
+			Thread.sleep(2000);
+			//Method for removing an item from the OneDrive list
+			oneDrive.deleteElementFromTheOneDriveList(fullFileName); //Deleting
+			Thread.sleep(2000);
+		}
+	
+	
+	
 	//********** Add new folder **********
 	@Test(enabled = true, priority = 0, description = "Add new Folder", groups = { "OneDrive" })
 	public void addNewFolderOneDrive() throws Exception {
@@ -76,6 +113,17 @@ public class TestOneDrive extends Settings{
 	oneDrive.checkingElementExistence(result);
 	Thread.sleep(2000);
 	}
+	
+	@Test(enabled = true, priority = 0, description = "Share", groups = { "OneDrive" })
+	public void shareOneDriveDocument() throws InterruptedException, IOException {
+
+		loginAsAmdocsUserSettings(ApplicationName.ONEDRIVE); // Settings.class method
+
+		OneDrive oneDrive = new OneDrive(driver);
+		String mailNmae = "yoelap@amdocs.com";
+		oneDrive.shareOneDriveDocument("Document.docx",mailNmae);
+	}
+	
 	
 	//********************************************************
 	//***************** Add new Word document ****************

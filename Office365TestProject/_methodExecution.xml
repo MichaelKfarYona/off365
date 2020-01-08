@@ -5,13 +5,10 @@
 		<classes>
 			
 			
-			<class name="tests.TestOutlook">
+			<class name="tests.TestOneDrive">
 				<methods>
-				 
-					<include name="createNewMeeting"/>
-				
-					<!--	<include name="assignRoleValidation"/> -->
-					 
+					
+					<include name="shareOneDriveDocument" />
 				</methods>
 			</class>
 			

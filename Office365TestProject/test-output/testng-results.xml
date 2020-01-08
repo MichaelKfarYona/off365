@@ -1,36 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="2" total="3" passed="1">
+<testng-results skipped="0" failed="0" ignored="6" total="7" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Desktop suite" duration-ms="60542" started-at="2020-01-06T09:18:38Z" finished-at="2020-01-06T09:19:38Z">
+  <suite name="My test suite" duration-ms="51827" started-at="2020-01-07T15:06:35Z" finished-at="2020-01-07T15:07:27Z">
     <groups>
-      <group name="DesktopOutlook">
-        <method signature="TestOutlookDesktop.createNewMessage()[pri:0, instance:desktop.tests.TestOutlookDesktop@7a3d45bd]" name="createNewMessage" class="desktop.tests.TestOutlookDesktop"/>
-      </group> <!-- DesktopOutlook -->
+      <group name="OneDrive">
+        <method signature="TestOneDrive.shareOneDriveDocument()[pri:0, instance:tests.TestOneDrive@76a3e297]" name="shareOneDriveDocument" class="tests.TestOneDrive"/>
+      </group> <!-- OneDrive -->
     </groups>
-    <test name="testing" duration-ms="60542" started-at="2020-01-06T09:18:38Z" finished-at="2020-01-06T09:19:38Z">
-      <class name="desktop.tests.TestOutlookDesktop">
-        <test-method status="PASS" signature="setupEnvironment()[pri:0, instance:desktop.tests.TestOutlookDesktop@7a3d45bd]" name="setupEnvironment" is-config="true" duration-ms="956" started-at="2020-01-06T09:18:38Z" finished-at="2020-01-06T09:18:39Z">
+    <test name="testing" duration-ms="51827" started-at="2020-01-07T15:06:35Z" finished-at="2020-01-07T15:07:27Z">
+      <class name="tests.TestOneDrive">
+        <test-method status="PASS" signature="setTimePoint()[pri:0, instance:tests.TestOneDrive@76a3e297]" name="setTimePoint" is-config="true" duration-ms="16" started-at="2020-01-07T15:06:35Z" finished-at="2020-01-07T15:06:35Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setupEnvironment -->
-        <test-method status="PASS" signature="startDriver()[pri:0, instance:desktop.tests.TestOutlookDesktop@7a3d45bd]" name="startDriver" is-config="true" duration-ms="1203" started-at="2020-01-06T09:18:39Z" finished-at="2020-01-06T09:18:40Z">
+        </test-method> <!-- setTimePoint -->
+        <test-method status="PASS" signature="ReportSetup()[pri:0, instance:tests.TestOneDrive@76a3e297]" name="ReportSetup" is-config="true" duration-ms="219" started-at="2020-01-07T15:06:35Z" finished-at="2020-01-07T15:06:35Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- startDriver -->
-        <test-method status="PASS" signature="createNewMessage()[pri:0, instance:desktop.tests.TestOutlookDesktop@7a3d45bd]" name="createNewMessage" duration-ms="47563" started-at="2020-01-06T09:18:40Z" finished-at="2020-01-06T09:19:27Z">
+        </test-method> <!-- ReportSetup -->
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestOneDrive@76a3e297]" name="Setup" is-config="true" duration-ms="6169" started-at="2020-01-07T15:06:35Z" finished-at="2020-01-07T15:06:41Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- createNewMessage -->
-        <test-method status="PASS" signature="stopDriver()[pri:0, instance:desktop.tests.TestOutlookDesktop@7a3d45bd]" name="stopDriver" is-config="true" duration-ms="10292" started-at="2020-01-06T09:19:27Z" finished-at="2020-01-06T09:19:38Z">
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="shareOneDriveDocument()[pri:0, instance:tests.TestOneDrive@76a3e297]" name="shareOneDriveDocument" duration-ms="43940" started-at="2020-01-07T15:06:41Z" description="Share" finished-at="2020-01-07T15:07:25Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- stopDriver -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:desktop.tests.TestOutlookDesktop@7a3d45bd]" name="tearDown" is-config="true" duration-ms="476" started-at="2020-01-06T09:19:38Z" finished-at="2020-01-06T09:19:38Z">
+        </test-method> <!-- shareOneDriveDocument -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestOneDrive@76a3e297]" name="tearDown" is-config="true" duration-ms="1473" started-at="2020-01-07T15:07:25Z" finished-at="2020-01-07T15:07:27Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=shareOneDriveDocument status=SUCCESS method=TestOneDrive.shareOneDriveDocument()[pri:0, instance:tests.TestOneDrive@76a3e297] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- desktop.tests.TestOutlookDesktop -->
+        <test-method status="PASS" signature="tearDownAll()[pri:0, instance:tests.TestOneDrive@76a3e297]" name="tearDownAll" is-config="true" duration-ms="2" started-at="2020-01-07T15:07:27Z" finished-at="2020-01-07T15:07:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownAll -->
+        <test-method status="PASS" signature="timeSpent()[pri:0, instance:tests.TestOneDrive@76a3e297]" name="timeSpent" is-config="true" duration-ms="0" started-at="2020-01-07T15:07:27Z" finished-at="2020-01-07T15:07:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- timeSpent -->
+      </class> <!-- tests.TestOneDrive -->
     </test> <!-- testing -->
-  </suite> <!-- Desktop suite -->
+  </suite> <!-- My test suite -->
 </testng-results>

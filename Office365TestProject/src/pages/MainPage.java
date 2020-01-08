@@ -23,7 +23,7 @@ public class MainPage {
     //@FindBy(xpath = "//input[@type='email']")
     private WebElement loginField;
  
-    @FindBy(xpath = "//input[@type='submit']")
+    //@FindBy(xpath = "//input[@type='submit']")
     public WebElement submitButton;
 
 	/*
@@ -44,6 +44,7 @@ public class MainPage {
     	
     	loginField = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='email']"))); 
     	loginField.sendKeys(word); 
+    	submitButton = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='submit']")));
     	submitButton.click();
     	
     	        

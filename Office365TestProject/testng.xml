@@ -10,8 +10,8 @@
 					<include name="createNewTeam" />
 					<include name="checkNewTeam" />
 					<include name="addNewMeeting" />
-					<include name="addNewTabWeb"/>
-					<include name="sendEmojiGiphyStickerToTheChat"/>
+					
+					
 				</methods>
 			</class>
  
@@ -24,6 +24,8 @@
 			<class name="tests.TestOneDrive">
 				<methods>
 					<include name="addNewFolderOneDrive" />
+					<include name="uploadNewFileOneDrive"/>
+					<include name="uploadNewFolderOneDrive"/>
 				</methods>
 			</class>
 			
@@ -46,7 +48,7 @@
 				</methods>
 
 			</class>
-
+<!--
 			<class name="tests.TestPlannerViaTeams">
 				<methods>
 					<include name="addPlannerViaTeams" />
@@ -59,7 +61,7 @@
 					<include name="addFormsViaTeams" />
 				</methods>
 			</class>
-
+-->
 			<!-- Run by groups -->
 
 			<!-- <groups> <run> <include name="Planner"/> </run> </groups> -->

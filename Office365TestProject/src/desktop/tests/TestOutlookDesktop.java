@@ -16,7 +16,7 @@ public class TestOutlookDesktop extends Config{
 	String meetingName = null;
 	boolean meetingInTheCalendar;
 	
-	@Test(enabled=false, priority = 0, groups = { "DesktopOutlook" })
+	@Test(enabled=true, priority = 0, groups = { "DesktopOutlook" })
 	public void createNewAmdocsMeeting() throws InterruptedException {
 		testLogOutlook = extent.createTest(getClass().getName());
 		testLogOutlook.log(Status.INFO, "Start Desktop Outlook");
@@ -31,7 +31,7 @@ public class TestOutlookDesktop extends Config{
 		testLogOutlook.pass("Test Passed");
 		
 	}
-	@Test(enabled=false, priority = 1, groups = { "DesktopOutlook" })
+	@Test(enabled=true, priority = 1, groups = { "DesktopOutlook" })
 	public void createNewMeeting() throws InterruptedException {
 		testLogOutlook = extent.createTest(getClass().getName());
 		testLogOutlook.log(Status.INFO, "Start Desktop Outlook");
@@ -48,7 +48,7 @@ public class TestOutlookDesktop extends Config{
 		
 	}
 	
-	@Test(enabled=true, priority = 0, groups = { "DesktopOutlook" })
+	@Test(enabled=true, priority = 2, groups = { "DesktopOutlook" })
 	public void createNewMessage() throws InterruptedException {
 		testLogOutlook = extent.createTest(getClass().getName());
 		testLogOutlook.log(Status.INFO, "Start Desktop Outlook");

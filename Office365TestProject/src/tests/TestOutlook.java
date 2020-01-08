@@ -48,10 +48,10 @@ public class TestOutlook extends Settings {
 		outlook.choosePresentationBottomMenu(LeftBottomMenuItem.CALENDAR);
 		outlook.clickNewEvent();
 		List<String> listE = new ArrayList();
-		listE.add("yoelap@amdocs.com");
-		//listE.add("michael.prudnikov@amdocs.com");
+		//listE.add("Dolphie.lobo@amdocs.com");
+		listE.add("michael.prudnikov@amdocs.com");
 		outlook.specifyCalendarProperties(TITLE, listE);
-		outlook.specifyNewDateAndTimeMeeting("05/02/2020", "16:00", "16:30");
+		outlook.specifyNewDateAndTimeMeeting("05/03/2020", "16:00", "16:30");
 		
 		outlook.clickSendButton();
 		boolean res = outlook.checkCalendar(TITLE);

@@ -12,11 +12,8 @@
 					<include name="createNewMeeting" />
 					<include name="createNewAmdocsMeeting" />
 
-
 				</methods>
 			</class>
-
-
 
 		</classes>
 	</test>
