@@ -22,7 +22,7 @@ public class OneDrive {
 		FILES, RECENT, SHARED, DISCOVER, RECYCLE_BIN
 	}
 	public enum NewMenuItem{
-		FOLDER, WORD_DOCUMENT,EXCEL_WORKBOOK, POWERPOINT_DOCUMENT,ONENOTE_NOTEBOOK,FORMS_FOR_EXCEL, LINK
+		FOLDER, WORD_DOCUMENT, EXCEL_WORKBOOK, POWERPOINT_DOCUMENT, ONENOTE_NOTEBOOK, FORMS_FOR_EXCEL, LINK
 	}
 	public enum UploadType{FILES, FOLDER}
 	WebElement btnUpload = null;
@@ -76,14 +76,19 @@ public class OneDrive {
 		robot.delay(2000);robot.keyPress(KeyEvent.VK_LEFT); robot.delay(1000); robot.keyPress(KeyEvent.VK_ENTER);Thread.sleep(2000);}
 	 }
 	 // Delete element OneDrive
-	 public void deleteElementFromTheOneDriveList(String elementName) {
+	 public boolean deleteElementFromTheOneDriveList(String elementName) throws InterruptedException {
+		 Thread.sleep(2000);
 		 //listElement = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@type='button' and contains(text(),'"+elementName+"')]")));
+		 try {
 		 checkBoxOfTheElement =(new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@aria-label='Checkbox for "+elementName+"']"))); 
 		 checkBoxOfTheElement.click();
 		 btnDelete = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//i[@data-icon-name='delete']")));
 		 btnDelete.click();
 		 confirmationButton = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[2]/div/span[1]/button")));
 		 confirmationButton.click();
+		 return true;
+		 }
+		 catch(Exception e) {System.out.println("Smthing wrong ... Check deleteElementFromTheOneDriveList method! "+e.getStackTrace());return false;}
 	 }
 	 // Share document
 	 public void shareOneDriveDocument(String elementName, String mail) throws InterruptedException {

@@ -1,5 +1,10 @@
 package desktop.pages;
 
+import java.awt.AWTException;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -21,7 +26,7 @@ public class OutlookDesktop {
 	}
 
 	WiniumDriver driver;
-	private WebElement newAmdocsMeeting, txtTo, txtSubject, btnSend, lblMeetingName, txtLocation, btnNewEmail, txtMessageTo, txtSubjectMessage = null;
+	private WebElement newAmdocsMeeting, txtTo, txtSubject, btnSend, lblMeetingName, btnConfirmCloseing, btnCloseMeeting, txtLocation, btnNewEmail, txtMessageTo, txtSubjectMessage, btnCreatedMeeting, btnOpen, linkJoinSkypeMeeting = null;
 	String TEST_TITLE = "AUTOTEST_"+getRandom();
 
 	public OutlookDesktop(WiniumDriver driver) {
@@ -49,27 +54,100 @@ public class OutlookDesktop {
 			break;
 			
 		}
-		WebElement leftBottomItem = (new WebDriverWait(driver, 10))
+		WebElement leftBottomItem = (new WebDriverWait(driver, 8))
 				.until(ExpectedConditions.presenceOfElementLocated(By.name(parametrListItem)));
 		leftBottomItem.click();
 	}
 
 	public void clickNewAmdocsMeeting() throws InterruptedException {
-		newAmdocsMeeting = (new WebDriverWait(driver, 10))
+		newAmdocsMeeting = (new WebDriverWait(driver, 5))
 				.until(ExpectedConditions.presenceOfElementLocated(By.name("New Amdocs Meeting")));
-		newAmdocsMeeting.click();Thread.sleep(4000);
+		newAmdocsMeeting.click();Thread.sleep(3000);
 	}
-	public void clickNewMeeting() throws InterruptedException {newAmdocsMeeting = (new WebDriverWait(driver, 10))
+	public void clickNewMeeting() throws InterruptedException {newAmdocsMeeting = (new WebDriverWait(driver, 5))
 			.until(ExpectedConditions.presenceOfElementLocated(By.name("New Meeting")));
 	newAmdocsMeeting.click();Thread.sleep(2000);}
 
-	public String specifyMeetingProperties(String mail) throws InterruptedException { 
+	public void clickToJoinSkypeMeeting() throws InterruptedException {
+		linkJoinSkypeMeeting = (new WebDriverWait(driver, 3)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@Name='join Skype Meeting']")));
+		linkJoinSkypeMeeting.click(); Thread.sleep(3000);
+}
+	
+	public boolean runAndVerificationSkypeMeeting(String meetingNameInTheList) throws AWTException {
+		Robot robot = new Robot();
+		//GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		//GraphicsDevice device = env.getDefaultScreenDevice();
+		List listSkypeElements = driver.findElements(By.xpath("//*[contains(@Name,'"+meetingNameInTheList+"')]"));
+		if(listSkypeElements.size()>0) {
+			
+			//Robot robot = new Robot();
+			robot.delay(2000);
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_ENTER); 
+			//robot.keyPress(KeyEvent.VK_LEFT);robot.keyPress(KeyEvent.VK_ENTER);
+			
+			btnCloseMeeting = (new WebDriverWait(driver, 1)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@Name='Close']")));
+			btnCloseMeeting.click();
+			//btnConfirmCloseing = (new WebDriverWait(driver, 2)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@Name='OK']")));
+			//btnConfirmCloseing.click();
+			
+			
+			return true;
+		}
+		else {return false;}
+		
+	}
+	
+	// TEST
+	public String specifyMeetingPropertiesTEST(List<String> mails) throws InterruptedException { 
 		txtSubject = (new WebDriverWait(driver, 7)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@AutomationId='4100']")));
 		txtSubject.sendKeys(TEST_TITLE);
 		txtTo = (new WebDriverWait(driver, 2)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@AutomationId='4106']")));
-		txtTo.sendKeys(mail); Thread.sleep(1000); // Dolphie.Lobo@amdocs.com
+		for(String mail : mails) 
+		{
+			txtTo.sendKeys(mail); txtTo.click();
+		}
+			
+		//mails.forEach(mail -> {txtTo.sendKeys(mail); txtTo.sendKeys(Keys.TAB); });
+		
+		 // Dolphie.Lobo@amdocs.com
 		btnSend = driver.findElement(By.name("Send"));
 		btnSend.click();Thread.sleep(2000);
+		return TEST_TITLE;
+
+	}
+	public void clickOKButton() throws AWTException {
+		Robot robot = new Robot();
+	robot.keyPress(KeyEvent.VK_ALT);
+	robot.keyPress(KeyEvent.VK_F4);
+	robot.delay(2000);
+		List okButtonList = driver.findElements(By.xpath("//*[@Name='OK']"));
+		if(okButtonList.size()>0) {
+			okButtonList.get(0);
+		btnConfirmCloseing = (WebElement) okButtonList.get(0);
+		btnConfirmCloseing.click(); System.out.println("OK button .. ");
+		}
+	}
+	/*********************************
+	 *  Open an appointment by name. *
+	 *********************************/
+	public void clickByMeetingName(String meetingNameInTheList) {
+		btnCreatedMeeting = (new WebDriverWait(driver, 3)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@Name,'"+meetingNameInTheList+"')]")));
+		btnCreatedMeeting.click();
+		btnOpen = (new WebDriverWait(driver, 1)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@Name='Open']")));
+		btnOpen.click();
+	}
+	
+	/*Original*/
+		public String specifyMeetingProperties(String mail) throws InterruptedException { 
+		txtSubject = (new WebDriverWait(driver, 7)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@AutomationId='4100']")));
+		txtSubject.sendKeys(TEST_TITLE);
+		txtTo = (new WebDriverWait(driver, 2)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@AutomationId='4106']")));
+		txtTo.sendKeys(mail); 
+		//txtTo.sendKeys(Keys.TAB); 
+		Thread.sleep(1000); // Dolphie.Lobo@amdocs.com
+		btnSend = driver.findElement(By.name("Send"));
+		btnSend.click();Thread.sleep(3000);
 		return TEST_TITLE;
 
 	}

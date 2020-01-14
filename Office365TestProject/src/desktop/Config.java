@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
@@ -27,6 +28,7 @@ public class Config {
     static WiniumDriverService service = null;
     static DesktopOptions options = null;
     static ExtentHtmlReporter htmlReporter;
+    WebElement btnConfirmCloseing = null;
     protected static ExtentReports extent;
 	@BeforeTest
 	public static void setupEnvironment(){
@@ -54,7 +56,8 @@ public class Config {
 
 	@AfterMethod
 	public void stopDriver(){
-	    driver.close();
+		driver.quit();
+	   // driver.close();
 	}
 
 	@AfterTest
@@ -70,6 +73,13 @@ public class Config {
 		return value;}
 	
 // https://github.com/2gis/Winium.Desktop/wiki/Supported-Commands
-	
+		public void clickOKButton() {
+			List okButtonList = driver.findElements(By.xpath("//*[@Name='OK']"));
+			if(okButtonList.size()>0) {
+				okButtonList.get(0);
+			btnConfirmCloseing = (WebElement) okButtonList.get(0);
+			btnConfirmCloseing.click(); System.out.println("OK button .. ");
+			}
+		}
 	
 }

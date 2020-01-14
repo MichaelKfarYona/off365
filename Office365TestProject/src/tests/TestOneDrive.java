@@ -50,6 +50,7 @@ public class TestOneDrive extends Settings{
 		oneDrive.uploadFileOrFolder(UploadType.FOLDER, "C:\\"+fullFileName);
 		testLog.log(Status.INFO, "Folder uploaded successfully");
 		Thread.sleep(2000);
+		testLog.pass("The Folder exists in the list.");
 		//Method for removing an item from the OneDrive list
 		oneDrive.deleteElementFromTheOneDriveList(fullFileName); //Deleting
 		Thread.sleep(2000);
@@ -67,6 +68,7 @@ public class TestOneDrive extends Settings{
 		
 			testLog.log(Status.INFO, "File uploaded successfully!"); 
 			Thread.sleep(2000);
+			testLog.pass("The File exists in the list.");
 			//Method for removing an item from the OneDrive list
 			oneDrive.deleteElementFromTheOneDriveList(fullFileName); //Deleting
 			Thread.sleep(2000);

@@ -63,10 +63,10 @@ public class Settings {
 	ExtentHtmlReporter htmlReporter;
     String driverPath = "c:\\DRIVERS\\chromedriver.exe";
     protected static WebDriver driver;
-    //Michael Lab user
+    // ***** Michael Lab user *****
     String loginName = "Michael@msglab.tech"; String password = "Amdocs@123";
-    //Steve user
-   // String loginName = "yoelap@amdocs.com"; String password = "Newpass1!";
+    // ***** Steve user *****
+   // String loginName = "yoelap@amdocs.com"; String password = "Random@224466";
     static ExtentTest testLogger;
     @BeforeTest
     public void ReportSetup() {
@@ -126,15 +126,13 @@ public class Settings {
         mainPage.setLogin(loginName); 
         if(loginName.equals("Michael@msglab.tech")) {mainPage.setPassword(password); mainPage.signInNo();}
         //testLogger.log(Status.INFO, "Open Office 365");
+        Thread.sleep(3000);
         Office365Page officePage = new Office365Page(driver);
         System.out.println("OFFICE 365");
         Thread.sleep(2000);
         //testLogger.log(Status.INFO, "Click Teams link ");
         chooseApplicationByName(appName);
        // officePage.chooseApplication(appName);
-        /************************
-         * Switch between tabs *
-         ************************/
         ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
        driver.switchTo().window(tabs.get(1));
        //System.out.println("******* "+appName.toString());
