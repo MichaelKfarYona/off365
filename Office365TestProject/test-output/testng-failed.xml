@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [My test suite]">
-  <test thread-count="5" name="testing(failed)">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="desktop.tests.TestOutlookDesktop">
+      <class name="desktop.tests.TestOneDriveDesktop">
         <methods>
           <include name="stopDriver"/>
+          <include name="checkOneDriveDesktop"/>
           <include name="startDriver"/>
           <include name="tearDown"/>
           <include name="setupEnvironment"/>
-          <include name="checkmeeting"/>
         </methods>
-      </class> <!-- desktop.tests.TestOutlookDesktop -->
+      </class> <!-- desktop.tests.TestOneDriveDesktop -->
     </classes>
-  </test> <!-- testing(failed) -->
-</suite> <!-- Failed suite [My test suite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

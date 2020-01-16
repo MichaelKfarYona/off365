@@ -47,7 +47,7 @@
 				</methods>
 
 			</class>
-<!--
+
 			<class name="tests.TestPlannerViaTeams">
 				<methods>
 					<include name="addPlannerViaTeams" />
@@ -60,7 +60,7 @@
 					<include name="addFormsViaTeams" />
 				</methods>
 			</class>
--->
+
 			<!-- Run by groups -->
 
 			<!-- <groups> <run> <include name="Planner"/> </run> </groups> -->

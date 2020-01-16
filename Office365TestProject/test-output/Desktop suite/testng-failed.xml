@@ -8,8 +8,8 @@
           <include name="stopDriver"/>
           <include name="startDriver"/>
           <include name="tearDown"/>
+          <include name="takeMailHeader"/>
           <include name="setupEnvironment"/>
-          <include name="checkmeeting"/>
         </methods>
       </class> <!-- desktop.tests.TestOutlookDesktop -->
     </classes>

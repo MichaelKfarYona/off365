@@ -32,7 +32,7 @@ public class ConfigOneDrive {
 	    protected static ExtentReports extent;
 		@BeforeTest
 		public static void setupEnvironment(){
-			htmlReporter = new ExtentHtmlReporter("extentReportOutlookDesktop.html");
+			htmlReporter = new ExtentHtmlReporter("extentReportOneDriveDesktop.html");
 	    	extent = new ExtentReports();
 	    	extent.attachReporter(htmlReporter);
 		    options = new DesktopOptions(); //Instantiate Winium Desktop Options
@@ -56,6 +56,7 @@ public class ConfigOneDrive {
 
 		@AfterMethod
 		public void stopDriver(){
+			//driver.quit();
 		    driver.close();
 		}
 

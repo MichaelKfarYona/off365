@@ -8,8 +8,8 @@
 			<class name="desktop.tests.TestOutlookDesktop">
 				<methods>
 
-					<include name="createNewAmdocsMeeting"/>
-					<include name="checkmeeting" />
+					<include name="takeMailHeader"/>
+					
 
 				</methods>
 			</class>

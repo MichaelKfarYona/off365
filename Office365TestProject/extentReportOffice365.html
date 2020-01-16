@@ -46,7 +46,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>Jan 14, 2020 10:20:12 AM</span>
+                    <span class='label suite-start-time blue darken-3'>Jan 14, 2020 04:22:09 PM</span>
 				</a>
 			</li>
 			<li>
@@ -122,7 +122,7 @@
 					<canvas id='parent-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>1</span> test(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>11</span> test(s) passed</span>
 				</div>
 				<div class='block text-small'>
 					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
@@ -137,10 +137,10 @@
 					<canvas id='child-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='16.667%'><span class='strong'>1</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='26.829%'><span class='strong'>11</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='83.333%'>5</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='73.171%'>30</span> others
 				</div>
 			</div>
 		</div>
@@ -157,15 +157,15 @@
 				
 				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>tests.TestFormViaTeams</span>
-						<span class='test-time'>Jan 14, 2020 10:20:21 AM</span>
+						<span class='test-name'>tests.TestTeamsChannelPage</span>
+						<span class='test-time'>Jan 14, 2020 04:22:17 PM</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>Jan 14, 2020 10:20:21 AM</span>
-	<span class='label end-time'>Jan 14, 2020 10:21:25 AM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 1m 4s+591ms</span>
+	<span class='label start-time'>Jan 14, 2020 04:22:17 PM</span>
+	<span class='label end-time'>Jan 14, 2020 04:23:19 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 2s+138ms</span>
 </div>
 	<div class='test-steps'>
 		<table class='bordered table-results'>
@@ -179,33 +179,498 @@
 			<tbody>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>10:20:58 AM</td>
+					<td class='timestamp'>4:22:17 PM</td>
+					<td class='step-details'>Create new team: started</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:22:54 PM</td>
+					<td class='step-details'>Open Teams page</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:23:07 PM</td>
+					<td class='step-details'>Attempt to create a team</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:23:19 PM</td>
+					<td class='step-details'>The New Team has been created! You can run 'checkNewTeam' or/and 'deleteNewTeam' method!</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='2'>
+					<div class='test-heading'>
+						<span class='test-name'>tests.TestTeamsChannelPage</span>
+						<span class='test-time'>Jan 14, 2020 04:23:29 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Jan 14, 2020 04:23:29 PM</span>
+	<span class='label end-time'>Jan 14, 2020 04:24:17 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 48s+621ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:23:29 PM</td>
+					<td class='step-details'>Checking the existence of the team</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:24:07 PM</td>
+					<td class='step-details'>Open Teams page</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:24:14 PM</td>
+					<td class='step-details'>Check the existence of the group.</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:24:17 PM</td>
+					<td class='step-details'>The team AUTOMATION_TEST_TEAM_85199 is on the list.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='3'>
+					<div class='test-heading'>
+						<span class='test-name'>tests.TestPowerAutomate</span>
+						<span class='test-time'>Jan 14, 2020 04:24:26 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Jan 14, 2020 04:24:26 PM</span>
+	<span class='label end-time'>Jan 14, 2020 04:25:23 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 57s+576ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:24:26 PM</td>
+					<td class='step-details'>Create new team: Started</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:25:23 PM</td>
+					<td class='step-details'>Flow has been created successfully!</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='4'>
+					<div class='test-heading'>
+						<span class='test-name'>tests.TestOneDrive</span>
+						<span class='test-time'>Jan 14, 2020 04:25:30 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Jan 14, 2020 04:25:30 PM</span>
+	<span class='label end-time'>Jan 14, 2020 04:26:16 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 45s+637ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:25:30 PM</td>
+					<td class='step-details'>Upload file: Started</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:26:14 PM</td>
+					<td class='step-details'>File uploaded successfully!</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:26:16 PM</td>
+					<td class='step-details'>The File exists in the list.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='5'>
+					<div class='test-heading'>
+						<span class='test-name'>tests.TestOneDrive</span>
+						<span class='test-time'>Jan 14, 2020 04:26:27 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Jan 14, 2020 04:26:27 PM</span>
+	<span class='label end-time'>Jan 14, 2020 04:27:11 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 44s+201ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:26:27 PM</td>
+					<td class='step-details'>Upload folder: Started</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:27:09 PM</td>
+					<td class='step-details'>Folder uploaded successfully</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:27:11 PM</td>
+					<td class='step-details'>The Folder exists in the list.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='6'>
+					<div class='test-heading'>
+						<span class='test-name'>tests.TestForms</span>
+						<span class='test-time'>Jan 14, 2020 04:27:24 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Jan 14, 2020 04:27:24 PM</span>
+	<span class='label end-time'>Jan 14, 2020 04:28:04 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 39s+630ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:27:24 PM</td>
+					<td class='step-details'>Start Forms app</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:27:24 PM</td>
+					<td class='step-details'>Login as User</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:27:34 PM</td>
+					<td class='step-details'>Open Office 365</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:27:36 PM</td>
+					<td class='step-details'>Click Teams link</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:27:58 PM</td>
+					<td class='step-details'>Forms has been created!</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:28:04 PM</td>
+					<td class='step-details'>The Form 'Test_Form_Name_22510' is exists!</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='7'>
+					<div class='test-heading'>
+						<span class='test-name'>tests.TestPlanner</span>
+						<span class='test-time'>Jan 14, 2020 04:28:12 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Jan 14, 2020 04:28:12 PM</span>
+	<span class='label end-time'>Jan 14, 2020 04:29:05 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 53s+719ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:28:12 PM</td>
+					<td class='step-details'>Start Planner app</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:28:53 PM</td>
+					<td class='step-details'>Plan has been created!</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:29:05 PM</td>
+					<td class='step-details'>Verification of the existence of the plan was successful! Task assigned!</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='8'>
+					<div class='test-heading'>
+						<span class='test-name'>tests.TestPlannerViaTeams</span>
+						<span class='test-time'>Jan 14, 2020 04:29:13 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Jan 14, 2020 04:29:13 PM</span>
+	<span class='label end-time'>Jan 14, 2020 04:30:18 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 4s+468ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:29:13 PM</td>
+					<td class='step-details'>Start Browser</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:29:52 PM</td>
+					<td class='step-details'>Teams is opened</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:30:05 PM</td>
+					<td class='step-details'>Application Planner selected</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:30:15 PM</td>
+					<td class='step-details'>Name specified: AUTO_TEST_VIA_TEAMS_4471</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:30:18 PM</td>
+					<td class='step-details'>The new plan has been created and checked successfully!</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='9'>
+					<div class='test-heading'>
+						<span class='test-name'>tests.TestFormViaTeams</span>
+						<span class='test-time'>Jan 14, 2020 04:30:26 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Jan 14, 2020 04:30:26 PM</span>
+	<span class='label end-time'>Jan 14, 2020 04:31:32 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 5s+841ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:31:04 PM</td>
 					<td class='step-details'>Loggedin</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>10:21:04 AM</td>
+					<td class='timestamp'>4:31:11 PM</td>
 					<td class='step-details'>Open Teams</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>10:21:05 AM</td>
+					<td class='timestamp'>4:31:12 PM</td>
 					<td class='step-details'>Click add tab button</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>10:21:10 AM</td>
+					<td class='timestamp'>4:31:17 PM</td>
 					<td class='step-details'>Element 'Forms' has been selected</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>10:21:25 AM</td>
+					<td class='timestamp'>4:31:32 PM</td>
 					<td class='step-details'>The form is filled</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>10:21:25 AM</td>
-					<td class='step-details'>The new form has been created and checked successfully! - AUTO_TEST_FORM_VIA_TEAMS_34651</td>
+					<td class='timestamp'>4:31:32 PM</td>
+					<td class='step-details'>The new form has been created and checked successfully! - AUTO_TEST_FORM_VIA_TEAMS_34483</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='10'>
+					<div class='test-heading'>
+						<span class='test-name'>tests.TestTeamsChannelPage</span>
+						<span class='test-time'>Jan 14, 2020 04:31:40 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Jan 14, 2020 04:31:40 PM</span>
+	<span class='label end-time'>Jan 14, 2020 04:32:33 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 52s+636ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:31:40 PM</td>
+					<td class='step-details'>Assign role validation</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:32:33 PM</td>
+					<td class='step-details'>New meeting has been created: AUTOCREATED_TITLE_60372</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='11'>
+					<div class='test-heading'>
+						<span class='test-name'>tests.TestsToDo</span>
+						<span class='test-time'>Jan 14, 2020 04:32:43 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Jan 14, 2020 04:32:43 PM</span>
+	<span class='label end-time'>Jan 14, 2020 04:33:27 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 43s+924ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:32:43 PM</td>
+					<td class='step-details'>Start: ToDo app</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>4:33:23 PM</td>
+					<td class='step-details'>List and tasks has been created!</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>4:33:27 PM</td>
+					<td class='step-details'>List and tasks has been created successfully!</td>
 				</tr>
 			</tbody>
 		</table>
@@ -247,31 +712,31 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Tests
-					<div class='panel-lead'>1</div>
+					<div class='panel-lead'>11</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>6</div>
+					<div class='panel-lead'>41</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Jan 14, 2020 10:20:12 AM</div>
+					<div class='panel-lead'>Jan 14, 2020 04:22:09 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Jan 14, 2020 10:21:27 AM</div>
+			 		<div class='panel-lead'>Jan 14, 2020 04:33:28 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>0h 1m 15s+254ms</div>
+					<div class='panel-lead'>0h 11m 19s+328ms</div>
 				</div>
 			</div>
 		</div>
@@ -284,7 +749,7 @@
 
 		<script>
 			var statusGroup = {
-				passParent: 1,
+				passParent: 11,
 				failParent: 0,
 				fatalParent: 0,
 				errorParent: 0,
@@ -292,13 +757,13 @@
 				skipParent: 0,
 				exceptionsParent: 0,
 				
-				passChild: 1,
+				passChild: 11,
 				failChild: 0,
 				fatalChild: 0,
 				errorChild: 0,
 				warningChild: 0,
 				skipChild: 0,
-				infoChild: 5,
+				infoChild: 30,
 				exceptionsChild: 0,
 				
 				passGrandChild: 0,

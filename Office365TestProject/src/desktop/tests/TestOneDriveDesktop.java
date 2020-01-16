@@ -1,10 +1,5 @@
 package desktop.tests;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.InputEvent;
-
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentTest;
@@ -20,24 +15,36 @@ public class TestOneDriveDesktop extends ConfigOneDrive{
 	ExtentTest testLogOutlook = null;
 	String meetingName = null;
 	boolean meetingInTheCalendar;
-	
-	// 1920x1080
-	public static void clickOD(int x, int y) throws AWTException{
-	    Robot bot = new Robot();
-	    bot.mouseMove(x, y);    
-	    bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-	    bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+	String _sourcePath = "C:\\DRIVERS\\1.jpg", _detinationPath = "C:\\Users\\michapru\\OneDrive - AMDOCS\\", _fileName = "1.jpg";
+
+	@Test(enabled=true, priority = 0, groups = { "DesktopOneDrive" })
+	public void addEntityToTheOneDriveFolder() { boolean elementExistence;
+		testLogOutlook = extent.createTest(getClass().getName());
+		testLogOutlook.log(Status.INFO, "Open OneDrive");
+		OneDriveDesktop oneDriveDesktop = new OneDriveDesktop(driver);
+		oneDriveDesktop.copyFileOrFolder("OneDrive - AMDOCS", _sourcePath, _detinationPath, _fileName);
+		oneDriveDesktop.swithToTaskBarOrTray("OneDrive - AMDOCS");
+		elementExistence = oneDriveDesktop.checkingElementExistence("1.jpg");
+		if(elementExistence==true) {testLogOutlook.pass("Test Pass");}
+		else {testLogOutlook.fail("Fail...");}
 	}
 	
-	@Test(enabled=true, priority = 0, groups = { "DesktopOutlook" })
+	
+	
+	@Test(enabled=false, priority = 0, groups = { "DesktopOneDrive" })
 	public void checkOneDriveDesktop() throws InterruptedException {
 		testLogOutlook = extent.createTest(getClass().getName());
-		testLogOutlook.log(Status.INFO, "Start Desktop Outlook");
+		testLogOutlook.log(Status.INFO, "Open OneDrive");
+		boolean myFlag;
 		OneDriveDesktop oneDriveDesktop = new OneDriveDesktop(driver);
-
-		
+		testLogOutlook.log(Status.INFO, "Switch to tray app");
+		oneDriveDesktop.swithToTaskBarOrTray("OneDrive - AMDOCS");
+		testLogOutlook.log(Status.INFO, "Check condition");
+		myFlag = oneDriveDesktop.checkOneDriveCondition(); 
+		System.out.println("My Flag = "+myFlag);
+		if(myFlag) {testLogOutlook.pass("Test passed!");}
+		else {testLogOutlook.fail("Failed");}
 		Thread.sleep(3000);
-		
 	}
 	
 }

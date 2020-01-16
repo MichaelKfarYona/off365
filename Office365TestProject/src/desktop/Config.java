@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -32,11 +33,14 @@ public class Config {
     protected static ExtentReports extent;
 	@BeforeTest
 	public static void setupEnvironment(){
+		int randomPort = randomNumInRange(9000, 9999);
 		htmlReporter = new ExtentHtmlReporter("extentReportOutlookDesktop.html");
     	extent = new ExtentReports();
     	extent.attachReporter(htmlReporter);
+    	
 	    options = new DesktopOptions(); //Instantiate Winium Desktop Options
 	    options.setApplicationPath("C:\\Program Files (x86)\\Microsoft Office\\Office16\\outlook.exe");
+	    
 	    File driverPath = new File("C:\\DRIVERS\\Winium.Desktop.Driver.exe");
 	    System.setProperty("webdriver.winium.desktop.driver","C:\\DRIVERS\\Winium.Desktop.Driver.exe");
 	    service = new WiniumDriverService.Builder().usingDriverExecutable(driverPath).usingPort(9999).withVerbose(true)
@@ -56,8 +60,8 @@ public class Config {
 
 	@AfterMethod
 	public void stopDriver(){
+		driver.close();
 		driver.quit();
-	   // driver.close();
 	}
 
 	@AfterTest
@@ -71,7 +75,11 @@ public class Config {
 		public int getRandom() {Random rand = new Random(); 
 		int value = rand.nextInt(100000);
 		return value;}
-	
+		
+		public static int randomNumInRange(int min, int max) {
+			int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+			return randomNum;
+		}
 // https://github.com/2gis/Winium.Desktop/wiki/Supported-Commands
 		public void clickOKButton() {
 			List okButtonList = driver.findElements(By.xpath("//*[@Name='OK']"));
