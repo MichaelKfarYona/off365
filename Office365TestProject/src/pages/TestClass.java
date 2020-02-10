@@ -4,7 +4,14 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
@@ -29,22 +36,60 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
+
 import pages.Forms.FormType;
 import pages.TeamsChannelPage.KindOfTeam;
 import pages.ToDo.LeftMenuItems;
 
 public class TestClass extends Settings {
 	
-	public static void main(String[]args) throws AWTException {
+	public static void main(String[]args) throws AWTException, SQLException {
+		
+		 SimpleDateFormat SDFormat = new SimpleDateFormat("E MM/dd/yyyy"); 
+	     Calendar cal = Calendar.getInstance(); 
+
+	     String curr_date = SDFormat.format(cal.getTime()); 
+	     System.out.println("Formatted Date: " + curr_date);
+	     cal.add(Calendar.DATE, 1);
+	     
+	     String nextT = SDFormat.format(cal.getTime()); // substract 1 month
+	     System.out.println("Formatted Date: " + nextT);
+	     
+		/*
+		
+		DataBaseProcessor db = new DataBaseProcessor();
+		Connection conn = db.getConnection("jdbc:mysql://localhost:3308/autotest", "root", "");
+		
+		String query = "SELECT * from test";
+		Statement statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(query);
+		int columns = rs.getMetaData().getColumnCount();
+        // Перебор строк с данными
+        while(rs.next()){
+            for (int i = 1; i <= columns; i++){
+                System.out.print(rs.getString(i) + "\t");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        if(rs != null)
+            rs.close();
+        if(statement != null)
+        	statement.close();
+        if(conn != null)
+        	conn.close();
+        */
+        
+		// v testovom classe nuzno sozdat DataBaseProcessor db = new DataBaseProcessor();
+		//Connection conn = db.getConnection(URL, USER, PASSWORD);
+		// String query = "select ...";
+		// Statement statement = conn.createStatement();
+		// ResultSet resSet = statement.executeQuery(query);
+		//statement.close(); 
+		//conn.close();
 		// 1920x1080
 		
-		    Robot bot = new Robot();
-		    bot.mouseMove(1650, 1052);    
-		    bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-		    bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-		    bot.delay(3000);
-		
-	}
+		   
 	/*
 	 * ExtentHtmlReporter htmlReporter; final String newTeamName =
 	 * "AUTOMATION_TEST_TEAM_"; final String listName = "LIST_NAME_"; final String
@@ -186,4 +231,4 @@ public class TestClass extends Settings {
 							 * public int getRandom() {Random rand = new Random(); int value =
 							 * rand.nextInt(1000000); return value;}
 							 */
-}
+}}

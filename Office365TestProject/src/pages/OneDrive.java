@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.Alert;
@@ -24,6 +25,7 @@ public class OneDrive {
 	public enum NewMenuItem{
 		FOLDER, WORD_DOCUMENT, EXCEL_WORKBOOK, POWERPOINT_DOCUMENT, ONENOTE_NOTEBOOK, FORMS_FOR_EXCEL, LINK
 	}
+	public enum LinkSettings{ANYONE_WITH_THE_LINK, PEOLE_IN_AMDOCS_MSGLAB_WITH_THE_LINK, PEOPLE_WITH_EXISTING_ACCESS, SPECIFIC_PEOPLE}
 	public enum UploadType{FILES, FOLDER}
 	WebElement btnUpload = null;
 	WebElement btnNew, btnUploadFilesFromPC, txtEnterFolderName, btnMagnifier, btnCreate, elementFromList = null;
@@ -91,22 +93,42 @@ public class OneDrive {
 		 catch(Exception e) {System.out.println("Smthing wrong ... Check deleteElementFromTheOneDriveList method! "+e.getStackTrace());return false;}
 	 }
 	 // Share document
-	 public void shareOneDriveDocument(String elementName, String mail) throws InterruptedException {
+	 public void shareOneDriveDocument(String elementName, String mail, LinkSettings linkSettings) throws InterruptedException, AWTException {
 		 checkBoxOfTheElement = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@aria-label='Checkbox for "+elementName+"']"))); 
 		 checkBoxOfTheElement.click();
 		 btnShareDocument = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button//span[contains(text(),'Share')]")));
 		 btnShareDocument.click();Thread.sleep(3000);
-		 
 		 WebElement iFrame= driver.findElement(By.xpath("//iframe[@id='shareFrame']"));
 			driver.switchTo().frame(iFrame);
-			txtEmailOrName = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@role='combobox']")));
-			txtEmailOrName.sendKeys(mail);
+		
 			
-			linkSendLink = driver.findElement(By.xpath("//h1[contains(text(),'Send Link')]"));
-			linkSendLink.click();
-						
+			//List<WebElement> list = driver.findElements(By.xpath("//span[contains(text(), 'outside of your organization')]"));		
+			//System.out.println("***** STEP 6");
+			//if (list.size()>0) {
+				WebElement chooseWhoWouldYouLike = driver.findElement(By.xpath("//div[@class='od-ShareLinkDescription']"));
+				chooseWhoWouldYouLike.click();
+				String linkSettingsParametr = null;
+				switch(linkSettings) { 
+				case ANYONE_WITH_THE_LINK: linkSettingsParametr = "Anyone";  break;
+				case PEOLE_IN_AMDOCS_MSGLAB_WITH_THE_LINK: linkSettingsParametr = "MSGLAB"; break;  
+				case PEOPLE_WITH_EXISTING_ACCESS : linkSettingsParametr = "existing"; break;
+				case SPECIFIC_PEOPLE: linkSettingsParametr = "Specific"; break;
+				}
+				WebElement LinkTo = (new WebDriverWait(driver, 5)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='od-ShareLinkDescription-label' and contains(text(),'"+linkSettingsParametr+"')]")));
+				LinkTo.click();
+				WebElement btnApply = driver.findElement(By.xpath("//div[contains(text(),'Apply')]"));
+				btnApply.click();
+				
+				txtEmailOrName = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@role='combobox']")));
+				txtEmailOrName.sendKeys(mail);
+				Thread.sleep(2000);
+		
+		  Robot robot = new Robot(); 
+		  robot.keyPress(KeyEvent.VK_ENTER);
+		  Thread.sleep(2000);
+
 			btnSendLink = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Send')]")));
-			btnSendLink.click(); Thread.sleep(2000);
+			btnSendLink.click(); 
 			driver.switchTo().parentFrame();
 			
 	 }

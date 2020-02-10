@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Desktop suite">
+	<test name="testing">
+		<classes>
+ 
+			<!-- OneDrive -->
+			<class name="desktop.tests.TestOneDriveDesktop">
+				<methods>
+
+					<include name="checkOneDriveDesktop"/>
+					<include name="addEntityToTheOneDriveFolder"/>
+					
+				</methods>
+			</class>
+
+		</classes>
+	</test>
+</suite>

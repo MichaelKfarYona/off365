@@ -21,7 +21,7 @@ public class DataBaseProcessor {
 	private static final String INSERT_NEW = "INSERT INTO table VALUES(?,?,?,?) ";
 	private static final String USER_NAME = "";
 	private static final String PASSWORD = "";
-	private static final String URL = "jdbc:mysql://localhost:3303/";
+	private static final String URL = "jdbc:mysql://localhost/";
 	
 	public DataBaseProcessor() throws SQLException {
 		DriverManager.registerDriver(new FabricMySQLDriver());
@@ -34,7 +34,7 @@ public class DataBaseProcessor {
 		return connection;
 	}
 	
- 
+  
 
 // v testovom classe nuzno sozdat DataBaseProcessor db = new DataBaseProcessor();
 //Connection conn = db.getConnection(URL, USER, PASSWORD);

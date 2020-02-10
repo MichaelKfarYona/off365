@@ -47,8 +47,10 @@ public class PowerAutomate {
 		driver.switchTo().alert().accept(); // ALERT
 	}
 	
-	public void createNewFlow() {
-		btnCreate = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='ms-Button-label label-113' and contains(text(),'Create')]")));
+	public void createNewFlow() throws InterruptedException {
+		Thread.sleep(2000);
+		// btnCreate = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='ms-Button-label label-113' and contains(text(),'Create')]"))); 
+		btnCreate = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(),'Create')]")));
 		btnCreate.click();
 	}
 	public void addAutomatedFlow(String autoFlowName) throws InterruptedException {
@@ -57,7 +59,7 @@ public class PowerAutomate {
 		popup.click();}
 		else {System.out.println("There is no notification!");}
 		
-		WebElement linkAutoFlow = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div//h2[@class='fl-CardTitle cardTitle-141' and contains(text(),'Automated flow')]")));
+		WebElement linkAutoFlow = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div//h2[contains(text(),'Automated flow')]")));
 		linkAutoFlow.click();
 		
 		//Thread.sleep(2000);
@@ -66,7 +68,7 @@ public class PowerAutomate {
 		txtFlowName.sendKeys(autoFlowName);
 		btnFlowsTrigger = driver.findElement(By.xpath("//div[@aria-live='polite']//span[contains(text(),'OneDrive for Business')]"));
 		btnFlowsTrigger.click();
-		btnCreateFlow = driver.findElement(By.xpath("//div[@class='ms-Button-label label-158' and contains(text(),'Create')]"));btnCreateFlow.click();
+		btnCreateFlow = driver.findElement(By.xpath("//div[contains(@class,'footer')]//div[contains(text(),'Create')]"));btnCreateFlow.click();
 		System.out.println("TITLE _ "+driver.getTitle());
 		txtFolderName = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='msla-editor-input-control']")));
 		txtFolderName.click();

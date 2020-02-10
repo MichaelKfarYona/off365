@@ -1,19 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Desktop suite">
+<suite name="Desktop Outloot suite">
 	<test name="testing">
+	<parameter name = "phoneNumberProduction" value="297267340"/>
+	<parameter name = "_ProductionAvayaPhoneNumber_1" value="2008"/>
+	<parameter name = "_ProductionAvayaPhoneNumber_2" value="6100"/>
+	<parameter name = "_ProductionPolycomPhoneNumber" value="67277"/>
+	<parameter name = "_TestEnvAvayaPhoneNumber" value="67340"/>
+	<parameter name = "_TestEnvPolycomPhoneNumber" value="67215"/>
+	<parameter name = "_AfterMeetingName" value="AUTOTEST_37630"/>
+	<parameter name = "_deleteAndVerifyMeeting" value="TestDelAndValidate"/>
+	<parameter name = "_MeetingInThePast" value="AUTOTEST_082187"/>
+	
+		
 		<classes>
-
+ 
 			<!-- Outlook Desktop -->
 			<class name="desktop.tests.TestOutlookDesktop">
 				<methods>
-
-					<include name="takeMailHeader"/>
+<!--
+					<include name="createNewAmdocsMeeting"/>
+					<include name="forwardMeeting"/>
+					<include name="updateMeetingParticipants"/>
+					<include name="checkAccessNumbers"/>
+					<include name="updateMeetingDate"/>
+					<include name="checkSkypeMeeting"/>
+					<include name="meetingCancellation"/>
 					
+					
+					
+					<include name="createInvalidNewAmdocsMeeting"/>
+					<include name="createInvalidReoccurringMeeting"/>
+					
+				
+					
+						<include name="checkSkypeMeetingCallNumber"/>
+						<include name="verifyRoomCreationBeforeMeetingStartTime"/>
+						
+						<include name="verifyRoomCreationAfterMeetingStartTime"/>
+						
+						<include name="updateMeetingFromThePast"/>
+						
+						<include name="check_TestEnvPolycomPhoneNumber"/>
+						<include name="check_ProductionAvayaPhoneNumber_1"/>
+						<include name="check_ProductionAvayaPhoneNumber_2"/>
+						<include name="createReoccurringMeeting2DaysAgo"/>
+				
+						
+				
+				<include name="updateMeetingFromThePast"/>
+				<include name="checkConnectionNewMeetingIDPolycom"/>
+				<include name="checkConnectionNewMeetingIDAvaya"/>						
+					
+					
+					<include name="createReoccurringMeeting"/>
+					<include name="updateReoccurringMeeting"/>
+					<include name="reoccurringCancellationOne"/>
+					<include name="reoccurringCancellationAll"/>
+					
+					
+					-->
+					
+<!-- Set . Create meeting in the future and try to connect via Avaya, Polycom -->	
+	<!--			<include name="createAmdocsMeetingInTheFuture"/>
+						<include name="checkConnectionBeforeMeetingAvayaTestEnv"/>
+						<include name="checkConnectionBeforeMeetingPolycomTestEnv"/>
+						<include name="checkConnectionBeforeMeetingAvayaProduction_1"/>
+						<include name="checkConnectionBeforeMeetingAvayaProduction_2"/>
+						<include name="checkConnectionBeforeMeetingPolycomProduction"/>
+	-->
+<!-- Set . Create Recurrence meeting in the future and try to connect via Avaya, Polycom -->
+	<!--				<include name="createReoccurringMeeting"/>
+						<include name="checkBeforeConnectionNewRecMeetingIDAvaya"/>
+						<include name="checkBeforeConnectionNewRecMeetingIDPolycom"/>
+						<include name="checkBeforeConnectionNewRecMeetingIDAvayaProduction"/>
+						<include name="checkBeforeConnectionNewRecMeetingIDPolycomProduction"/>
+						<include name="checkBeforeConnectionNewRecMeetingIDAvayaProduction_2"/>
+	-->						
+				
+										
 
+			
+					
+					
 				</methods>
 			</class>
+			<!-- OneDrive -->
+<!--			<class name="desktop.tests.TestOneDriveDesktop">
+				<methods>
 
+					<include name="checkOneDriveDesktop"/>
+					<include name="addEntityToTheOneDriveFolder"/>
+					
+				</methods>
+			</class>
+-->
 		</classes>
 	</test>
 </suite>

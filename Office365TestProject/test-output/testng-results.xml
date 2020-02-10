@@ -1,36 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="1" total="2" passed="1">
+<testng-results skipped="0" failed="0" ignored="39" total="42" passed="3">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="19573" started-at="2020-01-16T13:35:38Z" finished-at="2020-01-16T13:35:58Z">
+  <suite name="Desktop Outloot suite" duration-ms="223118" started-at="2020-02-10T13:59:58Z" finished-at="2020-02-10T14:03:41Z">
     <groups>
-      <group name="DesktopOneDrive">
-        <method signature="TestOneDriveDesktop.addEntityToTheFolder()[pri:0, instance:desktop.tests.TestOneDriveDesktop@262b2c86]" name="addEntityToTheFolder" class="desktop.tests.TestOneDriveDesktop"/>
-      </group> <!-- DesktopOneDrive -->
+      <group name="DesktopOutlook">
+        <method signature="TestOutlookDesktop.createReoccurringMeeting()[pri:4, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="createReoccurringMeeting" class="desktop.tests.TestOutlookDesktop"/>
+      </group> <!-- DesktopOutlook -->
     </groups>
-    <test name="Default test" duration-ms="19573" started-at="2020-01-16T13:35:38Z" finished-at="2020-01-16T13:35:58Z">
-      <class name="desktop.tests.TestOneDriveDesktop">
-        <test-method status="PASS" signature="setupEnvironment()[pri:0, instance:desktop.tests.TestOneDriveDesktop@262b2c86]" name="setupEnvironment" is-config="true" duration-ms="1511" started-at="2020-01-16T13:35:38Z" finished-at="2020-01-16T13:35:40Z">
+    <test name="testing" duration-ms="223118" started-at="2020-02-10T13:59:58Z" finished-at="2020-02-10T14:03:41Z">
+      <class name="desktop.tests.TestOutlookDesktop">
+        <test-method status="PASS" signature="setupEnvironment()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="setupEnvironment" is-config="true" duration-ms="953" started-at="2020-02-10T13:59:58Z" finished-at="2020-02-10T13:59:59Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupEnvironment -->
-        <test-method status="PASS" signature="startDriver()[pri:0, instance:desktop.tests.TestOneDriveDesktop@262b2c86]" name="startDriver" is-config="true" duration-ms="1221" started-at="2020-01-16T13:35:40Z" finished-at="2020-01-16T13:35:41Z">
+        <test-method status="PASS" signature="startDriver()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="startDriver" is-config="true" duration-ms="1274" started-at="2020-02-10T13:59:59Z" finished-at="2020-02-10T14:00:00Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startDriver -->
-        <test-method status="PASS" signature="addEntityToTheFolder()[pri:0, instance:desktop.tests.TestOneDriveDesktop@262b2c86]" name="addEntityToTheFolder" duration-ms="12719" started-at="2020-01-16T13:35:41Z" finished-at="2020-01-16T13:35:54Z">
+        <test-method status="PASS" signature="createReoccurringMeeting()[pri:4, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="createReoccurringMeeting" duration-ms="49181" started-at="2020-02-10T14:00:00Z" finished-at="2020-02-10T14:00:49Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- addEntityToTheFolder -->
-        <test-method status="PASS" signature="stopDriver()[pri:0, instance:desktop.tests.TestOneDriveDesktop@262b2c86]" name="stopDriver" is-config="true" duration-ms="3584" started-at="2020-01-16T13:35:54Z" finished-at="2020-01-16T13:35:57Z">
+        </test-method> <!-- createReoccurringMeeting -->
+        <test-method status="PASS" signature="stopDriver()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="stopDriver" is-config="true" duration-ms="10350" started-at="2020-02-10T14:00:49Z" finished-at="2020-02-10T14:01:00Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- stopDriver -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:desktop.tests.TestOneDriveDesktop@262b2c86]" name="tearDown" is-config="true" duration-ms="514" started-at="2020-01-16T13:35:58Z" finished-at="2020-01-16T13:35:58Z">
+        <test-method status="PASS" signature="startDriver()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="startDriver" is-config="true" duration-ms="1353" started-at="2020-02-10T14:01:00Z" finished-at="2020-02-10T14:01:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startDriver -->
+        <test-method status="PASS" signature="checkBeforeConnectionNewRecMeetingIDAvaya(java.lang.String)[pri:5, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="checkBeforeConnectionNewRecMeetingIDAvaya" duration-ms="88672" started-at="2020-02-10T14:01:01Z" depends-on-methods="desktop.tests.TestOutlookDesktop.createReoccurringMeeting" finished-at="2020-02-10T14:02:30Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[67340]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkBeforeConnectionNewRecMeetingIDAvaya -->
+        <test-method status="PASS" signature="stopDriver()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="stopDriver" is-config="true" duration-ms="570" started-at="2020-02-10T14:02:30Z" finished-at="2020-02-10T14:02:30Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- stopDriver -->
+        <test-method status="PASS" signature="startDriver()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="startDriver" is-config="true" duration-ms="822" started-at="2020-02-10T14:02:30Z" finished-at="2020-02-10T14:02:31Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startDriver -->
+        <test-method status="PASS" signature="checkBeforeConnectionNewRecMeetingIDPolycom(java.lang.String)[pri:5, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="checkBeforeConnectionNewRecMeetingIDPolycom" duration-ms="68331" started-at="2020-02-10T14:02:31Z" depends-on-methods="desktop.tests.TestOutlookDesktop.createReoccurringMeeting" finished-at="2020-02-10T14:03:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[67215]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkBeforeConnectionNewRecMeetingIDPolycom -->
+        <test-method status="PASS" signature="stopDriver()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="stopDriver" is-config="true" duration-ms="1108" started-at="2020-02-10T14:03:39Z" finished-at="2020-02-10T14:03:40Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- stopDriver -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="tearDown" is-config="true" duration-ms="467" started-at="2020-02-10T14:03:40Z" finished-at="2020-02-10T14:03:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- desktop.tests.TestOneDriveDesktop -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+        <test-method status="PASS" signature="after()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="after" is-config="true" duration-ms="1" started-at="2020-02-10T14:03:41Z" finished-at="2020-02-10T14:03:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- after -->
+      </class> <!-- desktop.tests.TestOutlookDesktop -->
+    </test> <!-- testing -->
+  </suite> <!-- Desktop Outloot suite -->
 </testng-results>

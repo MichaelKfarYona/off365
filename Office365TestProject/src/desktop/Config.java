@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -16,6 +18,7 @@ import org.openqa.selenium.winium.DesktopOptions;
 import org.openqa.selenium.winium.WiniumDriver;
 import org.openqa.selenium.winium.WiniumDriverService;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -31,6 +34,8 @@ public class Config {
     static ExtentHtmlReporter htmlReporter;
     WebElement btnConfirmCloseing = null;
     protected static ExtentReports extent;
+    static long start = System.currentTimeMillis();
+    static long timeSpent;
 	@BeforeTest
 	public static void setupEnvironment(){
 		int randomPort = randomNumInRange(9000, 9999);
@@ -60,14 +65,25 @@ public class Config {
 
 	@AfterMethod
 	public void stopDriver(){
-		driver.close();
-		driver.quit();
+		
+		  driver.close(); driver.quit();
+		 
 	}
 
 	@AfterTest
 	public void tearDown(){
 		extent.flush();
 	    service.stop();
+	    // driver.close();
+		// driver.quit();
+	}
+	@AfterSuite
+	public void after() {
+		timeSpent = System.currentTimeMillis() - start;
+    	Calendar cal = Calendar.getInstance();
+    	cal.setTimeInMillis(timeSpent);
+    	SimpleDateFormat format = new SimpleDateFormat("mm:ss");
+    	System.out.println("Spent on scripting: "+format.format(cal.getTime()));
 	}
 	 /***************** 
 		 * Random method *

@@ -3,15 +3,17 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="desktop.tests.TestOneDriveDesktop">
+      <class name="tests.TestPowerAutomate">
         <methods>
-          <include name="stopDriver"/>
-          <include name="checkOneDriveDesktop"/>
-          <include name="startDriver"/>
+          <include name="timeSpent"/>
+          <include name="createNewFlow"/>
+          <include name="Setup"/>
           <include name="tearDown"/>
-          <include name="setupEnvironment"/>
+          <include name="tearDownAll"/>
+          <include name="ReportSetup"/>
+          <include name="setTimePoint"/>
         </methods>
-      </class> <!-- desktop.tests.TestOneDriveDesktop -->
+      </class> <!-- tests.TestPowerAutomate -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

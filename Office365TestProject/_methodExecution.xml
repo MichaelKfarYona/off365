@@ -5,11 +5,10 @@
 		<classes>
 			
 			
-			<class name="desktop.tests.TestOutlookDesktop">
+			<class name="tests.TestTeamsChannelPage">
 				<methods>
-				<include name="createNewAmdocsMeeting"/>
+					<include name="assignRoleValidation"/>
 				
-					<include name="checkmeeting" />
 					
 					
 				</methods>

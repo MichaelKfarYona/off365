@@ -6,7 +6,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Random;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -30,7 +33,7 @@ public class ConfigOneDrive {
 	    static DesktopOptions options = null;
 	    static ExtentHtmlReporter htmlReporter;
 	    protected static ExtentReports extent;
-		@BeforeTest
+		@BeforeTest  
 		public static void setupEnvironment(){
 			htmlReporter = new ExtentHtmlReporter("extentReportOneDriveDesktop.html");
 	    	extent = new ExtentReports();
@@ -56,8 +59,10 @@ public class ConfigOneDrive {
 
 		@AfterMethod
 		public void stopDriver(){
+			//if(driver != null) {driver.close();}
+			System.out.println("Close session");
 			//driver.quit();
-		    driver.close();
+		   // driver.close();
 		}
 
 		@AfterTest
@@ -73,6 +78,12 @@ public class ConfigOneDrive {
 			return value;}
 		
 	// https://github.com/2gis/Winium.Desktop/wiki/Supported-Commands
-		
+			
+			// Make screenshot
+			public void screenShot() throws IOException {
+				   TakesScreenshot scr = ((TakesScreenshot) driver);
+				   File file1 = scr.getScreenshotAs(OutputType.FILE);
+				   FileUtils.copyFile(file1, new File("С:\\DRIVERS\\test1.PNG"));
+				}
 		
 	}

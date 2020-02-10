@@ -1,5 +1,6 @@
 package tests;
 
+import java.awt.AWTException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ import pages.TeamsChannelPage;
 import pages.WordDocumentPage;
 import pages.ExcelWorkboobPage.TopMenuTab;
 import pages.OneDrive.LeftMenuItem;
+import pages.OneDrive.LinkSettings;
 import pages.OneDrive.NewMenuItem;
 import pages.OneDrive.UploadType;
 import pages.Settings.ApplicationName;
@@ -117,13 +119,14 @@ public class TestOneDrive extends Settings{
 	}
 	
 	@Test(enabled = true, priority = 0, description = "Share", groups = { "OneDrive" })
-	public void shareOneDriveDocument() throws InterruptedException, IOException {
+	public void shareOneDriveDocument_() throws InterruptedException, IOException, AWTException {
 
 		loginAsAmdocsUserSettings(ApplicationName.ONEDRIVE); // Settings.class method
 
 		OneDrive oneDrive = new OneDrive(driver);
 		String mailNmae = "yoelap@amdocs.com";
-		oneDrive.shareOneDriveDocument("Document.docx",mailNmae);
+		oneDrive.shareOneDriveDocument("Document.docx", "prudnikov.michael@aol.com", LinkSettings.SPECIFIC_PEOPLE);
+		Thread.sleep(2000);
 	}
 	
 	

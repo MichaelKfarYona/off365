@@ -58,6 +58,24 @@ public class TestTeamsChannelPage extends Settings {
 		Thread.sleep(3000);
 	}
  
+	@Test(enabled = false, priority = 0, description = "Create a new Team Online", groups = { "Teams" })
+	public void createNewPrivateTeam() throws Exception {
+		testLog = extent.createTest(getClass().getName());
+		testLog.log(Status.INFO, "Create new team: started");
+		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
+		//loginAsAmdocsUser("Teams");
+		testLog.log(Status.INFO, "Open Teams page");
+		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
+		teamsPage.clickTeamsTab();
+		Thread.sleep(1000);
+		teamsPage.createTeam(); Thread.sleep(2000);
+		testLog.log(Status.INFO, "Attempt to create a team");
+		
+		teamsPage.buildATeamFromScratch(KindOfTeam.PRIVATE, newTeamName, teamNumber);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		testLog.pass("The New Team has been created! You can run 'checkNewTeam' or/and 'deleteNewTeam' method!");
+		Thread.sleep(3000);
+	}
 //*********************************************************************************************************
 //************************************* Checking the existence of the team *********************************
 //*********************************************************************************************************
@@ -153,21 +171,25 @@ public class TestTeamsChannelPage extends Settings {
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 		teamsPage.clickTeamsTab();
 		testLog.log(Status.INFO, "Open TeamMembers menu");
-		//teamsPage.openTeamMembersSettingsDot("AUTOMATION_TEST_TEAM_109");
-		teamsPage.openTeamMembersSettingsDot(newTeamName+teamNumber);
+		teamsPage.openTeamMembersSettingsDot("AUTOMATION_TEST_TEAM_109");
+		//teamsPage.openTeamMembersSettingsDot(newTeamName+teamNumber);
 		teamsPage.collapseExpandMembersAndGuests();
 		testLog.log(Status.INFO, "Owner users check");
-		Map<String, String> mapOwnersUsers = new HashMap<String, String>(teamsPage.checkOwnerOrMember());
+		//teamsPage.checkOwnerOrMember2();
+		teamsPage.listMembersAndGuestUsers();
+		/*
+		Map<String, String> mapOwnersUsers = new HashMap<String, String>(teamsPage.checkOwnerOrMember2());
 		for (Map.Entry<String, String> entry : mapOwnersUsers.entrySet()) {
 			Assert.assertEquals(entry.getKey(), "Michael Prudnikov"); 
 			Assert.assertEquals(entry.getValue(), "Owner"); 
 			// System.out.println(entry.getKey() + " - " + entry.getValue());
 		}
+		*/
 		testLog.log(Status.INFO, "Guest users check");
-		Map<String, String> mapGuestUsers = new HashMap<String, String>(teamsPage.checkGuestUsers());
-		for (Map.Entry<String, String> entry : mapGuestUsers.entrySet()) {
-			System.out.println(entry.getKey() + " - " + entry.getValue());
-		}
+		HashMap<String, String> resultMapGuest = new HashMap<String, String>(teamsPage.listMembersAndGuestUsers());
+		//resultMapGuest = teamsPage.listMembersAndGuestUsers();
+		if(resultMapGuest.isEmpty()) {testLog.log(Status.INFO, "Guests are absent.");}
+		else {testLog.log(Status.INFO, "Guests are present.");}
 		testLog.pass("Role check completed successfully");Thread.sleep(1000);
 	}
 	//*************************************************************************************************

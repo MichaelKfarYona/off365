@@ -5,3 +5,6 @@
 [1202/162026.982:ERROR:process_info.cc(556)] ReadMemoryInfo failed
 [1202/162026.982:ERROR:process_memory_win.cc(39)] Failed to initialize ProcessInfo.
 [1202/162026.982:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[0122/155723.457:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0122/155723.466:ERROR:exception_snapshot_win.cc(98)] thread ID 4504 not found in process
+[0122/155723.467:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)

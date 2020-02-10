@@ -16,15 +16,36 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.winium.WiniumDriver;
 import com.sun.jna.platform.win32.User32;
 
-public class OneDriveDesktop {
+import desktop.pages.OutlookDesktop.TopMenu;
 
+public class OneDriveDesktop {
+	public enum BottomMenu {OPEN_FOLDER, VIEW_ONLINE, MORE}
 	WiniumDriver driver;
 	private WebElement newAmdocsMeeting, txtTo, txtSubject, btnSend, lblMeetingName, txtLocation, btnNewEmail, txtMessageTo, txtSubjectMessage = null;
-	String TEST_TITLE = "AUTOTEST_"+getRandom();
+	String TEST_TITLE = "AUTOTEST_ONEDRIVE_"+getRandom();
 
 	public OneDriveDesktop(WiniumDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+	}
+	public void chooseBottomMenuItem(BottomMenu menuItems) throws InterruptedException {
+		//Thread.sleep(1000);
+		String parametrListItem = null;
+		
+		switch (menuItems) {
+		case OPEN_FOLDER:
+			parametrListItem = "Open folder";
+			break;
+		case VIEW_ONLINE:
+			parametrListItem = "View online";
+			break;
+		case MORE:
+			parametrListItem = "More";
+			break;
+		}
+		WebElement bottomMenuItem = (new WebDriverWait(driver, 2))
+				.until(ExpectedConditions.presenceOfElementLocated(By.name(parametrListItem)));
+		bottomMenuItem.click();
 	}
 	
 	public boolean checkOneDriveCondition() {
@@ -39,18 +60,17 @@ public class OneDriveDesktop {
 		}
 	}
 	public void swithToTaskBarOrTray(String appName) {
-		User32.INSTANCE.GetForegroundWindow();
+		User32.INSTANCE.GetForegroundWindow(); 
 		WebElement oneDriveTrayIcon = driver.findElement(By.xpath("//*[contains(@Name,'"+appName+"')]"));
 		oneDriveTrayIcon.click();
-		/*
-		 * HWND hwnd = User32.INSTANCE.FindWindow(null , "OneDrive - AMDOCS");
-		 * User32.INSTANCE.ShowWindow(hwnd,1);
-		 */
+		/*	 HWND hwnd = User32.INSTANCE.FindWindow(null , "OneDrive - AMDOCS");
+		  	 User32.INSTANCE.ShowWindow(hwnd,1);									 */
 	}
 
 	 /***********************************************************\
 	 * Copy a file or directory. Need to use an absolute path  *
 	 \***********************************************************/
+	
 	public String copyFileOrFolder(String appName, String pathSource_, String pathDetination_, String fileName) {
 		Path pathSource = Paths.get(pathSource_); 
 		Path pathDestination = Paths.get(pathDetination_+fileName);
@@ -62,12 +82,14 @@ public class OneDriveDesktop {
         } 
 		 return fileName;
 	}
-	
+	 
 	
 	public boolean checkingElementExistence(String fileName) {
 		List<WebElement> copiedFileFolder = driver.findElements(By.xpath("//*[contains(@Name,'"+fileName+"')]"));
-		if(copiedFileFolder.size()>0) {return true;}
-		else {return false;}
+		
+		if(copiedFileFolder.size() >0) {return true;}
+		else { 
+			return false;}
 		
 	}
 	
