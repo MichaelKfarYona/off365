@@ -38,7 +38,7 @@ public class Config {
     static long timeSpent;
 	@BeforeTest
 	public static void setupEnvironment(){
-		int randomPort = randomNumInRange(9000, 9999);
+		//int randomPort = randomNumInRange(9000, 9999);
 		htmlReporter = new ExtentHtmlReporter("extentReportOutlookDesktop.html");
     	extent = new ExtentReports();
     	extent.attachReporter(htmlReporter);
@@ -65,8 +65,9 @@ public class Config {
 
 	@AfterMethod
 	public void stopDriver(){
-		
+		if(driver!= null) {
 		  driver.close(); driver.quit();
+		  }
 		 
 	}
 

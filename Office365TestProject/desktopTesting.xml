@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Desktop Outloot suite">
-	<test name="testing">
+<suite name="Desktop Outlook suite">
+	<test name="desktopTesting">
 	<parameter name = "phoneNumberProduction" value="297267340"/>
 	<parameter name = "_ProductionAvayaPhoneNumber_1" value="2008"/>
 	<parameter name = "_ProductionAvayaPhoneNumber_2" value="6100"/>
@@ -11,6 +11,7 @@
 	<parameter name = "_AfterMeetingName" value="AUTOTEST_37630"/>
 	<parameter name = "_deleteAndVerifyMeeting" value="TestDelAndValidate"/>
 	<parameter name = "_MeetingInThePast" value="AUTOTEST_082187"/>
+	<parameter name = "_MEETING_NAME_DIFFERENT_USER" value="AUTOTEST_DF"/>
 	
 		
 		<classes>
@@ -19,20 +20,20 @@
 			<class name="desktop.tests.TestOutlookDesktop">
 				<methods>
 <!--
+
+					<include name="checkMainAmdocsMeetingWindowTemplate"/>
 					<include name="createNewAmdocsMeeting"/>
 					<include name="forwardMeeting"/>
-					<include name="updateMeetingParticipants"/>
-					<include name="checkAccessNumbers"/>
-					<include name="updateMeetingDate"/>
 					<include name="checkSkypeMeeting"/>
+					<include name="updateMeetingParticipants"/>
+					<include name="updateMeetingDate"/>
+					<include name="checkAccessNumbers"/>
 					<include name="meetingCancellation"/>
-					
 					
 					
 					<include name="createInvalidNewAmdocsMeeting"/>
 					<include name="createInvalidReoccurringMeeting"/>
 					
-				
 					
 						<include name="checkSkypeMeetingCallNumber"/>
 						<include name="verifyRoomCreationBeforeMeetingStartTime"/>
@@ -76,17 +77,60 @@
 						<include name="checkBeforeConnectionNewRecMeetingIDAvayaProduction"/>
 						<include name="checkBeforeConnectionNewRecMeetingIDPolycomProduction"/>
 						<include name="checkBeforeConnectionNewRecMeetingIDAvayaProduction_2"/>
+						
+						
 	-->						
+<!-- Set . Create Recurrence meeting Weekly, change to Daily and try to connect via Avaya, Polycom -->
+	<!--			<include name="createRecurrenceMeetingOneTimePerWeek"/>			
+					<include name="rescheduleRecMeetingOnePerWeekToDaily"/>
+					
+					<include name="connectToRescheduledRecMeetingWeeklyToDailyAvayaTestEnv"/>
+					<include name="connectToRescheduledRecMeetingWeeklyToDailyPolicomTestEnv"/>
+					<include name="connectToRescheduledRecMeetingWeeklyToDailyAvayaProduction_1"/>
+					<include name="connectToRescheduledRecMeetingWeeklyToDailyAvayaProduction_2"/>
+					<include name="connectToRescheduledRecMeetingWeeklyToDailyPolycomProduction_2"/>
 				
-										
-
+	-->
+<!-- Set . Create Recurrence meeting Daily in the future, change to Daily and try to connect via Avaya, Polycom -->		
+	<!--				
+					<include name="createReoccurringMeeting_2"/>
+					<include name="updateReoccurringMeetingOne"/>
+					<include name="connectionUpdatedRecurringMeetingOneAvayaTestEnv"/>
+	-->
+	<!-- Set . Create Recurrence meeting and reschedule 1 event (in the past) -->
+		<!--		<include name="createRecurrenceMeetingAndReschadule1Event"/>
+					<include name="updateReoccurringMeetingSeries"/>
+					
+					<include name="createNewAmdocsMeetingAndPreposeAnotherTime"/>
+					<include name="updateMeetingFromThePastTimeAndDateInOneDay"/>	
 			
+			
+					<include name="connectToDeletedMeetingRelevantTimeAvaya"/>
+					<include name="createReoccurringMeetingUpdateOneInThePast"/>
+					
+					<include name="createMeetingWithoutID"/>	
+						
+					<include name="createAllDayMeeting"/>
+					<include name="create24HoursMeeting"/>
+		-->		
+				
+					<include name="createNewAmdocsMeeting"/>
+					<include name="forwardMeeting"/>
+					<include name="checkSkypeMeeting"/>
+					<include name="meetingCancellation"/>
+			
+			
+						
 					
 					
 				</methods>
 			</class>
+			
+			
+			
 			<!-- OneDrive -->
-<!--			<class name="desktop.tests.TestOneDriveDesktop">
+			<!--
+			<class name="desktop.tests.TestOneDriveDesktop">
 				<methods>
 
 					<include name="checkOneDriveDesktop"/>
@@ -95,6 +139,7 @@
 				</methods>
 			</class>
 -->
+
 		</classes>
 	</test>
 </suite>

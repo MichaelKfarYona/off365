@@ -64,7 +64,7 @@ public class Settings {
     String driverPath = "c:\\DRIVERS\\chromedriver.exe";
     protected static WebDriver driver;
     // ***** Michael Lab user *****
-    String loginName = "Michael@msglab.tech"; String password = "Amdocs@123";
+    String loginName = "Michael@msglab.tech"; String password = "Ahmshere577561!";
     // ***** Steve user *****
    // String loginName = "yoelap@amdocs.com"; String password = "Random@224466";
     static ExtentTest testLogger;

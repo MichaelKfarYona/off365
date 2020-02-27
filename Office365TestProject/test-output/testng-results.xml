@@ -1,78 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="39" total="42" passed="3">
+<testng-results skipped="0" failed="0" ignored="9" total="12" passed="3">
   <reporter-output>
   </reporter-output>
-  <suite name="Desktop Outloot suite" duration-ms="223118" started-at="2020-02-10T13:59:58Z" finished-at="2020-02-10T14:03:41Z">
+  <suite name="My test suite" duration-ms="204004" started-at="2020-02-27T07:58:53Z" finished-at="2020-02-27T08:02:17Z">
     <groups>
-      <group name="DesktopOutlook">
-        <method signature="TestOutlookDesktop.createReoccurringMeeting()[pri:4, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="createReoccurringMeeting" class="desktop.tests.TestOutlookDesktop"/>
-      </group> <!-- DesktopOutlook -->
+      <group name="Teams">
+        <method signature="TestTeamsChannelPage.addNewMeeting()[pri:2, instance:tests.TestTeamsChannelPage@87f383f]" name="addNewMeeting" class="tests.TestTeamsChannelPage"/>
+        <method signature="TestTeamsChannelPage.checkNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@87f383f]" name="checkNewTeam" class="tests.TestTeamsChannelPage"/>
+        <method signature="TestTeamsChannelPage.createNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@87f383f]" name="createNewTeam" class="tests.TestTeamsChannelPage"/>
+      </group> <!-- Teams -->
     </groups>
-    <test name="testing" duration-ms="223118" started-at="2020-02-10T13:59:58Z" finished-at="2020-02-10T14:03:41Z">
-      <class name="desktop.tests.TestOutlookDesktop">
-        <test-method status="PASS" signature="setupEnvironment()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="setupEnvironment" is-config="true" duration-ms="953" started-at="2020-02-10T13:59:58Z" finished-at="2020-02-10T13:59:59Z">
+    <test name="testing" duration-ms="204004" started-at="2020-02-27T07:58:53Z" finished-at="2020-02-27T08:02:17Z">
+      <class name="tests.TestTeamsChannelPage">
+        <test-method status="PASS" signature="setTimePoint()[pri:0, instance:tests.TestTeamsChannelPage@87f383f]" name="setTimePoint" is-config="true" duration-ms="24" started-at="2020-02-27T07:58:53Z" finished-at="2020-02-27T07:58:53Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setupEnvironment -->
-        <test-method status="PASS" signature="startDriver()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="startDriver" is-config="true" duration-ms="1274" started-at="2020-02-10T13:59:59Z" finished-at="2020-02-10T14:00:00Z">
+        </test-method> <!-- setTimePoint -->
+        <test-method status="PASS" signature="ReportSetup()[pri:0, instance:tests.TestTeamsChannelPage@87f383f]" name="ReportSetup" is-config="true" duration-ms="278" started-at="2020-02-27T07:58:53Z" finished-at="2020-02-27T07:58:53Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- startDriver -->
-        <test-method status="PASS" signature="createReoccurringMeeting()[pri:4, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="createReoccurringMeeting" duration-ms="49181" started-at="2020-02-10T14:00:00Z" finished-at="2020-02-10T14:00:49Z">
+        </test-method> <!-- ReportSetup -->
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestTeamsChannelPage@87f383f]" name="Setup" is-config="true" duration-ms="5841" started-at="2020-02-27T07:58:53Z" finished-at="2020-02-27T07:58:59Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- createReoccurringMeeting -->
-        <test-method status="PASS" signature="stopDriver()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="stopDriver" is-config="true" duration-ms="10350" started-at="2020-02-10T14:00:49Z" finished-at="2020-02-10T14:01:00Z">
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="createNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@87f383f]" name="createNewTeam" duration-ms="69251" started-at="2020-02-27T07:58:59Z" description="Create a new Team Online" finished-at="2020-02-27T08:00:08Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- stopDriver -->
-        <test-method status="PASS" signature="startDriver()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="startDriver" is-config="true" duration-ms="1353" started-at="2020-02-10T14:01:00Z" finished-at="2020-02-10T14:01:01Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- startDriver -->
-        <test-method status="PASS" signature="checkBeforeConnectionNewRecMeetingIDAvaya(java.lang.String)[pri:5, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="checkBeforeConnectionNewRecMeetingIDAvaya" duration-ms="88672" started-at="2020-02-10T14:01:01Z" depends-on-methods="desktop.tests.TestOutlookDesktop.createReoccurringMeeting" finished-at="2020-02-10T14:02:30Z">
+        </test-method> <!-- createNewTeam -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestTeamsChannelPage@87f383f]" name="tearDown" is-config="true" duration-ms="1830" started-at="2020-02-27T08:00:08Z" finished-at="2020-02-27T08:00:10Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[67340]]>
+                <![CDATA[[TestResult name=createNewTeam status=SUCCESS method=TestTeamsChannelPage.createNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@87f383f] output={null}]]]>
               </value>
             </param>
           </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- checkBeforeConnectionNewRecMeetingIDAvaya -->
-        <test-method status="PASS" signature="stopDriver()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="stopDriver" is-config="true" duration-ms="570" started-at="2020-02-10T14:02:30Z" finished-at="2020-02-10T14:02:30Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- stopDriver -->
-        <test-method status="PASS" signature="startDriver()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="startDriver" is-config="true" duration-ms="822" started-at="2020-02-10T14:02:30Z" finished-at="2020-02-10T14:02:31Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- startDriver -->
-        <test-method status="PASS" signature="checkBeforeConnectionNewRecMeetingIDPolycom(java.lang.String)[pri:5, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="checkBeforeConnectionNewRecMeetingIDPolycom" duration-ms="68331" started-at="2020-02-10T14:02:31Z" depends-on-methods="desktop.tests.TestOutlookDesktop.createReoccurringMeeting" finished-at="2020-02-10T14:03:39Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[67215]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- checkBeforeConnectionNewRecMeetingIDPolycom -->
-        <test-method status="PASS" signature="stopDriver()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="stopDriver" is-config="true" duration-ms="1108" started-at="2020-02-10T14:03:39Z" finished-at="2020-02-10T14:03:40Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- stopDriver -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="tearDown" is-config="true" duration-ms="467" started-at="2020-02-10T14:03:40Z" finished-at="2020-02-10T14:03:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="after()[pri:0, instance:desktop.tests.TestOutlookDesktop@4d3167f4]" name="after" is-config="true" duration-ms="1" started-at="2020-02-10T14:03:41Z" finished-at="2020-02-10T14:03:41Z">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestTeamsChannelPage@87f383f]" name="Setup" is-config="true" duration-ms="4704" started-at="2020-02-27T08:00:10Z" finished-at="2020-02-27T08:00:15Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- after -->
-      </class> <!-- desktop.tests.TestOutlookDesktop -->
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="checkNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@87f383f]" name="checkNewTeam" duration-ms="53749" started-at="2020-02-27T08:00:15Z" description="Check New team creation" finished-at="2020-02-27T08:01:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkNewTeam -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestTeamsChannelPage@87f383f]" name="tearDown" is-config="true" duration-ms="1644" started-at="2020-02-27T08:01:09Z" finished-at="2020-02-27T08:01:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=checkNewTeam status=SUCCESS method=TestTeamsChannelPage.checkNewTeam()[pri:0, instance:tests.TestTeamsChannelPage@87f383f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.TestTeamsChannelPage@87f383f]" name="Setup" is-config="true" duration-ms="4853" started-at="2020-02-27T08:01:10Z" finished-at="2020-02-27T08:01:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="addNewMeeting()[pri:2, instance:tests.TestTeamsChannelPage@87f383f]" name="addNewMeeting" duration-ms="59539" started-at="2020-02-27T08:01:15Z" description="Teams : Create new meeting" finished-at="2020-02-27T08:02:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addNewMeeting -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:tests.TestTeamsChannelPage@87f383f]" name="tearDown" is-config="true" duration-ms="1769" started-at="2020-02-27T08:02:15Z" finished-at="2020-02-27T08:02:17Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=addNewMeeting status=SUCCESS method=TestTeamsChannelPage.addNewMeeting()[pri:2, instance:tests.TestTeamsChannelPage@87f383f] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="tearDownAll()[pri:0, instance:tests.TestTeamsChannelPage@87f383f]" name="tearDownAll" is-config="true" duration-ms="515" started-at="2020-02-27T08:02:17Z" finished-at="2020-02-27T08:02:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownAll -->
+        <test-method status="PASS" signature="timeSpent()[pri:0, instance:tests.TestTeamsChannelPage@87f383f]" name="timeSpent" is-config="true" duration-ms="2" started-at="2020-02-27T08:02:17Z" finished-at="2020-02-27T08:02:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- timeSpent -->
+      </class> <!-- tests.TestTeamsChannelPage -->
     </test> <!-- testing -->
-  </suite> <!-- Desktop Outloot suite -->
+  </suite> <!-- My test suite -->
 </testng-results>

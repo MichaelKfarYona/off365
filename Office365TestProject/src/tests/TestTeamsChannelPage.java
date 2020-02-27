@@ -32,7 +32,7 @@ public class TestTeamsChannelPage extends Settings {
 		OUTLOOK, ONEDRIVE, WORD, EXCEL, POWERPOINT, ONENOTE, SHAREPOINT,TEAMS, YAMMER, DYNAMICS_365, POWER_AUTOMATE, FORMS, TO_DO, PLANNER,DELVE
 	}
 	ExtentHtmlReporter htmlReporter;final String newTeamName = "AUTOMATION_TEST_TEAM_";
-	final int lineNumber = 2;String loginName = "Michael@msglab.tech";String password = "Amdocs@123";
+	final int lineNumber = 2;String loginName = "Michael@msglab.tech";String password = "Ahmshere577561!";
 	final String ownerName = "Michael Prudnikov";int teamNumber = getRandom();ExtentTest testLog = null;
 	final String meetingTitle = "AUTOCREATED_TITLE_";
 	

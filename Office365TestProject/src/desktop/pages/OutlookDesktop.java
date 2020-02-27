@@ -7,6 +7,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,8 +24,11 @@ import java.util.regex.Pattern;
 
 import org.eclipse.jetty.websocket.client.io.UpgradeConnection.SendUpgradeRequest;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -32,6 +36,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.winium.WiniumDriver;
 
 import com.sun.jna.platform.win32.User32;
+import com.thoughtworks.selenium.Selenium;
 
 import net.bytebuddy.utility.privilege.GetSystemPropertyAction;
 import pages.OneDrive.NewMenuItem;
@@ -48,8 +53,10 @@ public class OutlookDesktop {
 	final String _PRODUCTION_ENV_CONFIG = "C:\\DRIVERS\\_OutlookConfig\\penv\\AmdocsAddIn.dll.config";
 	final String _APP_PATH = "C:\\Program Files (x86)\\Amdocs\\Outlook Add-In\\";
 	final String _FILE_NAME = "AmdocsAddIn.dll.config";
-	
+	//WebDriver chromeDriver = new ChromeDriver();
 	WiniumDriver driver;
+	String driverPath = "c:\\DRIVERS\\chromedriver.exe";
+	
 	private WebElement newAmdocsMeeting,
 	txtTo, txtSubject, btnSend, txtSearchQuery,
 	btnDeleteMeeting, sendUpdate, mailInTheList,
@@ -76,7 +83,8 @@ public class OutlookDesktop {
 	confirmBtn.click();
 	}
 	/* OpenRecurrenceType{OPEN_OCCURENCE, OPEN_SERIES}*/
-	public void openRecurrenceTypeTopMenu(OpenRecurrenceType type) throws AWTException {
+	public boolean openRecurrenceTypeTopMenu(OpenRecurrenceType type) throws AWTException {
+		boolean flag= true;
 		String myType = null;
 		Robot rob = new Robot();
 		rob.keyPress(KeyEvent.VK_CONTROL);
@@ -91,20 +99,21 @@ public class OutlookDesktop {
 		switch(type) {
 		case OPEN_OCCURENCE : 
 			rob.keyPress(KeyEvent.VK_ENTER);
-			rob.keyRelease(KeyEvent.VK_ENTER);  
-			break;
+			rob.keyRelease(KeyEvent.VK_ENTER); rob.delay(500); flag = true; 
+			break;  
 		case OPEN_SERIES : 
 			rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB); rob.delay(500);
 			rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(500);
 			rob.keyPress(KeyEvent.VK_DOWN);		rob.keyRelease(KeyEvent.VK_DOWN);rob.delay(500);
 			rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(500);
-			rob.keyPress(KeyEvent.VK_ENTER);	rob.keyRelease(KeyEvent.VK_ENTER);  
-			break; 
+			rob.keyPress(KeyEvent.VK_ENTER);	rob.keyRelease(KeyEvent.VK_ENTER); rob.delay(500);flag = false; 
+			break;  
 		//case OPEN_OCCURENCE : myType = "Open Occurrence";  break;
 		//case OPEN_SERIES : myType = "Open Series"; break;
 		}
 		//WebElement choosenType = driver.findElement(By.xpath("//*[@Name='"+myType+"']"));
 		//choosenType.click();
+		return flag;
 	}
 	public void skypeMenu(SkypeTopMenuButton item) {
 		String menuItem = "";
@@ -151,6 +160,7 @@ public class OutlookDesktop {
 		}
 		
 	}
+	// value - esli NE true, vstavlyaets data 1/1/2020
 	public void chooseReccurrencePattern(RecurrencePattern recPattern, boolean value) throws InterruptedException, AWTException {
 		if(!value) {
 			WebElement startDate = driver.findElement(By.xpath("//*[@AutomationId='8222']"));
@@ -258,7 +268,7 @@ public class OutlookDesktop {
 	}
 	// Choose Left menu item
 	public void chooseNewMenuItem(LeftBottomMenu menuItem) throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		String parametrListItem = null;
 		
 		switch (menuItem) {
@@ -276,9 +286,21 @@ public class OutlookDesktop {
 			break;
 			
 		} 
-		WebElement leftBottomItem = (new WebDriverWait(driver, 3))
+		WebElement leftBottomItem = (new WebDriverWait(driver, 17))
 				.until(ExpectedConditions.presenceOfElementLocated(By.name(parametrListItem)));
 		leftBottomItem.click();
+	}
+	public void ifRecMeeting() throws InterruptedException, AWTException {
+		Thread.sleep(2000);
+		/*
+		 * try {List<WebElement> listA =
+		 * driver.findElements(By.xpath("//*[@Name='Open Recurring Item']"));
+		 * if(listA.size()>0) { System.out.println("LIST SIZE : "+listA.size()); Robot r
+		 * = new Robot(); r.keyPress(KeyEvent.VK_ENTER);
+		 * r.keyRelease(KeyEvent.VK_ENTER);} } catch(Exception e) {}
+		 */
+		Robot r = new Robot(); r.keyPress(KeyEvent.VK_ENTER);
+		  r.keyRelease(KeyEvent.VK_ENTER);
 	}
 
 	public void copyMailHeader(String mailName) throws InterruptedException, AWTException {
@@ -308,6 +330,19 @@ public class OutlookDesktop {
 		
 
 		// have to be  completed 
+	}
+	public void specifyWrongDay(int day) throws AWTException {
+		Robot rob = new Robot();
+		String newDay = createDate(day);
+		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(250);
+		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(250);
+		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(250);
+		rob.keyPress(KeyEvent.VK_CONTROL);  rob.keyPress(KeyEvent.VK_A);rob.delay(250);
+		rob.keyRelease(KeyEvent.VK_A); rob.keyRelease(KeyEvent.VK_CONTROL);
+		rob.keyPress(KeyEvent.VK_DELETE); rob.keyRelease(KeyEvent.VK_DELETE);
+		pasteString(newDay); rob.delay(250); rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(250);
+		btnSendMeeting_ByRobot();
+		
 	}
 	/* Specify INCORRECT date and time */
 	public void specifyNewDay(int day) throws InterruptedException, AWTException {
@@ -454,13 +489,16 @@ public class OutlookDesktop {
 		robot.keyPress(KeyEvent.VK_ALT); 
 		robot.keyPress(KeyEvent.VK_S);
 		robot.keyRelease(KeyEvent.VK_S);
-		robot.keyRelease(KeyEvent.VK_ALT);robot.delay(500);
-		
+		robot.keyRelease(KeyEvent.VK_ALT);robot.delay(2000);
+		try {
 		List<WebElement> btnSendAnyway = driver.findElements(By.xpath("//*[contains(@Name,'Send Anyway')]"));
-		if(btnSendAnyway.size()>0) {WebElement el = driver.findElement(By.xpath("//*[contains(@Name,'Send Anyway')]"));
-		el.click();
+		if(btnSendAnyway.size()>0) {
+			//WebElement el = driver.findElement(By.xpath("//*[contains(@Name,'Send Anyway')]"));
+			//el.click();
+			btnSendAnyway.get(0).click();
 		}
-		else {}
+		else {}}
+		catch(Exception e){}
 		return true;
 		
 		
@@ -602,6 +640,7 @@ public class OutlookDesktop {
 	}
 	
 	public void openAccessNumbers() throws InterruptedException {
+		Thread.sleep(2000);
 		WebElement allNumbers = driver.findElement(By.xpath("//*[@Name='all access numbers']"));
 		allNumbers.click(); Thread.sleep(2000);
 	}
@@ -611,8 +650,10 @@ public class OutlookDesktop {
 		WebElement btnAllowAccess = driver.findElement(By.xpath("//*[@Name='Allow once']"));
 		btnAllowAccess.click();}
 	}
-	public boolean checkCountry(String country) {
-		WebElement myCountry = driver.findElement(By.xpath("//tbody/tr[2]/td[1]")); 
+	public boolean checkCountry(String country) throws InterruptedException {
+		Thread.sleep(2000);
+		//ArrayList<WebElement> myArray = driver.findElements(By.xpath("//tbody//td[contains(text(),'"+country+"')]"));
+		WebElement myCountry = driver.findElement(By.xpath("//tbody//td[contains(text(),'"+country+"')]")); 
 		String nameFromTable = myCountry.getText();
 		System.out.println("===== "+ nameFromTable);
 		if(country.equals(nameFromTable)) {
@@ -658,9 +699,9 @@ public class OutlookDesktop {
 		Thread.sleep(2000);
 		WebElement txtConfirenceIDEditBox = (new WebDriverWait(driver, 3)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@LocalizedControlType='Edit Box' and contains(@Name,'Dialpad Text')]")));
 		txtConfirenceIDEditBox.sendKeys(meetingList.get(1));
-		Thread.sleep(40000);
-		List<WebElement> activeSkypeWindows = driver.findElements(By.xpath("//*[@ClassName='NetUINetUIDialog']")); 
-		System.out.println("Active window class : "+activeSkypeWindows.size());
+		Thread.sleep(59000);
+		List<WebElement> activeSkypeWindows = driver.findElements(By.xpath("//*[@ClassName='NetUIImage']")); 
+		System.out.println("Active window class size : "+activeSkypeWindows.size());
 		if(activeSkypeWindows.size()>0) {
 			robot.keyPress(KeyEvent.VK_CONTROL);
 			robot.keyPress(KeyEvent.VK_ENTER);
@@ -677,7 +718,33 @@ public class OutlookDesktop {
 			System.out.println("*** False * Not exist **");
 			return false;}
 		}
+	// today
 	
+	public boolean getLinksFromAmdocsMeetingWindow() {
+		boolean flag=true;
+		try {
+		//WebElement bodyDocument = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@LocalizedControlType='document' and contains(@Name,'Untitled Message')]")));
+		List<WebElement> bodyDocument = driver.findElements(By.xpath("//*[@LocalizedControlType='link']"));
+		 //String txtBody = bodyDocument.getText();
+		if(bodyDocument.size()>1) {
+		 System.out.println("Full text : " + bodyDocument.size());
+		 
+		 flag = true;}
+		 }
+		catch(Exception e){flag = false;}
+		return flag;
+		
+		
+	}
+	public void closeWithoutChanges() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_D);
+		robot.keyRelease(KeyEvent.VK_D);
+		robot.keyRelease(KeyEvent.VK_CONTROL); robot.delay(500);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+	}
 	public boolean callByNumber(String number, String meetingID) throws IOException, AWTException, InterruptedException {
 		
 		Process process=Runtime.getRuntime().exec("C:\\Program Files (x86)\\Microsoft Office\\Office16\\lync.exe");
@@ -710,8 +777,9 @@ public class OutlookDesktop {
 		Thread.sleep(2000);
 		WebElement txtConfirenceIDEditBox = (new WebDriverWait(driver, 3)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@LocalizedControlType='Edit Box' and contains(@Name,'Dialpad Text')]")));
 		txtConfirenceIDEditBox.sendKeys(meetingID);
-		Thread.sleep(40000);
-		List<WebElement> activeSkypeWindows = driver.findElements(By.xpath("//*[@ClassName='NetUINetUIDialog']")); 
+		Thread.sleep(58000);
+		//List<WebElement> activeSkypeWindows = driver.findElements(By.xpath("//*[@ClassName='NetUINetUIDialog']")); 
+		List<WebElement> activeSkypeWindows = driver.findElements(By.xpath("//*[contains(@Name,'1:')]"));
 		System.out.println("Active window class : "+activeSkypeWindows.size());
 		if(activeSkypeWindows.size()>0) {
 			robot.keyPress(KeyEvent.VK_CONTROL);
@@ -862,7 +930,7 @@ public class OutlookDesktop {
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_A);
 		robot.keyRelease(KeyEvent.VK_A);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyRelease(KeyEvent.VK_CONTROL); robot.delay(500);
 		pasteString(tn);
 		/*
 		robot.keyPress(KeyEvent.VK_TAB);robot.delay(500);robot.keyPress(KeyEvent.VK_TAB);robot.delay(500);robot.keyPress(KeyEvent.VK_TAB);robot.delay(500);
@@ -883,10 +951,61 @@ public class OutlookDesktop {
 		robot.keyPress(KeyEvent.VK_ALT);
 		robot.keyPress(KeyEvent.VK_S);
 		robot.keyRelease(KeyEvent.VK_S);
+		robot.keyRelease(KeyEvent.VK_ALT);robot.delay(500);
+		pasteString(newDay);
+		robot.delay(500);
+		robot.keyPress(KeyEvent.VK_TAB);		robot.keyRelease(KeyEvent.VK_TAB); robot.delay(500);
+		robot.keyPress(KeyEvent.VK_TAB);		robot.keyRelease(KeyEvent.VK_TAB); robot.delay(500);
+		
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		//clickOK();
+		
+		myRes = checkRecurrenceType();
+		btnSendMeeting_ByRobot();
+		Thread.sleep(1000);
+		System.out.println("Result - "+ myRes);
+		return myRes;
+		
+	}
+	
+	public boolean addRecurrenceNew(RecurrencePattern RP, boolean valid, int hour, int min, int day) throws AWTException, InterruptedException{
+		boolean myRes;
+		String tn = createTime(hour, min);
+		//String dayToday = createDate(day);
+		Robot robot = new Robot();
+		robot.delay(1000);
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_G);
+		robot.keyRelease(KeyEvent.VK_G);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.delay(1000);
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_A);
+		robot.keyRelease(KeyEvent.VK_A);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		pasteString(tn);
+		
+		String newDay = createDate(day);
+		chooseReccurrencePattern(RP);
+		System.out.println("DAY - "+newDay);
+		
+		robot.keyPress(KeyEvent.VK_ALT);
+		robot.keyPress(KeyEvent.VK_S);
+		robot.keyRelease(KeyEvent.VK_S);
 		robot.keyRelease(KeyEvent.VK_ALT);
+			robot.delay(500);
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_A);
+			robot.keyRelease(KeyEvent.VK_A);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.delay(500);
 		pasteString(newDay);
 		robot.delay(500);
 		
+		robot.keyPress(KeyEvent.VK_TAB);		robot.keyRelease(KeyEvent.VK_TAB); robot.delay(500);
+		robot.keyPress(KeyEvent.VK_TAB);		robot.keyRelease(KeyEvent.VK_TAB); robot.delay(500);
+		// suda mozno vstavit chislo povtoreniy
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 		//clickOK();
@@ -898,36 +1017,41 @@ public class OutlookDesktop {
 		return myRes;
 		
 	}
+	
 	public boolean checkRecurrenceType() {
-		List<WebElement> recList = driver.findElements(By.xpath("//*[@Name='Recurrence']"));
+		List<WebElement> recList = driver.findElements(By.xpath("//*[@LocalizedControlType='Button' and contains(@ToggleState,'On')]"));
+		System.out.println("Toggle state size : "+ recList.size());
+		
+		//ToggleState:	"Off
 		if(recList.size() > 0) {return true;}
 		else {return false;}
 	}
 	/* Update 1 meeting date and time . NOT R ! */
-	public ArrayList<String> updateOneMeetingDateAndTime(String meetingName, int hour, int min) throws AWTException {
+	public ArrayList<String> updateOneMeetingDateAndTime(String meetingName, int hour, int min, int day) throws AWTException {
 		String tn = createTime(hour, min);
-		String dayToday = createDate(0);
+		String dayToday = createDate(day);
+		Robot rob = new Robot();
 		List<WebElement> eventList = driver.findElements(By.xpath("//*[contains(@Name,'"+meetingName+"')]"));
 		if(!(eventList.size() > 0)) {
-			Robot robb = new Robot();
-			robb.keyPress(KeyEvent.VK_ALT);
-			robb.keyPress(KeyEvent.VK_UP);
-			robb.keyRelease(KeyEvent.VK_UP);
-			robb.keyRelease(KeyEvent.VK_ALT);
+			
+			rob.keyPress(KeyEvent.VK_ALT);
+			rob.keyPress(KeyEvent.VK_UP);
+			rob.keyRelease(KeyEvent.VK_UP);
+			rob.keyRelease(KeyEvent.VK_ALT);rob.delay(500);
 		}
+		
 		btnMeetingInThePast = driver.findElement(By.xpath("//*[contains(@Name,'"+meetingName+"')]"));
 		btnMeetingInThePast.click();
 		
-		Robot rob = new Robot();
 		rob.keyPress(KeyEvent.VK_ENTER);
 		rob.keyRelease(KeyEvent.VK_ENTER);
 		rob.delay(1000);
 		rob.setAutoDelay(1000);
-		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);
-		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);
-		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);
+		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(250);
+		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(250);
+		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(250);
 		pasteString(dayToday);
-		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);
+		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(250);
 		pasteString(tn);
 		
 		// poluchit  new id
@@ -936,10 +1060,10 @@ public class OutlookDesktop {
 		String oldMeetingID = getMeetingID(txtBody);
 		System.out.println("Old ID : "+oldMeetingID);
 		alt_F4();
-		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);
-		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);
-		rob.keyPress(KeyEvent.VK_UP);
-		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);
+		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(250);
+		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(250);
+		rob.keyPress(KeyEvent.VK_UP); rob.delay(250);
+		rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(250);
 		rob.keyPress(KeyEvent.VK_ENTER);
 		rob.keyRelease(KeyEvent.VK_ENTER);
 		rob.delay(1000);
@@ -967,6 +1091,133 @@ public class OutlookDesktop {
 		 */
 		
 	}
+	public void openOutlookAsDifferentUser(String user, String password) throws AWTException, InterruptedException {
+		Robot r = new Robot();
+		r.keyPress(KeyEvent.VK_WINDOWS);
+		r.keyPress(KeyEvent.VK_R);
+		r.keyRelease(KeyEvent.VK_R);
+		r.keyRelease(KeyEvent.VK_WINDOWS);r.delay(250);
+		Thread.sleep(3000);
+		r.keyPress(KeyEvent.VK_CONTROL);
+		r.keyPress(KeyEvent.VK_A);
+		r.keyRelease(KeyEvent.VK_A);
+		r.keyRelease(KeyEvent.VK_CONTROL); r.delay(250);
+		
+		// pasteString("runas /user:"+user+" \"C:\\Program Files (x86)\\Microsoft Office\\Office16\\OUTLOOK.EXE\"");
+		pasteString("C:\\_RESULTS\\Outlook");
+		r.keyPress(KeyEvent.VK_ENTER);
+		r.keyRelease(KeyEvent.VK_ENTER);r.delay(500);
+		Actions actions = new Actions(driver);
+		WebElement outlookLink = driver.findElement(By.xpath("//*[@LocalizedControlType='list item' and contains(@Name,'OUTLOOK')]"));
+		r.keyPress(KeyEvent.VK_SHIFT);
+		actions.contextClick(outlookLink).perform();
+		r.keyRelease(KeyEvent.VK_SHIFT);
+	//			pasteString(password);
+	//	r.keyPress(KeyEvent.VK_ENTER); 
+		r.keyPress(KeyEvent.VK_DOWN);	r.keyRelease(KeyEvent.VK_DOWN); r.delay(250);
+		r.keyPress(KeyEvent.VK_DOWN);	r.keyRelease(KeyEvent.VK_DOWN); r.delay(250);
+		r.keyPress(KeyEvent.VK_DOWN);	r.keyRelease(KeyEvent.VK_DOWN); r.delay(250);
+		r.keyPress(KeyEvent.VK_DOWN);	r.keyRelease(KeyEvent.VK_DOWN); r.delay(250);
+		r.keyPress(KeyEvent.VK_DOWN);	r.keyRelease(KeyEvent.VK_DOWN); r.delay(250);
+		r.keyPress(KeyEvent.VK_DOWN);	r.keyRelease(KeyEvent.VK_DOWN); r.delay(250);
+		r.keyPress(KeyEvent.VK_ENTER);  r.keyRelease(KeyEvent.VK_ENTER); r.delay(1000);
+		pasteString(user); r.keyPress(KeyEvent.VK_TAB);	r.keyRelease(KeyEvent.VK_TAB); r.delay(250);
+		pasteString(password); r.keyPress(KeyEvent.VK_TAB);	r.keyRelease(KeyEvent.VK_TAB); r.delay(250);
+		r.keyPress(KeyEvent.VK_TAB);	r.keyRelease(KeyEvent.VK_TAB); r.delay(250);
+		r.keyPress(KeyEvent.VK_ENTER);  r.keyRelease(KeyEvent.VK_ENTER);
+		r.delay(7000);
+	}
+	
+	public void changeOutlookAccount() throws AWTException {
+		Robot r = new Robot();
+		r.keyPress(KeyEvent.VK_ALT); r.keyPress(KeyEvent.VK_F);
+		r.keyRelease(KeyEvent.VK_F); r.keyRelease(KeyEvent.VK_ALT);r.delay(1000);
+		
+		r.keyPress(KeyEvent.VK_ALT); r.keyPress(KeyEvent.VK_D);
+		r.keyRelease(KeyEvent.VK_D); r.keyRelease(KeyEvent.VK_ALT);r.delay(1000);
+		
+		r.keyPress(KeyEvent.VK_ALT); r.keyPress(KeyEvent.VK_S);
+		r.keyRelease(KeyEvent.VK_S); r.keyRelease(KeyEvent.VK_ALT);r.delay(1000);
+		
+	}
+	// Ok
+	public void openOutlookAsDifferentUserRUNAS(String user, String password, String name) throws AWTException, InterruptedException {
+		Robot r = new Robot();
+		r.keyPress(KeyEvent.VK_WINDOWS);
+		r.keyPress(KeyEvent.VK_R);
+		r.keyRelease(KeyEvent.VK_R);
+		r.keyRelease(KeyEvent.VK_WINDOWS);r.delay(2000);
+		
+		r.keyPress(KeyEvent.VK_CONTROL);
+		r.keyPress(KeyEvent.VK_A);
+		r.keyRelease(KeyEvent.VK_A);
+		r.keyRelease(KeyEvent.VK_CONTROL); r.delay(500);
+		pasteString("cmd");
+		r.keyPress(KeyEvent.VK_ENTER); r.keyRelease(KeyEvent.VK_ENTER);r.delay(1000);
+		//String cmdCommand = "runas /user:"+user+" C:\\Program Files (x86)\\Microsoft Office\\Office16\\OUTLOOK.EXE";
+		 pasteString("runas /user:"+user+" \"C:\\Program Files (x86)\\Microsoft Office\\Office16\\OUTLOOK.EXE\"");r.delay(500);
+		r.keyPress(KeyEvent.VK_ENTER); r.keyRelease(KeyEvent.VK_ENTER);r.delay(500);
+		pasteString(password);r.delay(500);
+		r.keyPress(KeyEvent.VK_ENTER); r.keyRelease(KeyEvent.VK_ENTER); r.delay(5000);
+		r.keyPress(KeyEvent.VK_ALT);
+		r.keyPress(KeyEvent.VK_F);
+		r.keyRelease(KeyEvent.VK_F);r.delay(1000);
+		r.keyPress(KeyEvent.VK_D);
+		r.keyRelease(KeyEvent.VK_D);r.delay(5000);
+		r.keyPress(KeyEvent.VK_E);
+		r.keyRelease(KeyEvent.VK_E);r.delay(500);
+		r.keyRelease(KeyEvent.VK_ALT); r.delay(500);
+		
+		r.keyPress(KeyEvent.VK_Y);
+		r.keyRelease(KeyEvent.VK_Y); r.delay(500);
+		
+		WebElement invitationMail = (new WebDriverWait(driver, 12)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@Name,'Sign In')]")));
+		invitationMail.click();
+	
+		pasteString(user); r.keyPress(KeyEvent.VK_ENTER); r.keyRelease(KeyEvent.VK_ENTER); r.delay(1000);
+		pasteString(password); r.keyPress(KeyEvent.VK_ENTER); r.keyRelease(KeyEvent.VK_ENTER); r.delay(2000);
+	}
+	public void processBuilderRun() throws IOException {
+		//Process process=Runtime.getRuntime().exec("runas /env /user:"+user+" \"C:\\Program Files (x86)\\Microsoft Office\\Office16\\OUTLOOK.EXE\"");
+	}
+	// yoelap@amdocs.com  // Random@224466
+	public void openChromePageAsDifferentUser(String user, String password) throws AWTException, InterruptedException {
+		Robot r = new Robot();
+		r.keyPress(KeyEvent.VK_WINDOWS);
+		r.keyPress(KeyEvent.VK_R);
+		r.keyRelease(KeyEvent.VK_R);
+		r.keyRelease(KeyEvent.VK_WINDOWS);r.delay(250);
+		Thread.sleep(3000);
+		r.keyPress(KeyEvent.VK_CONTROL);
+		r.keyPress(KeyEvent.VK_A);
+		r.keyRelease(KeyEvent.VK_A);
+		r.keyRelease(KeyEvent.VK_CONTROL); r.delay(250);
+		
+		 pasteString("runas /user:"+user+" \"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\"");
+		r.keyPress(KeyEvent.VK_ENTER);
+		r.keyRelease(KeyEvent.VK_ENTER);r.delay(500);
+		pasteString(password);
+		r.keyPress(KeyEvent.VK_ENTER); 
+			
+		r.keyRelease(KeyEvent.VK_ENTER);r.delay(7000);
+		//pasteString("https://outlook.office.com/mail/inbox");
+		pasteString("https://www.office.com/");
+		r.keyPress(KeyEvent.VK_ENTER);
+		r.keyRelease(KeyEvent.VK_ENTER);r.delay(1000);
+	}
+	public static boolean selectWindow(WebDriver driver, String windowTitle){
+	    //Search ALL currently available windows
+	    for (String handle : driver.getWindowHandles()) {
+	        String newWindowTitle = driver.switchTo().window(handle).getTitle();
+	        System.out.println("WINDOWTITLE : "+newWindowTitle);
+	        if(newWindowTitle.equalsIgnoreCase(windowTitle))
+	            //if it was found break out of the wait
+	            return true;
+	    }
+	    return false;
+
+	}
+	
 	
 	/* Vstavka stroki v aktivnoe pole */
 	public void pasteString(String anystring) throws AWTException {
@@ -977,7 +1228,7 @@ public class OutlookDesktop {
 		rob.keyPress(KeyEvent.VK_CONTROL);
 		rob.keyPress(KeyEvent.VK_V);
 		rob.keyRelease(KeyEvent.VK_V);
-		rob.keyRelease(KeyEvent.VK_CONTROL);
+		rob.keyRelease(KeyEvent.VK_CONTROL); rob.delay(500);
 	}
 	public void alt_F4() throws AWTException {
 		Robot rob = new Robot();
@@ -987,8 +1238,9 @@ public class OutlookDesktop {
 		rob.keyRelease(KeyEvent.VK_ALT);
 	}
 	/* Update series */
-	public boolean updateAllRMeetings(String meetingNameInTheList, RecurrencePattern rpat, int timeNew, int min) {
+	public boolean updateAllRMeetings(String meetingNameInTheList, RecurrencePattern rpat, int timeNew, int min, boolean checkNexWeek, int endAfter) {
 		String tn = createTime(timeNew, min);
+		boolean myFlag = true;
 	//	WebElement mainWindow = driver.findElement(By.xpath("//*[@LocalizedControlType='window' and contains(@Name,'Calendar')]"));
 		
 		try {
@@ -998,11 +1250,11 @@ public class OutlookDesktop {
 			rob.keyPress(KeyEvent.VK_ENTER);
 			rob.keyRelease(KeyEvent.VK_ENTER);
 			rob.delay(1000);
-			rob.setAutoDelay(1000);
-			rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);
-			rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);
-			rob.keyPress(KeyEvent.VK_DOWN);		rob.keyRelease(KeyEvent.VK_DOWN);
-			rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);
+			//rob.setAutoDelay(1000);
+			rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(250);
+			rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(250);
+			rob.keyPress(KeyEvent.VK_DOWN);		rob.keyRelease(KeyEvent.VK_DOWN);rob.delay(250);
+			rob.keyPress(KeyEvent.VK_TAB);		rob.keyRelease(KeyEvent.VK_TAB);rob.delay(250);
 			rob.keyPress(KeyEvent.VK_ENTER);	rob.keyRelease(KeyEvent.VK_ENTER);
 			// tab-> tab-> DOWN -> ENTER
 		/*	
@@ -1016,35 +1268,58 @@ public class OutlookDesktop {
 			rob.keyRelease(KeyEvent.VK_G);
 			rob.keyRelease(KeyEvent.VK_CONTROL);
 			
-			String newTime = createTime(1, 5);
-			pasteString(newTime);
+			//String newTime = createTime(1, 5);
+			pasteString(tn);
 		//WebElement btnRecurrenceMainCalendar = driver.findElement(By.xpath("//Options/*[contains(@Name,'Recurrence')]"));
 		//btnRecurrenceMainCalendar.click();
 		//WebElement txtStartTime = driver.findElement(By.xpath("//*[@LocalizedControlType='radio button' and contains(@Name,'Start')]"));
 		//txtStartTime.clear();
 
 			chooseReccurrencePattern(rpat);
-		
-		
+		if(endAfter>0) {
+			rob.keyPress(KeyEvent.VK_TAB);	rob.keyRelease(KeyEvent.VK_TAB); rob.delay(250);
+			rob.keyPress(KeyEvent.VK_TAB);	rob.keyRelease(KeyEvent.VK_TAB); rob.delay(250);
+			rob.keyPress(KeyEvent.VK_TAB);	rob.keyRelease(KeyEvent.VK_TAB); rob.delay(250);
+			rob.keyPress(KeyEvent.VK_TAB);	rob.keyRelease(KeyEvent.VK_TAB); rob.delay(250);
+			rob.keyPress(KeyEvent.VK_DOWN);	rob.keyRelease(KeyEvent.VK_DOWN); rob.delay(250);
+			rob.keyPress(KeyEvent.VK_TAB);	rob.keyRelease(KeyEvent.VK_TAB); rob.delay(250);
+			pasteString(Integer.toString(endAfter)); rob.delay(250);
+		}
 		// WebElement txtStartTime = driver.findElement(By.xpath("//*[@LocalizedControlType='edit' and contains(@Name,'Start')]"));
 		// txtStartTime.clear();
 		// txtStartTime.sendKeys(newTime);
 		
 		
-		clickOK(); 
+		//clickOK(); 
+		clickOKByRobot();
+		
 		rob.keyPress(KeyEvent.VK_ENTER);
-		rob.keyRelease(KeyEvent.VK_ENTER);
+		rob.keyRelease(KeyEvent.VK_ENTER);rob.delay(250);
 		//clickOK();
 		
 		//WebElement sendUpdate = driver.findElement(By.xpath("//*[contains(@Name,'Send Update')]"));
 		//sendUpdate.click();
 		clickSendUpdate();
+		if(checkNexWeek) {
+			rob.keyPress(KeyEvent.VK_ALT);
+			rob.keyPress(KeyEvent.VK_DOWN);
+			rob.keyRelease(KeyEvent.VK_DOWN);
+			rob.keyRelease(KeyEvent.VK_ALT);
+			List<WebElement> elementsOnTheTable = driver.findElements(By.xpath("//*[contains(@Name,'"+meetingNameInTheList+"')]"));
+			if(elementsOnTheTable.size()>0) {myFlag = true;}
+		}
 		
 		exitAndSendLaterOrNot();
-		return true;}
+		return myFlag;}
 		catch(Exception e) {e.getStackTrace(); return false;}
 	}
-	
+	public void clickOKByRobot() throws AWTException {
+		Robot rob = new Robot();
+		rob.keyPress(KeyEvent.VK_ALT);
+		rob.keyPress(KeyEvent.VK_S);
+		rob.keyRelease(KeyEvent.VK_S);
+		rob.keyRelease(KeyEvent.VK_ALT);
+	}
 	
 	/* create before meeting */
 	public List<String> createBeforeMeetingInTheFuture(String mail, int hour, int min) throws AWTException, InterruptedException {
@@ -1121,21 +1396,24 @@ public class OutlookDesktop {
 		else {confirmation = driver.findElement(By.xpath("//*[contains(@Name,'Don't Send')]"));
 		confirmation.click();}
 	}
-	
 	/* Update recurring meeting date\time */ //ReoccurringTest
 	/**
-	 * @param meetingNameInTheList
-	 * @param rt
-	 * @param timeNew
-	 * @param min
+	 * @param meetingNameInTheList - Meeting name
+	 * @param rt - Recurrence type (one of all, All)
+	 * @param timeNew - Hour (counted from the current moment)
+	 * @param min - Minute/s (counted from the current moment)
+	 * @param day - Day/s (counted from the current day)
 	 * @return
 	 * @throws AWTException 
+	 * @throws InterruptedException 
 	 */
-	public boolean updateReoccurringMeeting(String meetingNameInTheList, OpenRecurrenceType rt, int timeNew, int min) throws AWTException {
+	public boolean updateReoccurringMeetingTimeAndDay(String meetingNameInTheList, OpenRecurrenceType rt, int timeNew, int min) throws AWTException, InterruptedException {
 		String tn = createTime(timeNew, min);
+		
+		boolean one_or_not;
 		Robot rob = new Robot();
 		WebElement mainWindow = driver.findElement(By.xpath("//*[@LocalizedControlType='window' and contains(@Name,'Calendar')]"));
-		
+		System.out.println("* Pitaemsa naiti miting by name");Thread.sleep(10000);
 		try {
 			btnCreatedMeeting = mainWindow.findElement(By.xpath("//*[contains(@Name,'"+meetingNameInTheList+"')]"));
 			btnCreatedMeeting.click();
@@ -1143,26 +1421,126 @@ public class OutlookDesktop {
 			
 		//btnCreatedMeeting = (new WebDriverWait(driver, 3)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@Name,'"+meetingNameInTheList+"')]")));
 		//btnCreatedMeeting.click();
-		openRecurrenceTypeTopMenu(rt); 
-		
-		List<WebElement> timeFieldList = driver.findElements(By.xpath("//edit[contains(@Name,'Start time')]"));
-		
-		if(timeFieldList.size()>0) {
 			
-			rob.keyPress(KeyEvent.VK_TAB); rob.keyRelease(KeyEvent.VK_TAB); rob.delay(500);
-			rob.keyPress(KeyEvent.VK_TAB); rob.keyRelease(KeyEvent.VK_TAB); rob.delay(500);
-			rob.keyPress(KeyEvent.VK_TAB); rob.keyRelease(KeyEvent.VK_TAB); rob.delay(500);
-			rob.keyPress(KeyEvent.VK_TAB); rob.keyRelease(KeyEvent.VK_TAB); rob.delay(500);
-			rob.keyPress(KeyEvent.VK_DELETE); rob.keyRelease(KeyEvent.VK_DELETE); rob.delay(500);
-			pasteString(tn);
+			one_or_not = openRecurrenceTypeTopMenu(rt); 
+		if(one_or_not) { System.out.println("* Type = "+one_or_not);
+			Robot robot = new Robot();
+			robot.keyPress(KeyEvent.VK_TAB);		robot.keyRelease(KeyEvent.VK_TAB); robot.delay(250);
+			robot.keyPress(KeyEvent.VK_TAB);		robot.keyRelease(KeyEvent.VK_TAB); robot.delay(250);
+			robot.keyPress(KeyEvent.VK_TAB);		robot.keyRelease(KeyEvent.VK_TAB); robot.delay(250);
+			robot.keyPress(KeyEvent.VK_TAB);		robot.keyRelease(KeyEvent.VK_TAB); robot.delay(250);
+			pasteString(tn); robot.delay(500);
+			rob.keyPress(KeyEvent.VK_ALT); 
+			rob.keyPress(KeyEvent.VK_S);
+			rob.keyRelease(KeyEvent.VK_S);rob.keyRelease(KeyEvent.VK_ALT);rob.delay(500);
+			List<WebElement> list = driver.findElements(By.xpath("//*[@LocalizedControlType='Dialog' and contains(@Name,'Microsoft Outlook')]"));
+			if(list.size()>0) {
+				rob.keyPress(KeyEvent.VK_RIGHT);
+			rob.keyRelease(KeyEvent.VK_RIGHT); rob.delay(250);
+			rob.keyPress(KeyEvent.VK_ENTER);
+			rob.keyRelease(KeyEvent.VK_ENTER);rob.delay(250);
+			}
+			else {}
 			
-		//startTime = driver.findElement(By.xpath("//edit[contains(@Name,'Start time')]"));
-		//startTime.clear(); startTime.sendKeys(tn);
 		}
-		else {startTime = driver.findElement(By.xpath("//*[@AutomationId='4096']"));
-		startTime.clear(); startTime.sendKeys(tn);
-		}
+		
+		else
+		{System.out.println("* Type = "+one_or_not);
+		
+			rob.keyPress(KeyEvent.VK_CONTROL); rob.keyPress(KeyEvent.VK_G); 
+			rob.keyRelease(KeyEvent.VK_G); rob.keyRelease(KeyEvent.VK_CONTROL);rob.delay(250);
+			rob.keyPress(KeyEvent.VK_CONTROL); rob.keyPress(KeyEvent.VK_A); 
+			rob.keyRelease(KeyEvent.VK_A); rob.keyRelease(KeyEvent.VK_CONTROL);rob.delay(250);
 			
+			pasteString(tn);rob.delay(250);
+			rob.keyPress(KeyEvent.VK_ALT); rob.keyPress(KeyEvent.VK_S); 
+			rob.keyRelease(KeyEvent.VK_S); rob.keyRelease(KeyEvent.VK_ALT);rob.delay(250);
+			
+			//pasteString(newDay);rob.delay(250);
+			rob.keyPress(KeyEvent.VK_ENTER); rob.keyRelease(KeyEvent.VK_ENTER); rob.delay(500);
+			
+			rob.keyPress(KeyEvent.VK_ENTER); rob.keyRelease(KeyEvent.VK_ENTER); rob.delay(500);
+			
+			rob.keyPress(KeyEvent.VK_ALT); 
+			rob.keyPress(KeyEvent.VK_S);
+			rob.keyRelease(KeyEvent.VK_S);
+			rob.keyRelease(KeyEvent.VK_ALT);rob.delay(500);
+			
+				/*
+				 * rob.keyPress(KeyEvent.VK_RIGHT); rob.keyRelease(KeyEvent.VK_RIGHT);
+				 * rob.delay(250); rob.keyPress(KeyEvent.VK_ENTER);
+				 * rob.keyRelease(KeyEvent.VK_ENTER);rob.delay(250);
+				 */
+			
+		 
+		}
+//********************************************************************************************************************************************			
+			
+	//	sendUpdate = driver.findElement(By.xpath("//*[contains(@Name,'Send Update')]"));
+	//	sendUpdate.click();
+		
+		List<WebElement> popup = driver.findElements(By.xpath("//*[contains(@Name,'Send Anyway')]"));
+		if(popup.size() > 0) {WebElement confirmation = driver.findElement(By.xpath("//*[contains(@Name,'Send Anyway')]"));
+		confirmation.click();}
+		
+		return true;}
+		catch(Exception ex){return false;}
+		
+		
+		
+	}
+	/* Update recurring meeting date\time */ //ReoccurringTest
+	/**
+	 * @param meetingNameInTheList - Meeting name
+	 * @param rt - Recurrence type (one of all, All)
+	 * @param timeNew - Hour (counted from the current moment)
+	 * @param min - Minute/s (counted from the current moment)
+	 * @return
+	 * @throws AWTException 
+	 */
+	public boolean updateReoccurringMeeting(String meetingNameInTheList, OpenRecurrenceType rt, int timeNew, int min, int day) throws AWTException {
+		String tn = createTime(timeNew, min);
+		Robot rob = new Robot();
+		String newDay = createDate(day);
+		//WebElement mainWindow = driver.findElement(By.xpath("//*[@LocalizedControlType='window' and contains(@Name,'Calendar')]"));
+		
+		try {
+			btnCreatedMeeting = driver.findElement(By.xpath("//*[contains(@Name,'"+meetingNameInTheList+"')]"));
+			btnCreatedMeeting.click();
+				openRecurrenceTypeTopMenu(rt);
+				Thread.sleep(2000);
+				switch(rt) {
+				case OPEN_OCCURENCE : 
+					rob.keyPress(KeyEvent.VK_TAB); rob.keyRelease(KeyEvent.VK_TAB); rob.delay(500);
+					rob.keyPress(KeyEvent.VK_TAB); rob.keyRelease(KeyEvent.VK_TAB); rob.delay(500);
+					rob.keyPress(KeyEvent.VK_TAB); rob.keyRelease(KeyEvent.VK_TAB); rob.delay(500);
+					rob.keyPress(KeyEvent.VK_TAB); rob.keyRelease(KeyEvent.VK_TAB); rob.delay(500);
+					rob.keyPress(KeyEvent.VK_DELETE); rob.keyRelease(KeyEvent.VK_DELETE); rob.delay(500);
+					pasteString(tn);
+					break;  
+				case OPEN_SERIES :
+					rob.keyPress(KeyEvent.VK_CONTROL); rob.keyPress(KeyEvent.VK_G); 
+					rob.keyRelease(KeyEvent.VK_G); rob.keyRelease(KeyEvent.VK_CONTROL);rob.delay(500);
+					rob.keyPress(KeyEvent.VK_CONTROL); rob.keyPress(KeyEvent.VK_A); 
+					rob.keyRelease(KeyEvent.VK_A); rob.keyRelease(KeyEvent.VK_CONTROL);rob.delay(250);
+					
+					pasteString(tn);rob.delay(250);
+					rob.keyPress(KeyEvent.VK_ALT); rob.keyPress(KeyEvent.VK_S); 
+					rob.keyRelease(KeyEvent.VK_S); rob.keyRelease(KeyEvent.VK_ALT);rob.delay(250);
+					
+					pasteString(newDay);rob.delay(250);
+					rob.keyPress(KeyEvent.VK_ENTER); rob.keyRelease(KeyEvent.VK_ENTER); rob.delay(500);
+					
+					rob.keyPress(KeyEvent.VK_ENTER); rob.keyRelease(KeyEvent.VK_ENTER); rob.delay(500);
+					
+					
+					
+					break;
+					
+				}
+		
+		
+		
 			
 	//	sendUpdate = driver.findElement(By.xpath("//*[contains(@Name,'Send Update')]"));
 	//	sendUpdate.click();
@@ -1177,12 +1555,92 @@ public class OutlookDesktop {
 		return true;}
 		catch(Exception ex){return false;}
 		
+	}
+	
+	/** Ok
+	 * @param meetingNameInTheList - Meeting name
+	 * @param rt - Recurrence type (one of all, All)
+	 * @param timeNew - Hour (counted from the current moment)
+	 * @param min - Minute/s (counted from the current moment)
+	 * @return
+	 * @throws AWTException 
+	 */
+	public boolean updateReoccurringMeetingAndDay(String meetingNameInTheList, OpenRecurrenceType rt, int timeNew, int min, int day) throws AWTException {
+		String tn = createTime(timeNew, min);
+		boolean flag;
+		Robot rob = new Robot();
+		String newDay = createDate(day);
+		
+		try {
+			btnCreatedMeeting = driver.findElement(By.xpath("//*[contains(@Name,'"+meetingNameInTheList+"')]"));
+			btnCreatedMeeting.click();
+			
+		openRecurrenceTypeTopMenu(rt); 
+		switch(rt) {
+		case OPEN_OCCURENCE:
+			rob.keyPress(KeyEvent.VK_TAB); rob.keyRelease(KeyEvent.VK_TAB); rob.delay(500);
+			rob.keyPress(KeyEvent.VK_TAB); rob.keyRelease(KeyEvent.VK_TAB); rob.delay(500);
+			rob.keyPress(KeyEvent.VK_TAB); rob.keyRelease(KeyEvent.VK_TAB); rob.delay(500);
+			pasteString(newDay);
+			rob.keyPress(KeyEvent.VK_TAB); rob.keyRelease(KeyEvent.VK_TAB); rob.delay(500);
+			rob.keyPress(KeyEvent.VK_DELETE); rob.keyRelease(KeyEvent.VK_DELETE); rob.delay(500);
+			pasteString(tn);
+			rob.keyPress(KeyEvent.VK_ALT); 
+			rob.keyPress(KeyEvent.VK_S);
+			rob.keyRelease(KeyEvent.VK_S);
+			rob.keyRelease(KeyEvent.VK_ALT);rob.delay(500);
+			rob.keyPress(KeyEvent.VK_ENTER); // do u want to change just this one?
+			rob.keyRelease(KeyEvent.VK_ENTER);rob.delay(500);
+			rob.keyPress(KeyEvent.VK_RIGHT); 
+			rob.keyRelease(KeyEvent.VK_RIGHT);rob.delay(500);
+			rob.keyPress(KeyEvent.VK_ENTER); 
+			rob.keyRelease(KeyEvent.VK_ENTER);rob.delay(500);
+			break;
+		case OPEN_SERIES:
+			rob.keyPress(KeyEvent.VK_CONTROL);
+			rob.keyPress(KeyEvent.VK_G);
+			rob.keyRelease(KeyEvent.VK_G);
+			rob.keyRelease(KeyEvent.VK_CONTROL); rob.delay(1000);
+			pasteString(tn);rob.delay(500);
+			rob.keyPress(KeyEvent.VK_ALT); 
+			rob.keyPress(KeyEvent.VK_S);
+			rob.keyRelease(KeyEvent.VK_S);
+			rob.keyRelease(KeyEvent.VK_ALT);rob.delay(500);
+			rob.keyPress(KeyEvent.VK_ENTER);
+			rob.keyRelease(KeyEvent.VK_ENTER);rob.delay(500);
+			rob.keyPress(KeyEvent.VK_ALT); 
+			rob.keyPress(KeyEvent.VK_S);
+			rob.keyRelease(KeyEvent.VK_S);
+			rob.keyRelease(KeyEvent.VK_ALT);rob.delay(500);
+		break;
+		}
+		rob.delay(500);
+		 List<WebElement> errors = driver.findElements(By.xpath("//*[contains(@Name,'Send Meeting Error')]")); 
+				if(errors.size()>0) {
+					rob.keyPress(KeyEvent.VK_ENTER);
+					rob.keyRelease(KeyEvent.VK_ENTER);rob.delay(500);
+
+					rob.keyPress(KeyEvent.VK_ALT);
+					rob.keyPress(KeyEvent.VK_F4);
+					rob.keyRelease(KeyEvent.VK_F4);
+					rob.keyRelease(KeyEvent.VK_ALT);rob.delay(500);
+					
+					rob.keyPress(KeyEvent.VK_ENTER);
+					rob.keyRelease(KeyEvent.VK_ENTER);rob.delay(500);
+					flag = true;
+					return flag;
+				}
+				else {flag = true;
+					return flag;}
 		
 		
 		
+		}
+		catch(Exception ex){return false;}
 		
 		
 	}
+	
 	/* Fast Cancellation Recurring Meeting*/
 	 public boolean fastCancelReoccurringMeeting(CancelRecurrence recurrenceType , String meetingNameInTheList) throws AWTException {
 		 Robot rob = new Robot();
@@ -1308,24 +1766,191 @@ robot.keyRelease(KeyEvent.VK_ALT);
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.delay(500);
 		robot.keyPress(KeyEvent.VK_TAB);						
-		pasteString(TEST_TITLE);robot.delay(1000);
-		
+		pasteString(TEST_TITLE);robot.delay(500);
 		
 	return TEST_TITLE;
 
 }
+	public boolean schedule24HoursMeeting(String mail, int endDay) throws AWTException, InterruptedException {
+		Thread.sleep(4000);
+		boolean flag = false;
+		Robot robot = new Robot();
+		pasteString(mail); robot.keyPress(KeyEvent.VK_RIGHT); robot.delay(250); robot.keyPress(KeyEvent.VK_TAB); 
+		pasteString(TEST_TITLE); robot.delay(250);
+		 robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  pasteString(createDate(endDay));
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(500);
+		  robot.keyPress(KeyEvent.VK_ALT); robot.keyPress(KeyEvent.VK_S);
+		  robot.keyRelease(KeyEvent.VK_S); robot.keyRelease(KeyEvent.VK_ALT);
+		  robot.delay(500);
+		  List<WebElement> sendMeetingError = driver.findElements(By.xpath("//*[@Name='Send Meeting Error']"));
+		  if(sendMeetingError.size()>0) {flag = true;}
+		  else {flag = false;}
+		  robot.keyPress(KeyEvent.VK_ENTER);  robot.keyRelease(KeyEvent.VK_ENTER);robot.delay(250);
+		  alt_F4(); robot.delay(500);
+		  robot.keyPress(KeyEvent.VK_ENTER);  robot.keyRelease(KeyEvent.VK_ENTER);robot.delay(250);
+		  return flag;
+	}
+	
+	public ArrayList<Object> createAllDayMeeting(String mail, boolean allDayParametr) throws AWTException, InterruptedException {
+		Thread.sleep(4000);
+		ArrayList<Object> listResult = null;
+		boolean flag = false;
+		Robot robot = new Robot();
+		pasteString(mail); robot.keyPress(KeyEvent.VK_RIGHT); robot.delay(250); robot.keyPress(KeyEvent.VK_TAB); 
+								
+		pasteString(TEST_TITLE); robot.delay(250);
+		System.out.println("Meeting name "+ TEST_TITLE);
+		
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  if(allDayParametr) {
+			  	robot.keyPress(KeyEvent.VK_SPACE); robot.delay(250);
+			  	flag = true;
+		  }
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  WebElement newbodyDocument = (new WebDriverWait(driver, 4)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@LocalizedControlType='document' and contains(@Name,'"+TEST_TITLE+"')]")));
+			String txtBodyNew = newbodyDocument.getText();
+			String MeetingID = getMeetingID(txtBodyNew);
+		  robot.keyPress(KeyEvent.VK_ALT); robot.keyPress(KeyEvent.VK_S);
+		  robot.keyRelease(KeyEvent.VK_S); robot.keyRelease(KeyEvent.VK_ALT);
+		  robot.delay(500);
+		  robot.keyPress(KeyEvent.VK_F9);
+		  robot.keyRelease(KeyEvent.VK_F9);
+		  	listResult.add(TEST_TITLE);
+		  	listResult.add(MeetingID);
+		  List<WebElement> createdMeeting = driver.findElements(By.xpath("//*[contains(@Name,'"+TEST_TITLE+"')]"));
+		  if (createdMeeting.size()>0) {flag = true;}
+		  		else {flag = false;}
+		  	listResult.add(flag);
+		  		return listResult;
+		  
+	}
+	
+	public boolean specifyMeetingPropertiesAndDeleteMeetingID(String mail) throws InterruptedException, AWTException, IOException {
+		Thread.sleep(4000);
+		boolean flag = false;
+		Robot robot = new Robot();
+		pasteString(mail); robot.keyPress(KeyEvent.VK_RIGHT); robot.delay(250); robot.keyPress(KeyEvent.VK_TAB); 
+								
+		pasteString(TEST_TITLE); robot.delay(250);
+		System.out.println("Meeting name "+ TEST_TITLE);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_DOWN); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_DOWN); robot.delay(250);
+		  
+		  robot.keyPress(KeyEvent.VK_CONTROL);robot.keyPress(KeyEvent.VK_DELETE); 
+		   robot.keyRelease(KeyEvent.VK_DELETE); robot.keyRelease(KeyEvent.VK_CONTROL); //robot.delay(250);
+		   robot.keyPress(KeyEvent.VK_CONTROL);robot.keyPress(KeyEvent.VK_DELETE); 
+		   robot.keyRelease(KeyEvent.VK_DELETE); robot.keyRelease(KeyEvent.VK_CONTROL); //robot.delay(250);
+		   robot.keyPress(KeyEvent.VK_CONTROL);robot.keyPress(KeyEvent.VK_DELETE); 
+		   robot.keyRelease(KeyEvent.VK_DELETE); robot.keyRelease(KeyEvent.VK_CONTROL); //robot.delay(250);
+		   robot.keyPress(KeyEvent.VK_CONTROL);robot.keyPress(KeyEvent.VK_DELETE); 
+		   robot.keyRelease(KeyEvent.VK_DELETE); robot.keyRelease(KeyEvent.VK_CONTROL); //robot.delay(250);
+		   robot.keyPress(KeyEvent.VK_CONTROL);robot.keyPress(KeyEvent.VK_DELETE); 
+		   robot.keyRelease(KeyEvent.VK_DELETE); robot.keyRelease(KeyEvent.VK_CONTROL); //robot.delay(250);
+		   
+		/*
+		 * WebElement el = (new WebDriverWait(driver,
+		 * 4)).until(ExpectedConditions.presenceOfElementLocated(By.
+		 * xpath("//*[@LocalizedControlType='document' and contains(@Name,'"+TEST_TITLE+
+		 * "')]"))); String str = el.getText().replaceAll("\\d+(\\#)", ""); //String str
+		 * = el.getAttribute("Text").replaceFirst("\\d+(\\#)", "");
+		 * robot.keyPress(KeyEvent.VK_CONTROL); robot.keyPress(KeyEvent.VK_A);
+		 * robot.keyRelease(KeyEvent.VK_A); robot.keyRelease(KeyEvent.VK_CONTROL);
+		 * robot.delay(250); robot.keyPress(KeyEvent.VK_DELETE);
+		 * robot.keyRelease(KeyEvent.VK_DELETE); robot.delay(250); pasteString(str);
+		 */
+		
+		 Thread.sleep(250);
+		//Object str = el.getText().replaceAll("\\d+(\\#)", "");
+		//System.out.println("RESULT : "+str);
+		/*
+		  robot.keyPress(KeyEvent.VK_CONTROL); robot.keyPress(KeyEvent.VK_A);
+		  robot.keyRelease(KeyEvent.VK_A); robot.keyRelease(KeyEvent.VK_CONTROL); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_DELETE); robot.keyRelease(KeyEvent.VK_DELETE);
+		  pasteString((String) str); robot.delay(250);
+		*/
+		  /*
+		  
+		 */
+		// WebElement newbodyDocument = (new WebDriverWait(driver, 4)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@LocalizedControlType='document' and contains(@Name,'"+TEST_TITLE+"')]")));
+/*	  
+		 String sstr = newbodyDocument.getText();
+		  StringBuffer sb = new StringBuffer();
+	        // Pattern p = Pattern.compile("^[(].*[)]$");
+	        Pattern p = Pattern.compile("\\d+(\\#)");
+	        String [] str = sstr.split(" ");
+	        for (String string : str) {
+	        Matcher m = p.matcher(string);
+	            if(!m.matches()){
+	                sb.append(string);
+	                sb.append(" ");
+	            }
+	        }
+	        System.out.println(sb.toString());
+	        String body = sb.toString();
+*/
+		  //Selenium selenium = null;
+		  //selenium.shiftKeyDown();
+		  
+		 
+		  // Runtime.getRuntime().exec("rundll32 user32.dll,LockWorkStation");
+		  
+		/*
+		 * Actions actions = new Actions(driver);
+		 * actions.sendKeys(Keys.chord(Keys.SHIFT,Keys.ARROW_DOWN)).build().perform();
+		 */
+	        
+			// actions.moveToElement(newbodyDocument, 2, 2).click().build().perform(); robot.delay(250);
+		  robot.delay(1000);
+		
+		  robot.keyPress(KeyEvent.VK_ALT); robot.keyPress(KeyEvent.VK_S);
+		  robot.keyRelease(KeyEvent.VK_S); robot.keyRelease(KeyEvent.VK_ALT);
+		  robot.delay(500);
+		 
+		List<WebElement> sendMeetingError = driver.findElements(By.xpath("//*[@Name='Send Meeting Error']"));
+		if (sendMeetingError.size() > 0) {
+			robot.keyPress(KeyEvent.VK_ENTER); robot.delay(250);
+			alt_F4();
+			robot.keyPress(KeyEvent.VK_ENTER); robot.delay(250);			flag = true;}
+		else {flag = false;}
+		
+	
+	return flag;
+
+}
+
+	
 	/*Original*/
 		public ArrayList<String> specifyMeetingProperties(String mail) throws InterruptedException, AWTException {
 			Thread.sleep(4000);
 			Robot robot = new Robot();
-			
-			pasteString(mail);
+			//robot.setAutoDelay(1000);
+			pasteString(mail); robot.keyPress(KeyEvent.VK_RIGHT);
 			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB);
 			robot.delay(500);
-			robot.keyPress(KeyEvent.VK_TAB);						
-			pasteString(TEST_TITLE);robot.delay(1000);
+			//robot.keyPress(KeyEvent.VK_TAB);						
+			pasteString(TEST_TITLE);
 			
-			WebElement newbodyDocument = (new WebDriverWait(driver, 3)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@LocalizedControlType='document' and contains(@Name,'"+TEST_TITLE+"')]")));
+			WebElement newbodyDocument = (new WebDriverWait(driver, 4)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@LocalizedControlType='document' and contains(@Name,'"+TEST_TITLE+"')]")));
 			String txtBodyNew = newbodyDocument.getText();
 			String MeetingID = getMeetingID(txtBodyNew);
 			ArrayList<String> meetingNameAndID = new ArrayList<String>();
@@ -1342,6 +1967,15 @@ robot.keyRelease(KeyEvent.VK_ALT);
 		return meetingNameAndID;
 
 	}
+		public void changeDate(int number) throws AWTException {
+			Robot robot = new Robot();
+			robot.keyPress(KeyEvent.VK_TAB); robot.delay(500);
+			robot.keyPress(KeyEvent.VK_TAB); robot.delay(500);
+			robot.keyPress(KeyEvent.VK_TAB); robot.delay(500);
+			String newStertDate = createDate(number);
+			pasteString(newStertDate);
+			robot.keyPress(KeyEvent.VK_TAB);
+		}
 		public String specifyMeetingPropertiesReturnID(String mail) throws InterruptedException, AWTException {
 			Thread.sleep(3000);
 			Robot robot = new Robot();
@@ -1359,10 +1993,10 @@ robot.keyRelease(KeyEvent.VK_ALT);
 			Thread.sleep(3000);
 			Robot robot = new Robot();
 			String meetingName = TEST_TITLE;
-			pasteString(mail);
-			robot.keyPress(KeyEvent.VK_TAB);
+			pasteString(mail); robot.keyPress(KeyEvent.VK_RIGHT); robot.keyRelease(KeyEvent.VK_RIGHT);
 			robot.delay(500);
-			robot.keyPress(KeyEvent.VK_TAB);						
+			//robot.keyPress(KeyEvent.VK_TAB); robot.keyRelease(KeyEvent.VK_TAB); robot.delay(250);
+			robot.keyPress(KeyEvent.VK_TAB); robot.keyRelease(KeyEvent.VK_TAB);	robot.delay(500);					
 			pasteString(meetingName);robot.delay(1000);
 			
 		
@@ -1428,21 +2062,35 @@ public String specifyNewMessageInfo(String recipient) throws InterruptedExceptio
 	return restTitle;
 }
 	
-	public boolean amdocsMeetingCancellation(String meetingNameInTheList) throws InterruptedException {
+	public boolean amdocsMeetingCancellation(String meetingNameInTheList) throws InterruptedException, AWTException {
+		boolean flag = true;
 		btnCreatedMeeting = (new WebDriverWait(driver, 3)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@Name,'"+meetingNameInTheList+"')]")));
 		btnCreatedMeeting.click();
 		Thread.sleep(2000);
-		List<WebElement> list = driver.findElements(By.name("Cancel Meeting"));
+		Robot rob = new Robot();
+			rob.keyPress(KeyEvent.VK_DELETE);
+			rob.keyRelease(KeyEvent.VK_DELETE);
+			rob.delay(2000);
+			rob.keyPress(KeyEvent.VK_ALT);
+			rob.keyPress(KeyEvent.VK_S);
+			rob.keyRelease(KeyEvent.VK_S);
+			rob.keyRelease(KeyEvent.VK_ALT);
+			rob.delay(1000);
+			try {
+		List<WebElement> list = driver.findElements(By.xpath("//*[contains(@Name,'"+meetingNameInTheList+"')]"));
 		if(list.size()>0) {
-			btnCancelMeeting = driver.findElement(By.name("Cancel Meeting"));
-			btnCancelMeeting.click();Thread.sleep(1000);
-			btnSendCancellation = driver.findElement(By.name("Send Cancellation"));
-			btnSendCancellation.click();
-			return true;
+			/*
+			 * btnCancelMeeting = driver.findElement(By.name("Cancel Meeting"));
+			 * btnCancelMeeting.click();Thread.sleep(1000); btnSendCancellation =
+			 * driver.findElement(By.name("Send Cancellation"));
+			 * btnSendCancellation.click();
+			 */
+			flag = false;
 		}
 		
-		else {btnDeleteMeeting = driver.findElement(By.name("Delete"));
-		btnDeleteMeeting.click(); return false;}
+		else { flag = true;}}
+			catch(Exception e) {}
+			return flag;
 		
 	}
 	/* Switch between Test/Production environment */

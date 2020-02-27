@@ -24,7 +24,7 @@ import pages.TeamsChannelPage.KindOfTeam;
 public class TestPowerAutomate extends Settings{
 
 	ExtentHtmlReporter htmlReporter;final String newTeamName = "AUTOMATION_TEST_TEAM_";
-	String loginName = "Michael@msglab.tech";String password = "Amdocs@123";
+	String loginName = "Michael@msglab.tech";String password = "Ahmshere577561!";
 	final String ownerName = "Michael Prudnikov";int teamNumber = getRandom();ExtentTest testLog = null;
 	final String AUTO_FLOW_NAME = "AUTO_TITLE_";
 	final String MAIL_TO = "michael.prudnikov@amdocs.com"; 

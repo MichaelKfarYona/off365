@@ -29,7 +29,7 @@ public class TestPlanner extends Settings{
 	final String listName = "LIST_NAME_";
 	final String taskName = "TASK_NAME_";
 	final int lineNumber = 2;
-	String loginName = "Michael@msglab.tech"; String password = "Amdocs@123";
+	String loginName = "Michael@msglab.tech"; String password = "Ahmshere577561!";
 	int teamNumber = getRandom();
 	ExtentTest testLog = null;
 	final String newPlanName = "AUTOMATION_PLAN_NAME_";

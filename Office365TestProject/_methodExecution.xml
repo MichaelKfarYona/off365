@@ -5,12 +5,10 @@
 		<classes>
 			
 			
-			<class name="tests.TestTeamsChannelPage">
+			<class name="tests.TestOneDrive">
 				<methods>
-					<include name="assignRoleValidation"/>
-				
-					
-					
+					<include name="uploadNewFileOneDrive"/>
+					<include name="uploadNewFolderOneDrive"/>
 				</methods>
 			</class>
 			

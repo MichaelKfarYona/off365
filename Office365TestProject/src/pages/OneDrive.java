@@ -42,6 +42,7 @@ public class OneDrive {
 	
 // ********** Uploading Files and folders ********** 
 	 public void uploadFileOrFolder(UploadType uploadType, String path) throws InterruptedException {
+		 Thread.sleep(1000);
 		 btnUpload = driver.findElement(By.xpath("//button[@name='Upload']"));
 		 btnUpload.click();
 		boolean FOLDER_CHOOSEN = false;
@@ -72,8 +73,8 @@ public class OneDrive {
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_CONTROL); robot.delay(250);
+		robot.keyPress(KeyEvent.VK_ENTER); robot.delay(250);
 		if (folder_ = true) {robot.delay(1000);robot.keyPress(KeyEvent.VK_ENTER);
 		robot.delay(2000);robot.keyPress(KeyEvent.VK_LEFT); robot.delay(1000); robot.keyPress(KeyEvent.VK_ENTER);Thread.sleep(2000);}
 	 }
@@ -84,8 +85,15 @@ public class OneDrive {
 		 try {
 		 checkBoxOfTheElement =(new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@aria-label='Checkbox for "+elementName+"']"))); 
 		 checkBoxOfTheElement.click();
-		 btnDelete = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//i[@data-icon-name='delete']")));
-		 btnDelete.click();
+		 Robot rob = new Robot();
+		 
+		 rob.keyPress(KeyEvent.VK_DELETE);
+		 rob.keyRelease(KeyEvent.VK_DELETE); rob.delay(250);
+			/*
+			 * btnDelete = (new WebDriverWait(driver,
+			 * 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+			 * "//i[@data-icon-name='delete']"))); btnDelete.click();
+			 */
 		 confirmationButton = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[2]/div/span[1]/button")));
 		 confirmationButton.click();
 		 return true;

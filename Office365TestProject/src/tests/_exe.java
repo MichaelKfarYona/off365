@@ -1,6 +1,14 @@
 package tests;
 
 import java.awt.AWTException;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,15 +16,32 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.imageio.ImageIO;
+import javax.swing.filechooser.FileSystemView;
+import javax.swing.text.DefaultEditorKit.PasteAction;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.winium.WiniumDriver;
+
+import com.sun.jna.platform.win32.User32;
 
 import desktop.pages.OutlookDesktop;
 
 public class _exe {
-	static WiniumDriver driver;
+	static ChromeDriver driver;
+	
+	
 	public static String createDate(int number) {
 		SimpleDateFormat SDFormat = new SimpleDateFormat("E MM/dd/yyyy"); 
 	     Calendar cal = Calendar.getInstance(); 
@@ -45,8 +70,185 @@ public class _exe {
 	     return newTime;
 	}
 	
+	public static void pasteString(String anystring) throws AWTException {
+		StringSelection stringSelection2 = new StringSelection(anystring);
+		Clipboard clipboard2 = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard2.setContents(stringSelection2, stringSelection2);
+		Robot rob = new Robot();
+		rob.keyPress(KeyEvent.VK_CONTROL);
+		rob.keyPress(KeyEvent.VK_V);
+		rob.keyRelease(KeyEvent.VK_V);
+		rob.keyRelease(KeyEvent.VK_CONTROL); rob.delay(500);
+	}
+
+	public static void openOutlookAsDifferentUserRUNAS(String user, String password, String name) throws AWTException, InterruptedException {
+		Robot r = new Robot();
+		r.keyPress(KeyEvent.VK_WINDOWS);
+		r.keyPress(KeyEvent.VK_R);
+		r.keyRelease(KeyEvent.VK_R);
+		r.keyRelease(KeyEvent.VK_WINDOWS);r.delay(2000);
+		
+		r.keyPress(KeyEvent.VK_CONTROL);
+		r.keyPress(KeyEvent.VK_A);
+		r.keyRelease(KeyEvent.VK_A);
+		r.keyRelease(KeyEvent.VK_CONTROL); r.delay(500);
+		pasteString("cmd");
+		r.keyPress(KeyEvent.VK_ENTER); r.keyRelease(KeyEvent.VK_ENTER);r.delay(1000);
+		//String cmdCommand = "runas /user:"+user+" C:\\Program Files (x86)\\Microsoft Office\\Office16\\OUTLOOK.EXE";
+		 pasteString("runas /user:"+user+" \"C:\\Program Files (x86)\\Microsoft Office\\Office16\\OUTLOOK.EXE\"");r.delay(500);
+		r.keyPress(KeyEvent.VK_ENTER); r.keyRelease(KeyEvent.VK_ENTER);r.delay(500);
+		pasteString(password);r.delay(500);
+		r.keyPress(KeyEvent.VK_ENTER); r.keyRelease(KeyEvent.VK_ENTER); r.delay(5000);
+		r.keyPress(KeyEvent.VK_ALT);
+		r.keyPress(KeyEvent.VK_F);
+		r.keyRelease(KeyEvent.VK_F);
+		r.keyPress(KeyEvent.VK_D);
+		r.keyRelease(KeyEvent.VK_D);
+		r.keyPress(KeyEvent.VK_E);
+		r.keyRelease(KeyEvent.VK_E);
+		r.keyRelease(KeyEvent.VK_ALT); r.delay(500);
+		
+		r.keyPress(KeyEvent.VK_Y);
+		r.keyRelease(KeyEvent.VK_Y); r.delay(500);
+		
+		WebElement invitationMail = (new WebDriverWait(driver, 12)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@Name,'Sign In')]")));
+		invitationMail.click();
+		//WebElement proposeNewTime = driver.findElement(By.xpath("//*[contains(@Name,'Propose New Time')]"));
+		//proposeNewTime.click();
+		
+	}
+	
+	public static void openAnotherAccount(String user, String password, String name) throws AWTException, InterruptedException {
+		Robot r = new Robot();
+		r.delay(1000);
+		r.keyPress(KeyEvent.VK_WINDOWS);
+		r.keyPress(KeyEvent.VK_R);
+		r.keyRelease(KeyEvent.VK_R);
+		r.keyRelease(KeyEvent.VK_WINDOWS);r.delay(1000);
+		pasteString("tsdiscon");
+		r.keyPress(KeyEvent.VK_ENTER);	r.keyRelease(KeyEvent.VK_ENTER); r.delay(5000);
+		r.keyPress(KeyEvent.VK_L);
+		r.keyRelease(KeyEvent.VK_L); r.delay(5000);
+		
+		
+		r.keyPress(KeyEvent.VK_TAB);	r.keyRelease(KeyEvent.VK_TAB); r.delay(250);
+		r.keyPress(KeyEvent.VK_TAB);	r.keyRelease(KeyEvent.VK_TAB); r.delay(250);
+		r.keyPress(KeyEvent.VK_TAB);	r.keyRelease(KeyEvent.VK_TAB); r.delay(250);
+		r.keyPress(KeyEvent.VK_TAB);	r.keyRelease(KeyEvent.VK_TAB); r.delay(250);
+		r.keyPress(KeyEvent.VK_ENTER);	r.keyRelease(KeyEvent.VK_ENTER); r.delay(250);
+		pasteString(user); r.delay(250);
+		pasteString(password); r.delay(250);
+		r.keyPress(KeyEvent.VK_ENTER);	r.keyRelease(KeyEvent.VK_ENTER); r.delay(250);
+		
+		
+	
+		
+	}
+	// create screen shot
+	 private static File getHomeDir() {
+	        FileSystemView fsv = FileSystemView.getFileSystemView();
+	        return fsv.getHomeDirectory();
+	    }
+	 
+	 private static BufferedImage grabScreen() { 
+	        try {
+	            return new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+	        } catch (SecurityException e) {
+	        } catch (AWTException e) {
+	        }
+	        return null;
+	    }
+	 // MAIN
 	public static void main(String[] args) throws IOException, InterruptedException, AWTException {
-		createDate(0);
+		
+		  try {
+	            //ImageIO.write(grabScreen(), "png", new File(getHomeDir(), "TESTscreen.png"));
+	            ImageIO.write(grabScreen(), "png", new File("C:\\1", "TESTscreen.png"));
+	        } catch (IOException e) {
+	            System.out.println("IO exception"+e);
+	        }
+	    }
+	 
+	   
+	 
+	    
+	
+		/*
+		 * String driverPath = "c:\\DRIVERS\\chromedriver.exe"; String mode =
+		 * "runas /user:yoelap@amdocs.com 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'"
+		 * ;
+		 * 
+		 * String user = "yoelap@amdocs.com"; // Process
+		 * process=Runtime.getRuntime().exec("runas /env /user:"
+		 * +user+" \"C:\\Program Files (x86)\\Microsoft Office\\Office16\\OUTLOOK.EXE\""
+		 * ); Runtime.getRuntime().exec("runas /env /user:"
+		 * +user+" \"C:\\Program Files (x86)\\Microsoft Office\\Office16\\OUTLOOK.EXE\""
+		 * );
+		 */
+		/*
+		 * String cmdCommand = "runas /user:"
+		 * +user+" \"C:\\Program Files (x86)\\Microsoft Office\\Office16\\OUTLOOK.EXE\""
+		 * ; System.out.println(cmdCommand);
+		 */
+    	/*
+    	
+		Robot r = new Robot();
+		r.keyPress(KeyEvent.VK_WINDOWS);
+		r.keyPress(KeyEvent.VK_R);
+		r.keyRelease(KeyEvent.VK_R);
+		r.keyRelease(KeyEvent.VK_WINDOWS);r.delay(250);
+		Thread.sleep(3000);
+		r.keyPress(KeyEvent.VK_CONTROL);
+		r.keyPress(KeyEvent.VK_A);
+		r.keyRelease(KeyEvent.VK_A);
+		r.keyRelease(KeyEvent.VK_CONTROL); r.delay(250);
+		driver = new ChromeDriver();
+		//pasteString(mode);
+		 pasteString("runas /user:yoelap@amdocs.com \"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\"");
+		r.keyPress(KeyEvent.VK_ENTER);
+		r.keyRelease(KeyEvent.VK_ENTER);r.delay(500);
+		pasteString("Random@224466");
+		r.keyPress(KeyEvent.VK_ENTER); 
+			
+		r.keyRelease(KeyEvent.VK_ENTER);r.delay(7000);
+		pasteString("https://www.office.com/");
+		r.keyPress(KeyEvent.VK_ENTER);
+		r.keyRelease(KeyEvent.VK_ENTER);r.delay(500);
+		
+		System.setProperty("webdriver.chrome.driver",driverPath);
+		
+    	driver.manage().window().maximize();
+    	
+    	*/
+		/*
+		ChromeOptions options = new ChromeOptions();
+    	options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.DISMISS);
+    	
+    	options.addArguments("--disable-notifications");
+    	
+    	options.addArguments("--lang=en"); 
+    	System.setProperty("webdriver.chrome.driver",driverPath);
+    	driver = new ChromeDriver(options);
+    	driver.manage().window().maximize();
+    	driver.get("https://login.microsoftonline.com/");
+    	driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
+    	
+    	
+		*/
+		/*
+		User32.INSTANCE.GetForegroundWindow(); 
+		WebElement oneDriveTrayIcon = driver.findElement(By.xpath("//*[contains(@Name,'"+appName+"')]"));
+		oneDriveTrayIcon.click();
+		*/
+		
+		/*	 HWND hwnd = User32.INSTANCE.FindWindow(null , "OneDrive - AMDOCS");
+		  	 User32.INSTANCE.ShowWindow(hwnd,1);
+		
+		// pasteString("runas /user:yoelap@amdocs.com \"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\"");
+		
+		// runas /user:yoelap@amdocs.com "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+		
+
 		//createTime(1, 30);
 		
 /*
@@ -94,6 +296,7 @@ public class _exe {
 		//**********************************************
 		
 		/*Generator sluchainih simvolov*/
+		/*
 		int lineLength = 36;
 		char[] alphabetA = new String("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789").toCharArray();
 		for(int n=0; n < lineLength; n++) {
@@ -103,6 +306,8 @@ public class _exe {
 			System.out.print(result);
 			
 		}
+		*/
+		
 		/*
 		 * for (int i =0; i < alphabetA.length; i++) System.out.println(alphabetA[i]);
 		 */
@@ -131,7 +336,7 @@ public class _exe {
 	*/
 		
 
-}
+
 	private static OutlookDesktop OutlookDesktop(WiniumDriver driver2) {
 		// TODO Auto-generated method stub
 		return null;

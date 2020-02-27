@@ -21,7 +21,7 @@ public class TestPlannerViaTeams extends Settings{
 	final String NAME_YOUR_PLAN_ = "AUTO_TEST_VIA_TEAMS_";
 	ExtentTest testLog = null;
 	String loginName = "Michael@msglab.tech";
-	String password = "Amdocs@123";
+	String password = "Ahmshere577561!";
 	//ExtentTest logger;
 	@Test(priority = 1, groups = { "PlannerViaTeams" })
 	public void addPlannerViaTeams() throws Exception {

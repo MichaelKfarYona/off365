@@ -4,6 +4,7 @@
   <test thread-count="5" name="testing(failed)">
     <parameter name="_ProductionAvayaPhoneNumber_2" value="6100"/>
     <parameter name="_ProductionAvayaPhoneNumber_1" value="2008"/>
+    <parameter name="_MEETING_NAME_DIFFERENT_USER" value="AUTOTEST_DF"/>
     <parameter name="_ProductionPolycomPhoneNumber" value="67277"/>
     <parameter name="_TestEnvPolycomPhoneNumber" value="67215"/>
     <parameter name="_AfterMeetingName" value="AUTOTEST_37630"/>
@@ -14,13 +15,11 @@
     <classes>
       <class name="desktop.tests.TestOutlookDesktop">
         <methods>
-          <include name="createReoccurringMeeting"/>
+          <include name="meetingCancellation"/>
           <include name="stopDriver"/>
           <include name="startDriver"/>
           <include name="tearDown"/>
-          <include name="checkBeforeConnectionNewRecMeetingIDAvaya" invocation-numbers="0"/>
           <include name="after"/>
-          <include name="checkBeforeConnectionNewRecMeetingIDPolycom" invocation-numbers="0"/>
           <include name="setupEnvironment"/>
         </methods>
       </class> <!-- desktop.tests.TestOutlookDesktop -->
