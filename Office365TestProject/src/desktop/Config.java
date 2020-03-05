@@ -21,6 +21,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -36,13 +37,24 @@ public class Config {
     protected static ExtentReports extent;
     static long start = System.currentTimeMillis();
     static long timeSpent;
+    @BeforeSuite
+    public void setSuite() {
+    	htmlReporter = new ExtentHtmlReporter("extentReportOutlookDesktop.html");
+    	extent = new ExtentReports();
+    	extent.attachReporter(htmlReporter);
+    }
+    @AfterSuite
+    public void setSuiteOff() {extent.flush();
+    service.stop();}
+    
 	@BeforeTest
 	public static void setupEnvironment(){
 		//int randomPort = randomNumInRange(9000, 9999);
+	/*
 		htmlReporter = new ExtentHtmlReporter("extentReportOutlookDesktop.html");
     	extent = new ExtentReports();
     	extent.attachReporter(htmlReporter);
-    	
+    	*/
 	    options = new DesktopOptions(); //Instantiate Winium Desktop Options
 	    options.setApplicationPath("C:\\Program Files (x86)\\Microsoft Office\\Office16\\outlook.exe");
 	    
@@ -73,8 +85,10 @@ public class Config {
 
 	@AfterTest
 	public void tearDown(){
+		/*
 		extent.flush();
 	    service.stop();
+	    */
 	    // driver.close();
 		// driver.quit();
 	}

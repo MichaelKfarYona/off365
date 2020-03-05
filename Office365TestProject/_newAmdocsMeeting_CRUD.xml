@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Desktop Outlook suite">
+	<test name="amdocsMeeting">
+	<parameter name = "phoneNumberProduction" value="297267340"/>
+	<parameter name = "_ProductionAvayaPhoneNumber_1" value="2008"/>
+	<parameter name = "_ProductionAvayaPhoneNumber_2" value="6100"/>
+	<parameter name = "_ProductionPolycomPhoneNumber" value="67277"/>
+	<parameter name = "_TestEnvAvayaPhoneNumber" value="67340"/>
+	<parameter name = "_TestEnvPolycomPhoneNumber" value="67221"/>
+	<parameter name = "_AfterMeetingName" value="AUTOTEST_37630"/>
+	<parameter name = "_deleteAndVerifyMeeting" value="TestDelAndValidate"/>
+	<parameter name = "_MeetingInThePast" value="AUTOTEST_082187"/>
+	<parameter name = "_MEETING_NAME_DIFFERENT_USER" value="AUTOTEST_DF"/>
+	
+		
+		<classes>
+			<!-- Outlook Desktop -->
+			<class name="desktop.tests.TestOutlookDesktop">
+				<methods>
+
+
+<!-- ******* LOAD. Create new Amdocs meeting and call ******* -->
+					<include name="createAmdocsMeeting_Load"/>
+					
+					<include name="callAvayaTestEnvLoad"/>
+					
+					<include name="deleteMeetingLoad_1Iteration"/>
+					
+					
+					
+					
+			<!--
+					<include name="createAmdocsMeeting_Load"/>
+					<include name="callAvayaTestEnvLoad"/>
+					<include name="callPolycomTestEnvLoad"/>
+					<include name="deleteMeetingLoad"/>
+					
+					<include name="callAvayaProductionEnvLoad"/>
+					<include name="callAvaya_2_ProductionEnvLoad"/>
+					<include name="callPolycomProductionEnvLoad"/>
+					<include name="deleteMeetingLoad_1Iteration"/>
+			
+			--> 
+
+
+<!-- ******* 1. CRUD main Amdocs meeting functions. Test.Production ******* -->
+					
+			<!--
+					<include name="setAmdocsCRUDFunctions"/>
+			
+					<include name="checkMainAmdocsMeetingWindowTemplate"/>
+					<include name="createNewAmdocsMeeting"/>
+					<include name="forwardMeeting"/>
+					<include name="checkSkypeMeeting"/>
+					<include name="updateMeetingParticipants"/>
+					<include name="updateMeetingDate"/>
+					<include name="meetingCancellation"/>
+					<include name="createMeetingWithoutID"/>
+					<include name="createInvalidNewAmdocsMeeting"/>
+			-->
+				
+									
+<!-- ******* 2. Create new Recurrence meeting. Reschedule . Weekly to Daily. Connect. (Test environment) ******* -->
+						
+				<!--
+					<include name="setRecurrenceAmdocsMeetingTestEnv"/>	
+				 
+					<include name="createRecurrenceMeetingOneTimePerWeek"/>
+					<include name="rescheduleRecMeetingOnePerWeekToDaily"/>
+					<include name="connectToRescheduledRecMeetingWeeklyToDailyAvayaTestEnv"/>
+					<include name="connectToRescheduledRecMeetingWeeklyToDailyPolicomTestEnv"/>
+					<include name="reoccurringCancellationAll"/>
+				-->
+				
+				
+<!-- ******* 3. Create new Recurrence meeting. Reschedule . Weekly to Daily. Connect. (Test environment) ******* -->
+				
+				<!--
+					<include name="setRecurrenceMeetingInTheFutureTestEnv"/>
+				 
+					<include name="createRecurrenceMeetingOneTimePerWeek"/>
+					<include name="rescheduleRecMeetingOnePerWeekToDaily"/>
+					<include name="connectToRescheduledRecMeetingWeeklyToDailyAvayaProduction_1"/>
+					<include name="connectToRescheduledRecMeetingWeeklyToDailyAvayaProduction_2"/>
+					<include name="connectToRescheduledRecMeetingWeeklyToDailyPolycomProduction_2"/>
+					<include name="reoccurringCancellationAll"/>
+				-->						
+										
+<!-- ******* 4.  ******* -->
+				
+				<!--
+					<include name="setRecurrenceMeetingInTheFutureTestEnv"/>
+				 
+				-->
+							
+<!-- ******* 5.  ******* -->
+				
+				<!--
+					<include name="setRecurrenceMeetingInTheFutureProductionEnv"/>
+				 
+				-->			
+										
+<!-- ******* 6.  ******* -->
+				
+				<!--
+					<include name="setAllDayMeetingTestEnvironment"/>
+				 
+				-->			
+
+<!-- ******* 7.  ******* -->
+				
+				<!--
+					<include name="setAllDayMeetingProductionEnvironment"/>
+				 
+				-->			
+
+											
+				</methods>
+				
+			</class>
+		</classes>
+	</test>
+</suite>

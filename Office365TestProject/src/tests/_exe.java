@@ -14,7 +14,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -33,6 +37,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.winium.WiniumDriver;
+import org.testng.TestNG;
 
 import com.sun.jna.platform.win32.User32;
 
@@ -158,17 +163,71 @@ public class _exe {
 	        }
 	        return null;
 	    }
+	 
+	 /**
+	 * @param iteration
+	 * @param XML
+	 */
+	public static void runTestSuite(int iteration, String XML) {
+	      List<String> suites = new ArrayList<String>(); 
+	      suites.add(XML); //path of .xml file to be run-provide complete path 
+	      TestNG tng = new TestNG(); 
+	      tng.setTestSuites(suites); 
+	      	for(int i=0;i<iteration;i++) { 
+	      		tng.run(); i++; }//run test suite
+		}
+	 
 	 // MAIN
 	public static void main(String[] args) throws IOException, InterruptedException, AWTException {
+		String id1 = "_id1";
+		String id2 = "_id2";
+		String name1 = "_name1";
+		String name2 = "_name2";
 		
-		  try {
-	            //ImageIO.write(grabScreen(), "png", new File(getHomeDir(), "TESTscreen.png"));
-	            ImageIO.write(grabScreen(), "png", new File("C:\\1", "TESTscreen.png"));
-	        } catch (IOException e) {
-	            System.out.println("IO exception"+e);
-	        }
-	    }
-	 
+		List<String> iDAndNameList = new ArrayList<String>();
+		iDAndNameList.add(id1);
+		iDAndNameList.add(name1);
+		iDAndNameList.add(id2);
+		iDAndNameList.add(name2);
+		
+		Map<String, String> myMap = new HashMap<String, String>();
+		myMap.put(name1, id1);
+		myMap.put(name2, id2);
+		myMap.size();
+		
+		// for (Map.Entry<String, String> entry : myMap.entrySet()) {
+		 //       System.out.println("Name =  " + entry.getKey() + " ID = " + entry.getValue());           
+		  //  }
+		
+		 for(Iterator<Map.Entry<String, String>> it = myMap.entrySet().iterator(); it.hasNext(); ) {
+				Map.Entry<String, String> entry = it.next();
+				if(entry.getKey().equals("_name1")) {
+					it.remove();
+				}
+				
+			}
+		 
+		 for (Map.Entry<String, String> entry1 : myMap.entrySet()) {
+		       System.out.println("Name =  " + entry1.getKey() + " ID = " + entry1.getValue());           
+		    }
+		 
+		/*
+		Set< Map.Entry< String, String> > st = myMap.entrySet();    
+		  
+	       for (Map.Entry< String, String> me:st) 
+	       { 
+	           System.out.print(me.getKey()+":"); 
+	           System.out.println(me.getValue()); 
+	       }
+	       */ 
+		/*
+		ArrayList<List<String>> arrayList = new ArrayList<List<String>>();
+		arrayList.add(list);
+		System.out.println(arrayList.get(0).toString());
+		*/
+		//runTestSuite(1, "desktopTesting.xml");
+		
+	   } 
 	   
 	 
 	    
@@ -344,4 +403,87 @@ public class _exe {
 	public static int randomNumInRange(int min, int max) {
 		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
 		return randomNum;
-	}}
+		
+	}
+	
+
+
+
+String TEST_TITLE;
+
+	public List<String> createBeforeMeetingInTheFuture(String mail, int hour, int min) throws AWTException, InterruptedException {
+		/*novoe okno - mainWindow*/
+		Thread.sleep(4000);
+		Robot robot = new Robot();
+		String newTime = createTime(hour, min);
+		String endTime = createTime(hour, min+30);
+		pasteString(mail);
+		robot.keyPress(KeyEvent.VK_RIGHT);robot.delay(250); 
+		robot.keyPress(KeyEvent.VK_TAB);robot.delay(250);						
+		//robot.keyRelease(KeyEvent.VK_TAB);robot.delay(500);
+		pasteString(TEST_TITLE);robot.delay(500);
+		robot.keyPress(KeyEvent.VK_TAB);robot.delay(250);
+		//robot.keyRelease(KeyEvent.VK_TAB);robot.delay(500);
+		robot.keyPress(KeyEvent.VK_TAB);robot.delay(250);
+		//robot.keyRelease(KeyEvent.VK_TAB);robot.delay(500);
+		robot.keyPress(KeyEvent.VK_TAB);robot.delay(250);
+		//robot.keyRelease(KeyEvent.VK_TAB);robot.delay(500);
+		robot.keyPress(KeyEvent.VK_TAB);robot.delay(250);
+		//robot.keyRelease(KeyEvent.VK_TAB);robot.delay(500);
+		pasteString(newTime);robot.delay(500);
+		robot.keyPress(KeyEvent.VK_TAB);robot.delay(250);
+		//robot.keyRelease(KeyEvent.VK_TAB);robot.delay(500);
+		robot.keyPress(KeyEvent.VK_TAB);
+		//robot.keyRelease(KeyEvent.VK_TAB);robot.delay(500);
+		pasteString(endTime);robot.delay(1000);
+	
+		
+		WebElement newbodyDocument = (new WebDriverWait(driver, 3)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@LocalizedControlType='document' and contains(@Name,'"+TEST_TITLE+"')]")));
+		String txtBodyNew = newbodyDocument.getText();
+		//String MeetingID = getMeetingID(txtBodyNew);
+		List<String> meetingNameAndID = new ArrayList<String>();
+		meetingNameAndID.add(TEST_TITLE);
+	//	meetingNameAndID.add(MeetingID);
+		
+								robot.delay(1000);
+		
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_S);
+		robot.keyRelease(KeyEvent.VK_S);
+		robot.keyRelease(KeyEvent.VK_CONTROL); robot.delay(1000);
+		robot.keyPress(KeyEvent.VK_ALT);
+		robot.keyPress(KeyEvent.VK_F4);
+		robot.keyRelease(KeyEvent.VK_F4);
+		robot.keyRelease(KeyEvent.VK_ALT);
+		
+		//clickSend();
+		
+		//btnSendAnyway(sendOrNot);
+		return meetingNameAndID;
+
+
+
+
+
+
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

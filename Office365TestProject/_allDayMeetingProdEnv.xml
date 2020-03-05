@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Desktop Outlook suite">
+	<test name="desktopTesting">
+	<parameter name = "phoneNumberProduction" value="297267340"/>
+	<parameter name = "_ProductionAvayaPhoneNumber_1" value="2008"/>
+	<parameter name = "_ProductionAvayaPhoneNumber_2" value="6100"/>
+	<parameter name = "_ProductionPolycomPhoneNumber" value="67277"/>
+	<parameter name = "_TestEnvAvayaPhoneNumber" value="67340"/>
+	<parameter name = "_TestEnvPolycomPhoneNumber" value="67215"/>
+	<parameter name = "_AfterMeetingName" value="AUTOTEST_37630"/>
+	<parameter name = "_deleteAndVerifyMeeting" value="TestDelAndValidate"/>
+	<parameter name = "_MeetingInThePast" value="AUTOTEST_082187"/>
+	<parameter name = "_MEETING_NAME_DIFFERENT_USER" value="AUTOTEST_DF"/>
+	
+		
+		<classes>
+ 
+			<!-- Outlook Desktop -->
+			<class name="desktop.tests.TestOutlookDesktop">
+				<methods>
+				
+					<include name="createAllDayMeeting"/>
+					
+					<include name="connectionAllDayMeetingAvayaProductionEnv"/>
+					<include name="connectionAllDayMeetingAvaya2ProductionEnv"/>
+			 		<include name="connectionAllDayMeetingPolycomProductionEnv"/>
+			
+				</methods>
+			</class>
+			
+			
+
+		</classes>
+	</test>
+</suite>

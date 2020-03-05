@@ -114,11 +114,7 @@
 					<include name="create24HoursMeeting"/>
 		-->		
 				
-					<include name="createNewAmdocsMeeting"/>
-					<include name="forwardMeeting"/>
-					<include name="checkSkypeMeeting"/>
-					<include name="meetingCancellation"/>
-			
+					<include name="setRecurrenceAmdocsMeetingTestEnv"/>
 			
 						
 					
