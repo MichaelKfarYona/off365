@@ -2163,6 +2163,39 @@ robot.keyRelease(KeyEvent.VK_ALT);
 		return resultList;
 
 	}
+		public List<String> specifyLoadMeeting_STATIC(String mail, int minPlus, String oldMeetingID_Static) throws InterruptedException, AWTException {
+			Thread.sleep(3000);
+			
+			List<String> resultList = new ArrayList<String>();
+			
+			Robot robot = new Robot();
+			
+			pasteString(mail); robot.keyPress(KeyEvent.VK_RIGHT); robot.keyRelease(KeyEvent.VK_RIGHT);
+			robot.delay(500);
+			//robot.keyPress(KeyEvent.VK_TAB); robot.keyRelease(KeyEvent.VK_TAB); robot.delay(250);
+			robot.keyPress(KeyEvent.VK_TAB); robot.keyRelease(KeyEvent.VK_TAB);	robot.delay(500);					
+			pasteString(TEST_TITLE);robot.delay(1000);
+			robot.keyPress(KeyEvent.VK_TAB); robot.keyRelease(KeyEvent.VK_TAB);	robot.delay(250);
+			//WebElement bodyDocument = (new WebDriverWait(driver, 1)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@LocalizedControlType='document' and contains(@Name,'"+TEST_TITLE+"')]")));
+			//String txtBody = bodyDocument.getText();
+			//String oldMeetingID = getMeetingID(txtBody);
+			resultList.add(TEST_TITLE);
+			resultList.add(oldMeetingID_Static);
+			if(minPlus!=0) {
+				
+				robot.keyPress(KeyEvent.VK_TAB); robot.keyRelease(KeyEvent.VK_TAB);	robot.delay(250);
+				robot.keyPress(KeyEvent.VK_TAB); robot.keyRelease(KeyEvent.VK_TAB);	robot.delay(250);
+				robot.keyPress(KeyEvent.VK_TAB); robot.keyRelease(KeyEvent.VK_TAB);	robot.delay(250);
+				String newTime = createTime(0, minPlus);
+				pasteString(newTime);robot.delay(1000);
+			}
+			
+		
+		return resultList;
+
+	}
+		
+		
 		public void exitAndSendLaterOrNot() throws InterruptedException, AWTException {
 			List<WebElement> exitList = driver.findElements(By.xpath("//*[contains(@Name,'Exit and Send Later')]"));
 			if(exitList.size()>0) {
@@ -2262,8 +2295,8 @@ public String specifyNewMessageInfo(String recipient) throws InterruptedExceptio
 		boolean flag = true;
 		
 	//	reminderDismissAll();
-		//chooseNewMenuItem(LeftBottomMenu.CALENDAR);
-		moveOut(10, 10);
+		
+		//moveOut(10, 10);
 		btnCreatedMeeting = (new WebDriverWait(driver, 3)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@Name,'"+meetingNameInTheList+"')]")));
 		btnCreatedMeeting.click();
 		Thread.sleep(1000);
@@ -2294,7 +2327,7 @@ public String specifyNewMessageInfo(String recipient) throws InterruptedExceptio
 		
 		}
 			catch(Exception e) {flag = false;}
-		
+		chooseNewMenuItem(LeftBottomMenu.CALENDAR);
 		return flag;
 		//return true;
 	}

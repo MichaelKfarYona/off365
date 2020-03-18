@@ -20,7 +20,7 @@
           <include name="startDriver"/>
           <include name="createAmdocsMeeting_Load"/>
           <include name="deleteMeetingLoad_1Iteration"/>
-          <include name="callAvayaTestEnvLoad" invocation-numbers="0"/>
+          <include name="callAvayaTestEnvLoad" invocation-numbers="0 0 0 0 0 0 0"/>
           <include name="tearDown"/>
           <include name="after"/>
           <include name="setSuiteOff"/>

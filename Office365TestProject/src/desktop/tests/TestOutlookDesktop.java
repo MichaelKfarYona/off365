@@ -275,7 +275,40 @@ public class TestOutlookDesktop extends Config {
 						valueListPolycomProdEnv.remove(0);
 						}
 				
-				
+//******************************************************* CREATE STATIC *******************************************************************
+					@Test(invocationCount = ITERATION, enabled = true, priority = 0, groups = { "DesktopOutlook" })
+					public void createAmdocsMeeting_Load_STATIC() throws InterruptedException, AWTException, IOException {
+						testLogOutlook = extent.createTest(getClass().getName());
+						testLogOutlook.log(Status.INFO, "Start Desktop Outlook");
+						OutlookDesktop outlookDesk = new OutlookDesktop(driver);
+						Thread.sleep(1000);
+						testLogOutlook.log(Status.INFO, "Open Calendar");
+						outlookDesk.chooseNewMenuItem(LeftBottomMenu.CALENDAR);
+						testLogOutlook.log(Status.INFO, "Create New Amdocs Meeting");
+						outlookDesk.clickNewAmdocsMeeting();
+						
+						meetingNameAndId = outlookDesk.specifyLoadMeeting_STATIC("yoelap@amdocs.com", 0, );
+					//  meetingNameAndId = outlookDesk.createBeforeMeetingInTheFuture("yoelap@amdocs.com", 0, 0);
+						
+						System.out.println("Meeting name: " + meetingNameAndId.get(0).toString());
+						outlookDesk.btnSendMeeting_ByRobot();
+						
+						valueList.add(meetingNameAndId.get(1));
+						keyList.add(meetingNameAndId.get(0));
+						myIDNameMap.put(meetingNameAndId.get(0), meetingNameAndId.get(1));
+						if (meetingNameAndId.size()>0) {
+							testLogOutlook.pass("Test Passed. Meeting created. ID : "+ meetingNameAndId.get(1).toString());
+								} else {createScreenShot("C:\\1","L_");
+							testLogOutlook.fail("Test failed...");			
+							}
+						// valueList.add(meetingNameAndId.get(1));
+						// keyList.add(meetingNameAndId.get(0));
+						// myIDNameMap.put(meetingNameAndId.get(0), meetingNameAndId.get(1));
+					}
+				 	
+					
+					
+					
 		
 //**************************************************************CRUD*************************************************************************************
 	/*********************************************************************************************************************

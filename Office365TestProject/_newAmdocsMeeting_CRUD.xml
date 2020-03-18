@@ -22,6 +22,7 @@
 
 <!-- ******* LOAD. Create new Amdocs meeting and call ******* -->
 					<include name="createAmdocsMeeting_Load"/>
+					<include name="createAmdocsMeeting_Load_STATIC"/>
 					
 					<include name="callAvayaTestEnvLoad"/>
 					
