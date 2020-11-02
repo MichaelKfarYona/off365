@@ -55,16 +55,19 @@ public class Config {
     	extent = new ExtentReports();
     	extent.attachReporter(htmlReporter);
     	*/
+		
 	    options = new DesktopOptions(); //Instantiate Winium Desktop Options
 	    options.setApplicationPath("C:\\Program Files (x86)\\Microsoft Office\\Office16\\outlook.exe");
 	    
 	    File driverPath = new File("C:\\DRIVERS\\Winium.Desktop.Driver.exe");
 	    System.setProperty("webdriver.winium.desktop.driver","C:\\DRIVERS\\Winium.Desktop.Driver.exe");
+	    
 	    service = new WiniumDriverService.Builder().usingDriverExecutable(driverPath).usingPort(9999).withVerbose(true)
 	            .withSilent(false).buildDesktopService();
 	    try {
 	        service.start();
-	    } catch (IOException e) {
+	    } 
+	    catch (IOException e) {
 	        System.out.println("Exception while starting WINIUM service");
 	        e.printStackTrace();
 	    }
@@ -76,10 +79,15 @@ public class Config {
 	}
 
 	@AfterMethod
-	public void stopDriver(){
-		if(driver!= null) {
-		  driver.close(); driver.quit();
-		  }
+	public void stopDriver() throws InterruptedException{
+		/*
+		  if(driver!= null) { driver.close(); driver.quit(); }
+		  */
+		if(driver!=null) {
+		  driver.close(); 
+		}
+		driver.quit();
+		 //Thread.sleep(1000);
 		 
 	}
 
@@ -89,8 +97,12 @@ public class Config {
 		extent.flush();
 	    service.stop();
 	    */
-	    // driver.close();
-		// driver.quit();
+		/*
+		if(driver!= null) {
+			  driver.close(); 
+			  driver.quit();
+			  }
+			*/ 
 	}
 	@AfterSuite
 	public void after() {

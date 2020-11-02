@@ -55,7 +55,7 @@ public class TestOutlookDesktop extends Config {
 	String createdRecMeetingID = null;
 	String meetingNameNew;
 	String allDayMeetingID;
-	
+	String pass = "577561#";
 	ArrayList<String> valueList = new ArrayList<String>(myIDNameMap.values());
 	ArrayList<String> valueListPolycomTestEnv = new ArrayList<String>(myIDNameMap.values());
 	ArrayList<String> valueListAvayaProdEnv = new ArrayList<String>(myIDNameMap.values());
@@ -78,8 +78,24 @@ public class TestOutlookDesktop extends Config {
 		 	ImageIO.write(grabScreen(), "png", new File(path, filename+getRandom()+".png"));}
 	 		catch (IOException e){System.out.println("IO exception"+e + " Check createScreenShot method...");}
 	 }
+
+	/* TC1 Connect from Open Network to Outlook with No VPN (Validate any pop-up) | Regression suite*/
+	 @Test(enabled = true, priority = 0, groups = { "DesktopOutlookNoVPN" })
+		public void popupValidationNoVPN() throws InterruptedException, AWTException, IOException {
+			testLogOutlook = extent.createTest(getClass().getName());
+			testLogOutlook.log(Status.INFO, "Start Desktop Outlook");
+			OutlookDesktop outlookDesk = new OutlookDesktop(driver);
+			Thread.sleep(1000);
+			boolean status = outlookDesk.checkStatus();
+			if(status) {System.out.println("TRUE");
+			testLogOutlook.pass("Test Passed. : Outlook is not connected to the network.");
+			}
+			else {System.out.println("False... | TC1 Connect from Open Network to Outlook with No VPN (Validate any pop-up) | Regression suite");}
+			
+			
+	 }
 //*********************************************************************LOAD*********************************************************************************
-	 final int ITERATION = 10;
+	 final int ITERATION = 5;
 	 /*********************************************************************************************************************
 	 * Load 1. TC#L Create Amdocs meetings 
 	 * @throws Exception 
@@ -141,8 +157,8 @@ public class TestOutlookDesktop extends Config {
 	 * Load 3. Delete set of meetings. 
 	 * @throws Exception 
 	 *********************************************************************************************************************/
-	 @Test(invocationCount = ITERATION,enabled = true, priority = 2)
-//@Test(enabled = true, priority = 2)
+	 @Test(invocationCount = ITERATION, enabled = true, priority = 2)
+//@Test(enabled = true, priority = 2, alwaysRun = true)
 	 public void deleteMeetingLoad() throws Exception {
 		  
 	 testLogOutlook = extent.createTest(getClass().getName());
@@ -194,7 +210,26 @@ public class TestOutlookDesktop extends Config {
 			Thread.sleep(2000);
 			}
 	}
-	 
+	 // Adding Rules Outlook 
+	/* TC6 Adding Rules Outlook | Regression Suite for track 1_2_3*/
+		 @Test(enabled = true, priority = 2)
+		 public void addRulesOutlookDesktop() throws AWTException, InterruptedException {
+			 testLogOutlook = extent.createTest(getClass().getName());
+				testLogOutlook.log(Status.INFO, "Start Desktop Outlook");
+				OutlookDesktop outlookDesk = new OutlookDesktop(driver);
+				Thread.sleep(1000);
+				testLogOutlook.log(Status.INFO, "Open Manage Rules");
+				outlookDesk.chooseNewMenuItem(LeftBottomMenu.CALENDAR);
+				boolean res = outlookDesk.addRule();
+				if (res) {
+					testLogOutlook.pass("Rule has been added!");
+				} else {
+					testLogOutlook.fail("Test failed...");
+				}
+			 
+		 }
+		 
+		 
 	 /*********************************************************************************************************************
 	 * Load 4. Calling... Polycom Test env.
 	 * @throws Exception 
@@ -276,7 +311,7 @@ public class TestOutlookDesktop extends Config {
 						}
 				
 //******************************************************* CREATE STATIC *******************************************************************
-					@Test(invocationCount = ITERATION, enabled = true, priority = 0, groups = { "DesktopOutlook" })
+					@Test(invocationCount = ITERATION, enabled = true, priority = 0)
 					public void createAmdocsMeeting_Load_STATIC() throws InterruptedException, AWTException, IOException {
 						testLogOutlook = extent.createTest(getClass().getName());
 						testLogOutlook.log(Status.INFO, "Start Desktop Outlook");
@@ -287,7 +322,7 @@ public class TestOutlookDesktop extends Config {
 						testLogOutlook.log(Status.INFO, "Create New Amdocs Meeting");
 						outlookDesk.clickNewAmdocsMeeting();
 						
-						meetingNameAndId = outlookDesk.specifyLoadMeeting_STATIC("yoelap@amdocs.com", 0, );
+						meetingNameAndId = outlookDesk.specifyLoadMeeting_STATIC("yoelap@amdocs.com", 0, "114814#");
 					//  meetingNameAndId = outlookDesk.createBeforeMeetingInTheFuture("yoelap@amdocs.com", 0, 0);
 						
 						System.out.println("Meeting name: " + meetingNameAndId.get(0).toString());
@@ -304,10 +339,63 @@ public class TestOutlookDesktop extends Config {
 						// valueList.add(meetingNameAndId.get(1));
 						// keyList.add(meetingNameAndId.get(0));
 						// myIDNameMap.put(meetingNameAndId.get(0), meetingNameAndId.get(1));
+						//Thread.sleep(1000);
 					}
 				 	
+		
+				@Test(invocationCount = ITERATION,enabled = true, priority = 1)
+						//@Test(enabled = true, priority = 1)
+						@Parameters({"_ProductionAvayaPhoneNumber_1"})
+						public void callAvayaProductionEnvLoad_STATIC(String _ProductionAvayaPhoneNumber_1) throws IOException, AWTException, InterruptedException {
+							boolean setRes = false;
+							
+							System.out.println("BEFORE ELEMENT : " + valueList.get(0));
+							testLogOutlook = extent.createTest(getClass().getName());
+							testLogOutlook.log(Status.INFO, "TC#_Load2 - Call using new Recurrence meeting ID. Test env. Avaya.");
+							testLogOutlook.log(Status.INFO, "Try to connect. Number : "+_ProductionAvayaPhoneNumber_1);
+							OutlookDesktop od = new OutlookDesktop(driver);
+							setRes = od.callByNumberSTATIC(_ProductionAvayaPhoneNumber_1, valueList.get(0), pass);
+							if(setRes) {testLogOutlook.pass("Test Passed! | Connect is available through the new ID "+ valueList.get(0));}
+							else {createScreenShot("C:\\1","TC#_Load2_"); testLogOutlook.fail("Test failed... : ID : "+valueList.get(0));}
+							valueList.remove(0); Thread.sleep(1000);
+							}
 					
+				@Test(invocationCount = ITERATION,enabled = true, priority = 1)
+				//@Test(enabled = true, priority = 1)
+				@Parameters({"_ProductionAvayaPhoneNumber_2"})
+				public void callAvaya2ProductionEnvLoad_STATIC(String _ProductionAvayaPhoneNumber_2) throws IOException, AWTException, InterruptedException {
+					boolean setRes = false;
 					
+					System.out.println("BEFORE ELEMENT : " + valueList.get(0));
+					testLogOutlook = extent.createTest(getClass().getName());
+					testLogOutlook.log(Status.INFO, "TC#_Load2 - Call using new Recurrence meeting ID. Test env. Avaya.");
+					testLogOutlook.log(Status.INFO, "Try to connect. Number : "+_ProductionAvayaPhoneNumber_2);
+					OutlookDesktop od = new OutlookDesktop(driver);
+					setRes = od.callByNumberSTATIC(_ProductionAvayaPhoneNumber_2, valueList.get(0), pass);
+					if(setRes) {testLogOutlook.pass("Test Passed! | Connect is available through the new ID "+ valueList.get(0));}
+					else {createScreenShot("C:\\1","TC#_Load2_"); testLogOutlook.fail("Test failed... : ID : "+valueList.get(0));}
+					valueList.remove(0); Thread.sleep(1000);
+					}
+				
+				@Test(invocationCount = ITERATION,enabled = true, priority = 1)
+				//@Test(enabled = true, priority = 1)
+				@Parameters({"_ProductionPolycomPhoneNumber"})
+				public void callPolycomProductionEnvLoad_STATIC(String _ProductionPolycomPhoneNumber) throws IOException, AWTException, InterruptedException {
+					boolean setRes = false;
+					
+					System.out.println("BEFORE ELEMENT : " + valueList.get(0));
+					testLogOutlook = extent.createTest(getClass().getName());
+					testLogOutlook.log(Status.INFO, "TC#_Load2 - Call using new Recurrence meeting ID. Test env. Avaya.");
+					testLogOutlook.log(Status.INFO, "Try to connect. Number : "+_ProductionPolycomPhoneNumber);
+					OutlookDesktop od = new OutlookDesktop(driver);
+					setRes = od.callByNumberSTATIC(_ProductionPolycomPhoneNumber, valueList.get(0), pass);
+					if(setRes) {testLogOutlook.pass("Test Passed! | Connect is available through the new ID "+ valueList.get(0));}
+					else {createScreenShot("C:\\1","TC#_Load2_"); testLogOutlook.fail("Test failed... : ID : "+valueList.get(0));}
+					valueList.remove(0);Thread.sleep(1000);
+					}
+				
+				
+			//	
 					
 		
 //**************************************************************CRUD*************************************************************************************
@@ -626,7 +714,25 @@ System.out.println("Result : " + res);
 		}
 		Thread.sleep(1000);
 	}
+	/* TC4 - Send message */
+	@Test(enabled = true, priority = 1, groups = { "DesktopOutlook" })
+	public void sendMessageDesktopOutlook() throws InterruptedException, AWTException {
+		testLogOutlook = extent.createTest(getClass().getName());
+		testLogOutlook.log(Status.INFO, "TC#4 - send message");
+		testLogOutlook.log(Status.INFO, "Start Desktop Outlook");
+		OutlookDesktop outlookDesk = new OutlookDesktop(driver);
+		Thread.sleep(2000);
+		outlookDesk.chooseNewMenuItem(LeftBottomMenu.MAIL);
+		String subj = outlookDesk.sendMessage("yoelap@amdocs.com");
+		boolean res = outlookDesk.checkSentItems(subj);
+		if (res) {
+			testLogOutlook.pass("Test Passed: sendMessageDesktopOutlook");
+		} else {createScreenShot("C:\\1","TC4_");
+			testLogOutlook.fail("Test failed... : sendMessageDesktopOutlook");
+		}
+		
 	
+	}
 
 	/* TC#4 - Schedule Reoccurring meeting invalid */
 	@Test(enabled = true, priority = 7, groups = { "DesktopOutlook" })
@@ -1772,6 +1878,26 @@ System.out.println("Result : " + res);
 		isExist = outlookDesk.specifyMeetingPropertiesAndDeleteMeetingID("yoelap@amdocs.com");
 		if(isExist) {testLogOutlook.pass("Test Passed! | ...");}
 		else {createScreenShot("C:\\1","TC66_"); testLogOutlook.fail("Test failed... : ");}
+	}
+	
+	/* TC#67N Create Teams meeting */
+	@Test(enabled = true, priority = 4, groups = { "AllDayMeeting" })
+	public void createTeamsMeetingViaOutlook() throws InterruptedException, AWTException, IOException {
+		testLogOutlook = extent.createTest(getClass().getName());
+		testLogOutlook.log(Status.INFO, "* Create Teams meeting via Outlook.");
+		testLogOutlook.log(Status.INFO, "Start Desktop Outlook");
+		OutlookDesktop outlookDesk = new OutlookDesktop(driver);
+		outlookDesk.titleBar();
+		Thread.sleep(2000);
+		testLogOutlook.log(Status.INFO, "Open Calendar");
+		outlookDesk.chooseNewMenuItem(LeftBottomMenu.CALENDAR);
+		testLogOutlook.log(Status.INFO, "Create New Teams Meeting");
+		outlookDesk.clickNewTeamsMeeting();
+		
+		myResList = outlookDesk.createTeamsMeeting("yoelap@amdocs.com", false, false);
+		boolean res = (boolean) myResList.get(1);
+		if (res) {testLogOutlook.pass("Test Passed! | All day meeting has been created.");}
+		else {createScreenShot("C:\\1","TC67N_"); testLogOutlook.fail("Test failed... : ");}
 	}
 	
 	/* TC#67 Create all day meeting */

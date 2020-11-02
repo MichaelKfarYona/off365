@@ -8,7 +8,6 @@
           <include name="stopDriver"/>
           <include name="checkOneDriveDesktop"/>
           <include name="startDriver"/>
-          <include name="addEntityToTheOneDriveFolder"/>
           <include name="tearDown"/>
           <include name="setupEnvironment"/>
         </methods>

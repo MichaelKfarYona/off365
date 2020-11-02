@@ -3,15 +3,24 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="desktop.tests.TestDifferentUser">
+      <class name="tests.TestTeamsChannelPage">
         <methods>
-          <include name="openAsDifferentUser"/>
+          <include name="timeSpent"/>
+          <include name="addNewTabWeb"/>
+          <include name="addNewMeeting"/>
+          <include name="deleteNewTeam"/>
           <include name="tearDown"/>
-          <include name="stopDriver"/>
-          <include name="setupEnvironment"/>
-          <include name="startDriver"/>
+          <include name="assignRoleValidation"/>
+          <include name="ReportSetup"/>
+          <include name="sendEmojiGiphyStickerToTheChat"/>
+          <include name="checkNewTeam"/>
+          <include name="sendEmojiStickerToTheChat"/>
+          <include name="Setup"/>
+          <include name="tearDownAll"/>
+          <include name="createNewTeam"/>
+          <include name="setTimePoint"/>
         </methods>
-      </class> <!-- desktop.tests.TestDifferentUser -->
+      </class> <!-- tests.TestTeamsChannelPage -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

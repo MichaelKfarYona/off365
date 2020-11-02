@@ -35,7 +35,9 @@ public class MainPage {
     
     public void signInNo() throws InterruptedException {
     	Thread.sleep(2000);
-    	staySignedIn_No = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='idBtn_Back']")));
+    	//input[@value='No']
+    	
+    	staySignedIn_No = (new WebDriverWait(driver, 21)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='idBtn_Back']")));
     	staySignedIn_No.click();
     }
     public void setLogin(String word) throws InterruptedException{

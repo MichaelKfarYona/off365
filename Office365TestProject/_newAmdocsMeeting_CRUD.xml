@@ -19,19 +19,32 @@
 			<class name="desktop.tests.TestOutlookDesktop">
 				<methods>
 
+<!-- ******* LOAD.STATIC. Create new Amdocs meeting and call ******* -->
+ 		
+ 		<include name="sendMessageDesktopOutlook"/>
+ 		
+ 		
+ 		<!--   <include name="addRulesOutlookDesktop"/> -->
+	<!--	<include name="popupValidationNoVPN"/> -->
+		
+		
+			
+	
+			<!-- <include name="createAmdocsMeeting_Load_STATIC"/> -->
+				 
+			<!-- <include name="callAvayaProductionEnvLoad_STATIC"/> -->
+			<!-- <include name="callAvaya2ProductionEnvLoad_STATIC"/> -->
+			<!-- <include name="callPolycomProductionEnvLoad_STATIC"/> -->
+
+
+<!-- ************************************************************************************************************ -->
 
 <!-- ******* LOAD. Create new Amdocs meeting and call ******* -->
-					<include name="createAmdocsMeeting_Load"/>
-					<include name="createAmdocsMeeting_Load_STATIC"/>
-					
-					<include name="callAvayaTestEnvLoad"/>
-					
-					<include name="deleteMeetingLoad_1Iteration"/>
-					
 					
 					
 					
 			<!--
+			
 					<include name="createAmdocsMeeting_Load"/>
 					<include name="callAvayaTestEnvLoad"/>
 					<include name="callPolycomTestEnvLoad"/>

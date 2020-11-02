@@ -23,7 +23,7 @@ public class TestFormViaTeams extends Settings {
 
 	ExtentHtmlReporter htmlReporter;
 	String loginName = "Michael@msglab.tech";
-	String password = "Ahmshere577561!";
+	String password = "Ahmshere577561^";
 	final int lineNumber = 2;
 	final String APP_NAME = "Teams";
 	int teamNumber = getRandom();

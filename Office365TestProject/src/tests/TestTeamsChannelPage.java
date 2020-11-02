@@ -14,6 +14,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
+import pages.FileFromMainPage;
 import pages.MainPage;
 import pages.Office365Page;
 import pages.OutlookPage;
@@ -36,29 +37,57 @@ public class TestTeamsChannelPage extends Settings {
 	final String ownerName = "Michael Prudnikov";int teamNumber = getRandom();ExtentTest testLog = null;
 	final String meetingTitle = "AUTOCREATED_TITLE_";
 	
+	
+	@Test(enabled = true, priority = 0, description = "Share files via chat")
+	public void shareFilesViaChatTeams() throws Exception {
+		testLog = extent.createTest(getClass().getName());
+		testLog.log(Status.INFO, "Create new team: started");
+		//loginAsAmdocsUserSettingsM(ApplicationName.TEAMS); // Settings.class method
+		//loginAsAmdocsUserProduction(ApplicationName.TEAMS,1);
+		loginAsAmdocsUser("Teams");
+		testLog.log(Status.INFO, "Open Teams page");
+		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
+		teamsPage.clickByLinkWeb();
+		teamsPage.clickTeamsTab();
+		Thread.sleep(1000);
+		//teamsPage.createTeam(); Thread.sleep(2000);
+		teamsPage.clickByLeftMenuItem(LeftMenuTeams.CHAT);
+		testLog.log(Status.INFO, "Open chat tab");
+		teamsPage.buildATeamFromScratch(KindOfTeam.PUBLIC, newTeamName, teamNumber);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		testLog.pass("The New Team has been created!");
+		Thread.sleep(1000);
+	}
+	
+	
 	//String[] invitePeople;
 //*********************************************************************************************************
 //************************************* Create a new Team Online ********************************************
 //*********************************************************************************************************
-	@Test(enabled = true, priority = 0, description = "Create a new Team Online", groups = { "Teams" })
+	//, groups = { "Teams" }
+	// as Michael!
+	@Test(enabled = true, priority = 0, description = "Create a new Team Online")
 	public void createNewTeam() throws Exception {
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Create new team: started");
-		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
-		//loginAsAmdocsUser("Teams");
+		//loginAsAmdocsUserSettingsM(ApplicationName.TEAMS); // Settings.class method
+		//loginAsAmdocsUserProduction(ApplicationName.TEAMS,1);
+		loginAsAmdocsUser("Teams");
 		testLog.log(Status.INFO, "Open Teams page");
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
+		teamsPage.clickByLinkWeb();
 		teamsPage.clickTeamsTab();
-		Thread.sleep(3000);
-		teamsPage.createTeam(); Thread.sleep(2000);
+		Thread.sleep(1000);
+		//teamsPage.createTeam(); Thread.sleep(2000);
+		teamsPage.clickJoinOrCreateATeam();Thread.sleep(2000);
 		testLog.log(Status.INFO, "Attempt to create a team");
 		teamsPage.buildATeamFromScratch(KindOfTeam.PUBLIC, newTeamName, teamNumber);
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-		testLog.pass("The New Team has been created! You can run 'checkNewTeam' or/and 'deleteNewTeam' method!");
-		Thread.sleep(3000);
+		testLog.pass("The New Team has been created!");
+		Thread.sleep(1000);
 	}
- 
-	@Test(enabled = false, priority = 0, description = "Create a new Team Online", groups = { "Teams" })
+ // , groups = { "Teams" }
+	@Test(enabled = false, priority = 0, description = "Create a new Team Online")
 	public void createNewPrivateTeam() throws Exception {
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Create new team: started");
@@ -79,13 +108,14 @@ public class TestTeamsChannelPage extends Settings {
 //*********************************************************************************************************
 //************************************* Checking the existence of the team *********************************
 //*********************************************************************************************************
-	@Test(enabled = true, priority = 0, description = "Check New team creation", groups = { "Teams" })
+	// , groups = { "Teams" }
+	@Test(enabled = true, priority = 0, description = "Check New team creation")
 	public void checkNewTeam() throws Exception {
 		// ExtentTest testLog = extent.createTest(getClass().getName());
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Checking the existence of the team");
-		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
-		//loginAsAmdocsUser("Teams");
+		//loginAsAmdocsUserSettingsM(ApplicationName.TEAMS); // Settings.class method
+		loginAsAmdocsUser("Teams");
 		testLog.log(Status.INFO, "Open Teams page");
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 		teamsPage.clickTeamsTab();
@@ -101,12 +131,13 @@ public class TestTeamsChannelPage extends Settings {
 	/*********************************************************************************************************
 	********************************************* Deleting the team ******************************************
 	*********************************************************************************************************/
-		@Test(enabled = true, priority = 5, description = "Delete the team", groups = { "Teams" })
+	// , groups = { "Teams" }
+		@Test(enabled = true, priority = 5, description = "Delete the team")
 		public void deleteNewTeam() throws Exception {
 			testLog = extent.createTest(getClass().getName());
 			testLog.log(Status.INFO, "Checking the existence of the team");
-			loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
-			//loginAsAmdocsUser("Teams");
+			//loginAsAmdocsUserSettingsM(ApplicationName.TEAMS); // Settings.class method
+			loginAsAmdocsUser("Teams");
 			testLog.log(Status.INFO, "Logged in to the Teams");
 			TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 			teamsPage.clickTeamsTab();
@@ -121,7 +152,43 @@ public class TestTeamsChannelPage extends Settings {
 			Thread.sleep(2000);
 			// extent.flush();
 		}
-
+		
+// ***************** 
+		
+		/* TC19 Autosave option . any doc*/  
+		@Test(enabled = true, priority = 1, description = "Teams : Doc autosave option.")
+		public void autosaveOption() throws Exception {
+			testLog = extent.createTest(getClass().getName());
+			testLog.log(Status.INFO, "Autosave option");
+			// Through the main Office page
+			loginAsAmdocsUserSettingsWithoutApp();
+			Office365Page officePage = new Office365Page(driver);
+			officePage.openFileOnMainPage("test");			
+			switchNewOpenedTab(1);
+			testLog.log(Status.INFO, "Switch to filepage.");
+				FileFromMainPage filePage = new FileFromMainPage(driver);
+			filePage.cleanAndPasteCanvas("Test");
+			driver.close();
+			switchNewOpenedTab(0);
+			officePage.openFileOnMainPage("test");
+			testLog.log(Status.INFO, "Check autosave mode.");
+			switchNewOpenedTab(1);
+			FileFromMainPage filePageSaved = new FileFromMainPage(driver);
+			boolean res = filePageSaved.checkCanvasAutosave("Test");
+			if(res) {testLog.pass("Autosaved");}
+			else {testLog.fail("File not saved...");}
+			Thread.sleep(3000);
+			System.out.println("Result : "+res);
+			
+		/*//Through the teams
+		 * loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
+		 * //loginAsAmdocsUser("Teams"); testLog.log(Status.INFO, "Open Teams page");
+		 * TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
+		 * teamsPage.clickTeamsTab();
+		 * teamsPage.openTeamSettingsDotAndCheckFile("TestOwners", "test.docx");
+		 */
+		}
+		
 	
 	/*****************************************************************
 	***************** * Chat attachment. OneDrive * *****************      													dodelat
@@ -157,16 +224,18 @@ public class TestTeamsChannelPage extends Settings {
 			else {testLog.fail("Status not changed.");}
 			
 		}
+
+	
 	
 //**************************************************************************************************************************
-//*******	 Assign role validation. This test needs to be run after the team is created. In the same test group	 *******
+//******* TC23	 Assign role validation. This test needs to be run after the team is created. In the same test group	 *******
 //**************************************************************************************************************************
-	@Test(enabled = true, priority = 1, description = "Teams : Assign role validation", groups = { "Teams" })
+	@Test(enabled = true, priority = 1, description = "Teams : Assign role validation")
 	public void assignRoleValidation() throws Exception {
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Assign role validation");
-		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
-		//loginAsAmdocsUser("Teams");
+		//loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
+		loginAsAmdocsUser("Teams");
 		testLog.log(Status.INFO, "Open Teams page");
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
 		teamsPage.clickTeamsTab();
@@ -195,26 +264,36 @@ public class TestTeamsChannelPage extends Settings {
 	//*************************************************************************************************
 	// Create new Meeting. invitePeople - names and mails of those who need to be added to the meeting.
 	//*************************************************************************************************
-	@Test(enabled = true, priority = 2, description = "Teams : Create new meeting", groups = { "Teams" })
+	//  groups = { "Teams" }
+	@Test(enabled = true, priority = 2, description = "Teams : Create new meeting")
 	public void addNewMeeting() throws InterruptedException, IOException {
 		testLog = extent.createTest(getClass().getName());
 		testLog.log(Status.INFO, "Assign role validation");
 		String[] invitePeople = {"michael.prudnikov@amdocs.com"}; // You can add as many users as you like "Dolphie.Lobo@amdocs.com" "prudnikov.michael@aol.com", "michael.prudnikov@amdocs.com"
+		loginAsAmdocsUserProduction(ApplicationName.TEAMS,1);
 		
-		loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
+		//loginAsAmdocsUserSettings(ApplicationName.TEAMS); // Settings.class method
 		//loginAsAmdocsUser("Teams");
 		TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
+		
+		Thread.sleep(3000);
+		teamsPage.chooseWebApp();
 		teamsPage.clickByLeftMenuItem(LeftMenuTeams.CALENDAR);
 		String newMeetingTitle = meetingTitle+getRandom();
-		Assert.assertEquals(newMeetingTitle, teamsPage.createNewMeetingInCalendar(newMeetingTitle, invitePeople)); 
-		testLog.pass("New meeting has been created: "+ newMeetingTitle);
-		Thread.sleep(2000);
+		teamsPage.createNewMeetingInCalendar(newMeetingTitle, invitePeople);
+		teamsPage.openWeek();
+		boolean res = teamsPage.checkMeeting(newMeetingTitle);
+		//Assert.assertEquals(newMeetingTitle, teamsPage.createNewMeetingInCalendar(newMeetingTitle, invitePeople)); 
+		if(res) {
+		testLog.pass("New meeting has been created: "+ newMeetingTitle+ " *** "+res);
+		}
+		else {testLog.fail("Meeting not found: "+ newMeetingTitle+ " *** "+res);}
 		
 		// check email in the Outlook
 			  
 	}
 	
-
+// Michael Lab
 	  public void loginAsAmdocsUser(String appName) throws InterruptedException,
 	  IOException{ testLog.log(Status.INFO, "Login as User"); 
 	  MainPage mainPage =  new MainPage(driver); Thread.sleep(2000); mainPage.setLogin(loginName);
@@ -223,6 +302,7 @@ public class TestTeamsChannelPage extends Settings {
 	  Office365Page officePage = new Office365Page(driver);
 	  System.out.println("OFFICE 365"); Thread.sleep(2000);
 	  testLog.log(Status.INFO, "Click Teams link ");
+	  officePage.OpenAllApps();
 	  officePage.chooseApplication(appName);
 	 
 									  ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
@@ -241,7 +321,8 @@ public class TestTeamsChannelPage extends Settings {
 	/*****************************************************************************************
 	 ********************************** Add A New Flow ***************************************
 	 *****************************************************************************************/
-		@Test(enabled = false, priority = 2, description = "Add new tab", groups = { "Teams" })
+	  // , groups = { "Teams" }
+		@Test(enabled = true, priority = 2, description = "Add new tab")
 		public void addNewFlow() throws Exception, IOException {
 			testLog = extent.createTest(getClass().getName());
 			String element = "Flow";
@@ -266,12 +347,13 @@ public class TestTeamsChannelPage extends Settings {
 		 * teamsPage.checkNewTabAddedViaContent(myURL)==true)
 		 * {testLog.pass("New website "+myURL+" has been added: TestName_"+
 		 * teamNumber);} else {testLog.fail("The problem of creating a web site!");}
-		 */Thread.sleep(3000);
+		 */Thread.sleep(2000);
 		}
 	/******************************************************************************************************/
 	/********************************************Add A New Web Tab*****************************************/
 	/******************************************************************************************************/
-	@Test(enabled = true, priority = 2, description = "Add new tab", groups = { "Teams" })
+		//, groups = { "Teams" }
+	@Test(enabled = true, priority = 2, description = "Add new tab")
 	public void addNewTabWeb() throws Exception, IOException {
 		testLog = extent.createTest(getClass().getName());
 		String element = "Website";

@@ -5,7 +5,7 @@ package tests;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.testng.Assert;
+
 
 import org.testng.annotations.Test;
 
@@ -29,7 +29,7 @@ public class TestPlanner extends Settings{
 	final String listName = "LIST_NAME_";
 	final String taskName = "TASK_NAME_";
 	final int lineNumber = 2;
-	String loginName = "Michael@msglab.tech"; String password = "Ahmshere577561!";
+	String loginName = "Michael@msglab.tech"; String password = "Ahmshere577561^";
 	int teamNumber = getRandom();
 	ExtentTest testLog = null;
 	final String newPlanName = "AUTOMATION_PLAN_NAME_";
@@ -39,23 +39,35 @@ public class TestPlanner extends Settings{
 		System.out.println("TestPlanner -> creationAndVerificationOfNewPlan");
 		testLog = extent.createTest(getClass().getName());
     	testLog.log(Status.INFO, "Start Planner app");
+    	System.out.println("* STEP 1");
     	try {
     		loginAsAmdocsUserSettings(ApplicationName.PLANNER); // Settings.class method
-    	//loginAsAmdocsUser("Planner");
+    	
+    		System.out.println("* STEP 2");
+    		//loginAsAmdocsUser("Planner");
     	String myParamPlannerName = newPlanName+getRandom();
     	Thread.sleep(1000);
     	Planner plannerPage = new Planner(driver);
+    	System.out.println("* STEP 3");
     	plannerPage.createANewPlan(myParamPlannerName);
-    	plannerPage.privacyOption(Privacy.PUBLIC);
+    	System.out.println("* STEP 4");
+    	plannerPage.checkAdminGroupCreation();
+    	//plannerPage.privacyOption(Privacy.PUBLIC);
+    	System.out.println("* STEP 5");
     	plannerPage.clickCreatePlan();
+    	System.out.println("* STEP 6");
     	testLog.log(Status.INFO, "Plan has been created!");
     	plannerPage.returnToTheMainPlannerPage();
+    	System.out.println("* STEP 7");
     	//Assert.assertTrue(plannerPage.verificationOfTheExistenceOfThePlan(myParamPlannerName)); 
     	
     	String testString = plannerPage.choosePlanFromTheList(myParamPlannerName);Thread.sleep(3000);
+    	System.out.println("* STEP 8");
     	System.out.println(" ******* "+testString);
     	plannerPage.specifyTaskName("Test_Name_");Thread.sleep(1000);
-    	plannerPage.specifyAssignName("Steve");Thread.sleep(1000);
+    	System.out.println("* STEP 9");
+    	plannerPage.specifyAssignName("Michael Prudnikov");Thread.sleep(1000);
+    	System.out.println("* STEP 10");
     	testLog.pass("Verification of the existence of the plan was successful! Task assigned!");
     	}
     	catch(Exception e) {testLog.fail("Something went wrong! "+e.toString());}

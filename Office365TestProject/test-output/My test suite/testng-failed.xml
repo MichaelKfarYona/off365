@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [My test suite]">
+  <parameter name="NoteName" value="TEST_NOTE_00000"/>
   <test thread-count="5" name="testing(failed)">
     <classes>
-      <class name="tests.TestOneDrive">
+      <class name="tests.TestOutlook">
         <methods>
-          <include name="uploadNewFileOneDrive"/>
           <include name="timeSpent"/>
+          <include name="sendMessageWeb"/>
           <include name="Setup"/>
           <include name="tearDown"/>
           <include name="tearDownAll"/>
           <include name="ReportSetup"/>
           <include name="setTimePoint"/>
         </methods>
-      </class> <!-- tests.TestOneDrive -->
+      </class> <!-- tests.TestOutlook -->
     </classes>
   </test> <!-- testing(failed) -->
 </suite> <!-- Failed suite [My test suite] -->

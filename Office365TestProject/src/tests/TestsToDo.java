@@ -24,7 +24,7 @@ public class TestsToDo extends Settings{
 	final String listName = "LIST_NAME_";
 	final String taskName = "TASK_NAME_";
 	final int lineNumber = 2;
-	String loginName = "Michael@msglab.tech"; String password = "Ahmshere577561!";
+	String loginName = "Michael@msglab.tech"; String password = "Ahmshere577561^";
 	int teamNumber = getRandom();
 	ExtentTest testLog = null;
 	
@@ -35,7 +35,8 @@ public class TestsToDo extends Settings{
 	    	testLog = extent.createTest(getClass().getName());
 	    	testLog.log(Status.INFO, "Start: ToDo app");
 	    	try {
-	    		loginAsAmdocsUserSettings(ApplicationName.TODO); // Settings.class method
+	    		loginAsAmdocsUserSettingsTD(ApplicationName.TODO);
+	    		//loginAsAmdocsUserSettings(ApplicationName.TODO); // Settings.class method
 	    	//loginAsAmdocsUser("To Do");
 	    	Thread.sleep(2000);
 	    	ToDo toDoPage = new ToDo(driver);

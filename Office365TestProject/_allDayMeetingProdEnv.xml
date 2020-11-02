@@ -19,13 +19,15 @@
 			<!-- Outlook Desktop -->
 			<class name="desktop.tests.TestOutlookDesktop">
 				<methods>
-				
-					<include name="createAllDayMeeting"/>
+				    
+				<include name="createTeamsMeetingViaOutlook"/>
 					
+				<!--	
+				<include name="createAllDayMeeting"/>
 					<include name="connectionAllDayMeetingAvayaProductionEnv"/>
 					<include name="connectionAllDayMeetingAvaya2ProductionEnv"/>
 			 		<include name="connectionAllDayMeetingPolycomProductionEnv"/>
-			
+			-->
 				</methods>
 			</class>
 			

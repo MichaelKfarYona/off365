@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Desktop Outlook suite]">
-  <test thread-count="5" name="amdocsMeeting(failed)">
+  <test thread-count="5" name="desktopTesting(failed)">
     <parameter name="_ProductionAvayaPhoneNumber_2" value="6100"/>
     <parameter name="_ProductionAvayaPhoneNumber_1" value="2008"/>
     <parameter name="_MEETING_NAME_DIFFERENT_USER" value="AUTOTEST_DF"/>
     <parameter name="_ProductionPolycomPhoneNumber" value="67277"/>
-    <parameter name="_TestEnvPolycomPhoneNumber" value="67221"/>
+    <parameter name="_TestEnvPolycomPhoneNumber" value="67215"/>
     <parameter name="_AfterMeetingName" value="AUTOTEST_37630"/>
     <parameter name="_deleteAndVerifyMeeting" value="TestDelAndValidate"/>
     <parameter name="_MeetingInThePast" value="AUTOTEST_082187"/>
@@ -18,15 +18,13 @@
           <include name="stopDriver"/>
           <include name="setSuite"/>
           <include name="startDriver"/>
-          <include name="createAmdocsMeeting_Load"/>
-          <include name="deleteMeetingLoad_1Iteration"/>
-          <include name="callAvayaTestEnvLoad" invocation-numbers="0 0 0 0 0 0 0"/>
           <include name="tearDown"/>
           <include name="after"/>
           <include name="setSuiteOff"/>
           <include name="setupEnvironment"/>
+          <include name="createTeamsMeetingViaOutlook"/>
         </methods>
       </class> <!-- desktop.tests.TestOutlookDesktop -->
     </classes>
-  </test> <!-- amdocsMeeting(failed) -->
+  </test> <!-- desktopTesting(failed) -->
 </suite> <!-- Failed suite [Desktop Outlook suite] -->

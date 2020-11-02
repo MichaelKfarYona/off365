@@ -90,10 +90,10 @@ public class Forms {
 	public void addNewForm(FormType type) {
 		btnAddNew = driver.findElement(By.xpath("//*[@id='form-designer']//div[2]/*/button/*[@class='button-content']"));
 		btnAddNew.click();
-		switch(type) { case CHOICE: btnChoice = driver.findElement(By.xpath("//button[@title='Choice']")); btnChoice.click(); break;
-		case TEXT: btnChoice = driver.findElement(By.xpath("//button[@title='Text']")); btnText.click(); break;
-		case RATING: btnChoice = driver.findElement(By.xpath("//button[@title='Rating']")); btnRating.click(); break;
-		case DATE: btnChoice = driver.findElement(By.xpath("//button[@title='Date']")); btnDate.click(); break;
+		switch(type) { case CHOICE: btnChoice = driver.findElement(By.xpath("//button[@aria-label='Choice']")); btnChoice.click(); break;
+		case TEXT: btnChoice = driver.findElement(By.xpath("//button[@aria-label='Text']")); btnText.click(); break;
+		case RATING: btnChoice = driver.findElement(By.xpath("//button[@aria-label='Rating']")); btnRating.click(); break;
+		case DATE: btnChoice = driver.findElement(By.xpath("//button[@aria-label='Date']")); btnDate.click(); break;
 		}
 	}
 /***************************************************************************************************************************

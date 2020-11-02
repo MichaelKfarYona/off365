@@ -1,6 +1,7 @@
 package pages;
 
 
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
@@ -11,10 +12,17 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 import pages.OneDrive.LeftMenuItem;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -27,14 +35,35 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class Settings {
+	
 	 public enum ApplicationName{
 			OUTLOOK, ONEDRIVE, WORD, EXCEL, POWERPOINT, ONENOTE, SHAREPOINT,TEAMS,YAMMER,DYNAMICS365,POWER_AUTOMATE, FORMS, PLANNER, TODO, DELVE
 		}
-		public void chooseApplicationByName(ApplicationName item) {
+	 //
+	 public void pasteFromClipboard(String text) throws AWTException {
+		 Robot robot = new Robot();
+		 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+	 		clipboard.setContents(new StringSelection(text), null);
+	 		robot.keyPress(KeyEvent.VK_CONTROL);
+	        robot.keyPress(KeyEvent.VK_V);
+	        robot.keyRelease(KeyEvent.VK_CONTROL);
+	        robot.keyRelease(KeyEvent.VK_V);
+	 }
+		public void chooseApplicationByName(ApplicationName item) throws InterruptedException {
+			List<WebElement> allApps = driver.findElements(By.xpath("//i[@data-icon-name='allAppsLogo']"));
+	    	   //Thread.sleep(3000);
+	    	   if(allApps.size()>0) {
+	    		   allApps.get(0).click();
+	    		   Thread.sleep(2000);
+	    	   }
+	       
 			String parametrListItem = null;
+			
 			switch(item) { 
 			case OUTLOOK: parametrListItem = "Outlook";  break;
 			case ONEDRIVE: parametrListItem = "OneDrive";  break;
@@ -52,7 +81,13 @@ public class Settings {
 			case TODO:parametrListItem = "To Do"; break;
 			case DELVE:parametrListItem = "Delve"; break;
 			}
-			WebElement leftMenuItemElement = driver.findElement(By.xpath("//div[@class='hero-container']//div[@title='"+parametrListItem+"']"));
+			
+			
+			WebElement leftMenuItemElement = (new WebDriverWait(driver, 17))
+			.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title='"+parametrListItem+"' and contains(text(),'"+parametrListItem+"')]")));
+			
+			/* WebElement leftMenuItemElement = driver.findElement(By.xpath("//div[@class='hero-container']//div[@title='"+parametrListItem+"']"));
+			*/
 			leftMenuItemElement.click();
 		}
 	protected static ExtentReports extent;
@@ -63,10 +98,19 @@ public class Settings {
 	ExtentHtmlReporter htmlReporter;
     String driverPath = "c:\\DRIVERS\\chromedriver.exe";
     protected static WebDriver driver;
+	
+/* LOGIN NAME */
+    // Prod
+    String loginName = "michapru@amdocs.com"; String password = "Ahmshere577561)";
+    
     // ***** Michael Lab user *****
-    String loginName = "Michael@msglab.tech"; String password = "Ahmshere577561!";
+    
+    // String loginName = "Michael@msglab.tech"; String password = "Ahmshere577561^";
+   
     // ***** Steve user *****
-   // String loginName = "yoelap@amdocs.com"; String password = "Random@224466";
+    
+    //String loginName = "yoelap@amdocs.com"; String password = "Random!224466";
+    
     static ExtentTest testLogger;
     @BeforeTest
     public void ReportSetup() {
@@ -77,7 +121,10 @@ public class Settings {
     	extent.attachReporter(htmlReporter);
     }
     @BeforeSuite
-    public void setTimePoint() {start = System.currentTimeMillis();}
+    public void setTimePoint() {
+    	
+    	start = System.currentTimeMillis();
+    	}
     @BeforeMethod
     public void Setup(){
     	ChromeOptions options = new ChromeOptions();
@@ -117,8 +164,93 @@ public class Settings {
     	
     }
     
+    public void loginAsAmdocsUserSettingsM(ApplicationName appName) throws InterruptedException, IOException{
+    	//testLogger = extent.createTest(getClass().getName());
+    	//testLogger.log(Status.INFO, "Login as User");
+        MainPage mainPage = new MainPage(driver);
+		Thread.sleep(3000);
+        mainPage.setLogin("Michael@msglab.tech"); 
+        if(loginName.equals("Michael@msglab.tech")) {mainPage.setPassword(password); mainPage.signInNo();}
+        //testLogger.log(Status.INFO, "Open Office 365");
+        Thread.sleep(3000);
+        Office365Page officePage = new Office365Page(driver);
+        System.out.println("OFFICE 365");
+        
+		/*
+		 * List<WebElement> allApps =
+		 * driver.findElements(By.xpath("//div[@class and contains(text(),'All apps')]")
+		 * ); //Thread.sleep(3000); if(allApps.size()>0) { allApps.get(0).click();
+		 * System.out.println(" Settings.java ***** "+ allApps.get(0));
+		 * 
+		 * }
+		 */
+        
+        //Thread.sleep(1000);
+        //testLogger.log(Status.INFO, "Click Teams link ");
+        chooseApplicationByName(appName);
+       // officePage.chooseApplication(appName);
+        Thread.sleep(2000);
+        ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+       driver.switchTo().window(tabs.get(1));
+       //System.out.println("******* "+appName.toString());
+       if(appName.toString().equals("TEAMS")) {
+  	   TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
+  	   try { Thread.sleep(10000);
+       } catch (InterruptedException e) {e.printStackTrace();        }
+       System.out.println(appName);      
+       teamsPage.clickByLinkWeb();
+       }
+        try { Thread.sleep(10000);
+        } catch (InterruptedException e) {e.printStackTrace();        }
+       // test.log(Status.INFO, "Logged in as User - "+ loginName);
+    }
     
+    // MAIN METHOD
     public void loginAsAmdocsUserSettings(ApplicationName appName) throws InterruptedException, IOException{
+    	//testLogger = extent.createTest(getClass().getName());
+    	//testLogger.log(Status.INFO, "Login as User");
+        MainPage mainPage = new MainPage(driver);
+		Thread.sleep(3000);
+        mainPage.setLogin(loginName); 
+        
+        if(loginName.equals("Michael@msglab.tech")) {mainPage.setPassword(password); mainPage.signInNo();}
+        //testLogger.log(Status.INFO, "Open Office 365");
+        Thread.sleep(3000);
+        Office365Page officePage = new Office365Page(driver);
+        System.out.println("OFFICE 365");
+       // officePage.showAllApps();
+        
+		/*
+		 * List<WebElement> allApps =
+		 * driver.findElements(By.xpath("//div[@class and contains(text(),'All apps')]")
+		 * ); //Thread.sleep(3000); if(allApps.size()>0) { allApps.get(0).click();
+		 * System.out.println(" Settings.java ***** "+ allApps.get(0));
+		 * 
+		 * }
+		 */
+        
+        Thread.sleep(1000);
+        //testLogger.log(Status.INFO, "Click Teams link ");
+        chooseApplicationByName(appName);
+       // officePage.chooseApplication(appName);
+        Thread.sleep(2000);
+        ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+       driver.switchTo().window(tabs.get(1));
+       //System.out.println("******* "+appName.toString());
+       if(appName.toString().equals("TEAMS")) {
+  	   TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
+  	   try { Thread.sleep(10000);
+       } catch (InterruptedException e) {e.printStackTrace();        }
+       System.out.println(appName);      
+       teamsPage.clickByLinkWeb();
+       }
+        try { Thread.sleep(10000);
+        } catch (InterruptedException e) {e.printStackTrace();        }
+       // test.log(Status.INFO, "Logged in as User - "+ loginName);
+    }
+
+    // For One Note
+    public void loginAsAmdocsUserSettingsOneNote(ApplicationName appName) throws InterruptedException, IOException{
     	//testLogger = extent.createTest(getClass().getName());
     	//testLogger.log(Status.INFO, "Login as User");
         MainPage mainPage = new MainPage(driver);
@@ -129,25 +261,147 @@ public class Settings {
         Thread.sleep(3000);
         Office365Page officePage = new Office365Page(driver);
         System.out.println("OFFICE 365");
-        Thread.sleep(2000);
+        
         //testLogger.log(Status.INFO, "Click Teams link ");
         chooseApplicationByName(appName);
        // officePage.chooseApplication(appName);
+        Thread.sleep(2000);
+        ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+       driver.switchTo().window(tabs.get(0));
+       //System.out.println("******* "+appName.toString());
+       if(appName.toString().equals("TEAMS")) {
+  	   TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
+  	   try { Thread.sleep(2000);
+       } catch (InterruptedException e) {e.printStackTrace();        }
+       System.out.println(appName);      
+       teamsPage.clickByLinkWeb();
+       }
+        try { Thread.sleep(2000);
+        } catch (InterruptedException e) {e.printStackTrace();        }
+       // test.log(Status.INFO, "Logged in as User - "+ loginName);
+    }
+    
+    public void loginAsAmdocsUserSettingsTD(ApplicationName appName) throws InterruptedException, IOException{
+    	//testLogger = extent.createTest(getClass().getName());
+    	//testLogger.log(Status.INFO, "Login as User");
+        MainPage mainPage = new MainPage(driver);
+		Thread.sleep(3000);
+        mainPage.setLogin(loginName); 
+        if(loginName.equals("Michael@msglab.tech")) {mainPage.setPassword(password); mainPage.signInNo();}
+        //testLogger.log(Status.INFO, "Open Office 365");
+        Thread.sleep(3000);
+        Office365Page officePage = new Office365Page(driver);
+        System.out.println("OFFICE 365");
+        
+        //testLogger.log(Status.INFO, "Click Teams link ");
+        chooseApplicationByName(appName);
+       // officePage.chooseApplication(appName);
+        Thread.sleep(2000);
         ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
        driver.switchTo().window(tabs.get(1));
        //System.out.println("******* "+appName.toString());
        if(appName.toString().equals("TEAMS")) {
   	   TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
-  	   try { Thread.sleep(8000);
+  	   try { Thread.sleep(2000);
        } catch (InterruptedException e) {e.printStackTrace();        }
        System.out.println(appName);      
        teamsPage.clickByLinkWeb();
        }
-        try { Thread.sleep(8000);
+        try { Thread.sleep(2000);
         } catch (InterruptedException e) {e.printStackTrace();        }
        // test.log(Status.INFO, "Logged in as User - "+ loginName);
     }
     
+ // For One Note Production
+    public void loginAsAmdocsUserSettingsOneNoteProduction(ApplicationName appName) throws InterruptedException, IOException{
+    	//testLogger = extent.createTest(getClass().getName());
+    	//testLogger.log(Status.INFO, "Login as User");
+        MainPage mainPage = new MainPage(driver);
+		Thread.sleep(3000);
+        mainPage.setLogin("yoelap@amdocs.com"); 
+        
+		/*
+		  if(loginName.equals("yoelap@amdocs.com"))
+		  {mainPage.setPassword("Random#224466"); mainPage.signInNo();}
+		 */
+        //testLogger.log(Status.INFO, "Open Office 365");
+        Thread.sleep(3000);
+        Office365Page officePage = new Office365Page(driver);
+        System.out.println("OFFICE 365");
+        
+        //testLogger.log(Status.INFO, "Click Teams link ");
+        chooseApplicationByName(appName);
+       // officePage.chooseApplication(appName);
+        Thread.sleep(2000);
+        ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+       driver.switchTo().window(tabs.get(0));
+       //System.out.println("******* "+appName.toString());
+       if(appName.toString().equals("TEAMS")) {
+  	   TeamsChannelPage teamsPage = new TeamsChannelPage(driver);
+  	   try { Thread.sleep(2000);
+       } catch (InterruptedException e) {e.printStackTrace();        }
+       System.out.println(appName);      
+       teamsPage.clickByLinkWeb();
+       }
+        try { Thread.sleep(2000);
+        } catch (InterruptedException e) {e.printStackTrace();        }
+       // test.log(Status.INFO, "Logged in as User - "+ loginName);
+    }
+    
+    public void loginAsAmdocsUserProduction(ApplicationName appName, int tabNumber) throws InterruptedException, IOException{
+    	//testLogger = extent.createTest(getClass().getName());
+    	//testLogger.log(Status.INFO, "Login as User");
+        MainPage mainPage = new MainPage(driver);
+		Thread.sleep(3000);
+        mainPage.setLogin(loginName); 
+        if(loginName.equals("yoelap@amdocs.com")) {mainPage.setPassword("Random#224466"); mainPage.signInNo();}
+        //testLogger.log(Status.INFO, "Open Office 365");
+        Thread.sleep(3000);
+        Office365Page officePage = new Office365Page(driver);
+        System.out.println("OFFICE 365");
+        
+        //testLogger.log(Status.INFO, "Click Teams link ");
+        chooseApplicationByName(appName);
+       // officePage.chooseApplication(appName);
+        Thread.sleep(3000);
+        ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+       driver.switchTo().window(tabs.get(tabNumber));
+       //System.out.println("******* "+appName.toString());
+		/*
+		 * if(appName.toString().equals("TEAMS")) { TeamsChannelPage teamsPage = new
+		 * TeamsChannelPage(driver); try { Thread.sleep(2000); } catch
+		 * (InterruptedException e) {e.printStackTrace(); } System.out.println(appName);
+		 * teamsPage.clickByLinkWeb(); } try { Thread.sleep(2000); } catch
+		 * (InterruptedException e) {e.printStackTrace(); }
+		 */
+       // test.log(Status.INFO, "Logged in as User - "+ loginName);
+    }
+    
+    public void loginAsAmdocsUserSettingsWithoutApp() throws InterruptedException, IOException{
+    	//testLogger = extent.createTest(getClass().getName());
+    	//testLogger.log(Status.INFO, "Login as User");
+        MainPage mainPage = new MainPage(driver);
+		Thread.sleep(3000);
+        mainPage.setLogin(loginName); 
+        if(loginName.equals("Michael@msglab.tech")) {mainPage.setPassword(password); mainPage.signInNo();}
+        //testLogger.log(Status.INFO, "Open Office 365");
+     
+        
+        System.out.println("OFFICE 365");
+        
+        
+        Thread.sleep(2000);
+        //testLogger.log(Status.INFO, "Click Teams link ");
+       
+       // officePage.chooseApplication(appName);
+       
+       //System.out.println("******* "+appName.toString());
+       
+       
+       // test.log(Status.INFO, "Logged in as User - "+ loginName);
+    }
+    
+	/* Switch between tabs */
     public void switchNewOpenedTab(int number) {
     	ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		  driver.switchTo().window(tabs.get(number));

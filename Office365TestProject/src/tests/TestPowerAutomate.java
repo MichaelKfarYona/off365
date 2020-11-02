@@ -24,7 +24,7 @@ import pages.TeamsChannelPage.KindOfTeam;
 public class TestPowerAutomate extends Settings{
 
 	ExtentHtmlReporter htmlReporter;final String newTeamName = "AUTOMATION_TEST_TEAM_";
-	String loginName = "Michael@msglab.tech";String password = "Ahmshere577561!";
+	String loginName = "Michael@msglab.tech";String password = "Ahmshere577561^";
 	final String ownerName = "Michael Prudnikov";int teamNumber = getRandom();ExtentTest testLog = null;
 	final String AUTO_FLOW_NAME = "AUTO_TITLE_";
 	final String MAIL_TO = "michael.prudnikov@amdocs.com"; 
@@ -40,7 +40,7 @@ public class TestPowerAutomate extends Settings{
 		loginAsAmdocsUserSettings(ApplicationName.POWER_AUTOMATE); // Settings.class method
 		//loginAsAmdocsUser("Power Automate");
 		PowerAutomate powerPage = new PowerAutomate(driver);
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		powerPage.createNewFlow();
 		String nameAF = AUTO_FLOW_NAME+getRandom();
 		powerPage.addAutomatedFlow(nameAF);
@@ -66,6 +66,7 @@ public class TestPowerAutomate extends Settings{
 	  Office365Page officePage = new Office365Page(driver);
 	  System.out.println("OFFICE 365"); Thread.sleep(2000);
 	  testLog.log(Status.INFO, "Click Teams link ");
+	  officePage.OpenAllApps();
 	  officePage.chooseApplication(appName);
 	 
 									  ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());

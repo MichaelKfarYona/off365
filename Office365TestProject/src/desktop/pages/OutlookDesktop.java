@@ -39,6 +39,7 @@ import org.openqa.selenium.winium.WiniumDriver;
 import com.sun.jna.platform.win32.User32;
 import com.thoughtworks.selenium.Selenium;
 
+import desktop.pages.OutlookDesktop.LeftBottomMenu;
 import net.bytebuddy.utility.privilege.GetSystemPropertyAction;
 import pages.OneDrive.NewMenuItem;
 
@@ -73,6 +74,42 @@ public class OutlookDesktop {
 	}
 	
 	public OutlookDesktop() {}
+	
+	public String sendMessage(String toPerson) throws AWTException {
+		String subj = "TEST_MAIL_";
+			Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_N);
+		robot.keyRelease(KeyEvent.VK_N);
+		robot.keyRelease(KeyEvent.VK_CONTROL); robot.delay(2000);
+		pasteString(toPerson);
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);robot.delay(100);
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);robot.delay(100);
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);robot.delay(100);
+		pasteString(subj);
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);robot.delay(500);
+		robot.keyPress(KeyEvent.VK_ALT);
+		robot.keyPress(KeyEvent.VK_S);
+		robot.keyRelease(KeyEvent.VK_S);
+		robot.keyRelease(KeyEvent.VK_ALT); robot.delay(2000);
+		return subj;
+	}
+	public boolean checkSentItems(String item) {
+		WebElement sentItemsMenu = driver.findElement(By.xpath("//*[@LocalizedControlType='Tree Item' and contains(@Name,'Sent Items')]"));
+		sentItemsMenu.click();
+		
+		List<WebElement> sentList = driver.findElements(By.xpath("//*[@LocalizedControlType='item' and contains(@Name,'"+item+"')]"));
+		if(sentList.size()>0) {return true;}
+		else {return false;}
+		
+		
+		    	
+	}
+	
 	public void sendAnyWay() {WebElement buttonExecute = driver.findElement(By.xpath("//*[@Name='Send Anyway']"));
 	buttonExecute.click();
 	List<WebElement> errorList = driver.findElements(By.name("Send Meeting Error"));
@@ -115,6 +152,126 @@ public class OutlookDesktop {
 		//WebElement choosenType = driver.findElement(By.xpath("//*[@Name='"+myType+"']"));
 		//choosenType.click();
 		return flag;
+	}
+	
+	// 1
+	public boolean checkStatus() {
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> statusList = driver.findElements(By.xpath("//*[@LocalizedControlType='Button' and contains(@Name,'Connectivity to your server. Disconnected')]"));
+		// WebElement statusInfo =  (new WebDriverWait(driver, 17)).until(ExpectedConditions.presenceOfElementLocated(By.name("//*[@LocalizedControlType='Button' and contains(@Name,'Connectivity to your server. Disconnected')]")));
+		// WebElement statusInfo = driver.findElement(By.xpath("//*[@LocalizedControlType='Button' and contains(@Name,'Connectivity to your server. Disconnected')]")); 
+		if(statusList.size()>0) {
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean addRule() throws AWTException, InterruptedException {
+		// List<WebElement> fileEl = driver.findElements(By.xpath("//*[@AutomationId='FileTabButton']"));
+		
+		Robot r = new Robot();
+		r.keyPress(KeyEvent.VK_ALT);
+		r.keyPress(KeyEvent.VK_F);
+		r.keyRelease(KeyEvent.VK_F);
+		r.keyRelease(KeyEvent.VK_ALT);
+		WebElement btnManageRules = (new WebDriverWait(driver, 5))
+				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@LocalizedControlType='Button' and contains(@Name,'Manage Rules & Alerts...')]")));
+		btnManageRules.click();
+		r.delay(1000);
+		r.keyPress(KeyEvent.VK_ALT);
+		r.keyPress(KeyEvent.VK_N);
+		r.keyRelease(KeyEvent.VK_N);
+		r.keyRelease(KeyEvent.VK_ALT);
+		r.delay(1000);
+		r.keyPress(KeyEvent.VK_DOWN);r.delay(100);
+		r.keyPress(KeyEvent.VK_DOWN);r.delay(100);
+		r.keyPress(KeyEvent.VK_DOWN);r.delay(100);
+		r.keyPress(KeyEvent.VK_ALT);
+		r.keyPress(KeyEvent.VK_N);
+		r.keyRelease(KeyEvent.VK_N);
+		r.keyRelease(KeyEvent.VK_ALT);r.delay(500);
+		r.keyPress(KeyEvent.VK_ALT);
+		r.keyPress(KeyEvent.VK_Y);
+		r.keyRelease(KeyEvent.VK_Y);
+		r.keyRelease(KeyEvent.VK_ALT);r.delay(500);
+		
+		/*
+		 * WebElement listItem = (new WebDriverWait(driver, 5))
+		 * .until(ExpectedConditions.presenceOfElementLocated(By.
+		 * xpath("//*[@LocalizedControlType='list item' and contains(@Name,'from people or public group')]"
+		 * ))); listItem.click();
+		 */
+		r.keyPress(KeyEvent.VK_TAB);
+		r.keyRelease(KeyEvent.VK_TAB); r.delay(100);
+		r.keyPress(KeyEvent.VK_ENTER); r.delay(500);
+		r.keyPress(KeyEvent.VK_TAB);
+		r.keyRelease(KeyEvent.VK_TAB); r.delay(100);
+		r.keyPress(KeyEvent.VK_TAB);
+		r.keyRelease(KeyEvent.VK_TAB); r.delay(100);
+		r.keyPress(KeyEvent.VK_TAB);
+		r.keyRelease(KeyEvent.VK_TAB); r.delay(100);
+		pasteString("yoelap@amdocs.com");r.delay(250);
+		r.keyPress(KeyEvent.VK_TAB);
+		r.keyRelease(KeyEvent.VK_TAB); r.delay(100);
+		r.keyPress(KeyEvent.VK_ENTER); r.delay(500);
+		r.keyPress(KeyEvent.VK_ALT);
+		r.keyPress(KeyEvent.VK_N);
+		r.keyRelease(KeyEvent.VK_N);
+		r.keyRelease(KeyEvent.VK_ALT);r.delay(500);
+		
+		/*
+		 * WebElement flagMessage = (new WebDriverWait(driver, 5))
+		 * .until(ExpectedConditions.presenceOfElementLocated(By.
+		 * xpath("//*[@LocalizedControlType='list item' and contains(@Name,'flag message for follow up at this time')]"
+		 * ))); flagMessage.click();r.delay(250);
+		 */
+		r.keyPress(KeyEvent.VK_TAB);
+		r.keyRelease(KeyEvent.VK_TAB); r.delay(100);
+		r.keyPress(KeyEvent.VK_DOWN);
+		r.keyRelease(KeyEvent.VK_DOWN); r.delay(100);
+		r.keyPress(KeyEvent.VK_ENTER); r.delay(500);
+		
+		r.keyPress(KeyEvent.VK_TAB);
+		r.keyRelease(KeyEvent.VK_TAB); r.delay(100);
+		r.keyPress(KeyEvent.VK_TAB);
+		r.keyRelease(KeyEvent.VK_TAB); r.delay(100);
+		r.keyPress(KeyEvent.VK_ENTER); r.delay(500);
+		r.keyPress(KeyEvent.VK_TAB);
+		r.keyRelease(KeyEvent.VK_TAB); r.delay(100);
+		r.keyPress(KeyEvent.VK_TAB);
+		r.keyRelease(KeyEvent.VK_TAB); r.delay(100);
+		r.keyPress(KeyEvent.VK_TAB);
+		r.keyRelease(KeyEvent.VK_TAB); r.delay(100);
+		r.keyPress(KeyEvent.VK_TAB);
+		r.keyRelease(KeyEvent.VK_TAB); r.delay(100);
+		r.keyPress(KeyEvent.VK_ENTER); r.delay(500);
+		r.keyPress(KeyEvent.VK_ENTER); r.delay(500);
+		r.keyPress(KeyEvent.VK_ALT);
+		r.keyPress(KeyEvent.VK_A);
+		r.keyRelease(KeyEvent.VK_A);
+		r.keyRelease(KeyEvent.VK_ALT);r.delay(100);
+		r.keyPress(KeyEvent.VK_ALT);
+		r.keyPress(KeyEvent.VK_F4);
+		r.keyRelease(KeyEvent.VK_F4);
+		r.keyRelease(KeyEvent.VK_ALT);
+		return true;
+		
+		/*
+		pasteString("yoelap@amdocs.com");r.delay(250);
+		r.keyPress(KeyEvent.VK_TAB); r.delay(500);
+		/*
+		WebElement fileTab = (new WebDriverWait(driver, 10))
+		.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@LocalizedControlType='Button' and contains(@Name,'File Tab')]")));
+		*/
+		//WebElement fileTab = driver.findElement(By.xpath("//*[@LocalizedControlType='Button' and contains(@Name,'File Tab')]"));
+		
+		
+		
 	}
 	public void skypeMenu(SkypeTopMenuButton item) {
 		String menuItem = "";
@@ -541,17 +698,23 @@ public class OutlookDesktop {
 		//return mailInTheList;
 	}
 	
+	public void clickNewTeamsMeeting() throws InterruptedException {
+		newAmdocsMeeting = (new WebDriverWait(driver, 10))
+				.until(ExpectedConditions.presenceOfElementLocated(By.name("New Teams Meeting")));
+		newAmdocsMeeting.click();Thread.sleep(2000);
+	}
+	
 	public void clickNewAmdocsMeeting() throws InterruptedException {
-		newAmdocsMeeting = (new WebDriverWait(driver, 5))
+		newAmdocsMeeting = (new WebDriverWait(driver, 10))
 				.until(ExpectedConditions.presenceOfElementLocated(By.name("New Amdocs Meeting")));
 		newAmdocsMeeting.click();Thread.sleep(2000);
 	}
-	public void clickNewMeeting() throws InterruptedException {newAmdocsMeeting = (new WebDriverWait(driver, 5))
+	public void clickNewMeeting() throws InterruptedException {newAmdocsMeeting = (new WebDriverWait(driver, 10))
 			.until(ExpectedConditions.presenceOfElementLocated(By.name("New Meeting")));
 	newAmdocsMeeting.click();Thread.sleep(2000);}
 
 	public void clickToJoinSkypeMeeting() throws InterruptedException {
-		linkJoinSkypeMeeting = (new WebDriverWait(driver, 3)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@Name='join Skype Meeting']")));
+		linkJoinSkypeMeeting = (new WebDriverWait(driver, 5)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@Name='join Skype Meeting']")));
 		linkJoinSkypeMeeting.click(); Thread.sleep(3000);
 }
 	
@@ -834,7 +997,102 @@ public class OutlookDesktop {
 		catch(Exception e) {System.out.println("Check callByNumber method.");}
 		return flag;
 		}
+	//***STATICS CALLS
+	
+	public boolean callByNumberSTATIC(String number, String meetingID, String pass) throws IOException, AWTException, InterruptedException {
+		boolean flag = true;
+		Process process=Runtime.getRuntime().exec("C:\\Program Files (x86)\\Microsoft Office\\Office16\\lync.exe");
+		Robot robot = new Robot();
+		robot.delay(3000);
+		// LocalizedControlType:	"Title Bar"
+
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_4);
+		robot.keyRelease(KeyEvent.VK_4);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		//skypeMenu(SkypeTopMenuButton.PHONE);
 		
+		pasteString(number);
+		/*
+		StringSelection stringSelection = new StringSelection(number);
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard.setContents(stringSelection, stringSelection);
+		
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		*/
+		Thread.sleep(2000);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		
+		System.out.println("Calling ..... ");
+		// Actions act = new Actions(driver);
+		// act.click(driver.findElement(By.xpath("//*[@LocalizedControlType='Button' and contains(@Name,'Call')]"))).perform();
+		
+		/*
+		WebElement btnCall = driver.findElement(By.xpath("//*[@LocalizedControlType='Button' and contains(@Name,'Call')]"));
+		btnCall.click();
+		*/
+		Thread.sleep(5000);
+		robot.keyPress(KeyEvent.VK_TAB); robot.delay(250); 
+		robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		/*
+		WebElement txtConfirenceIDEditBox = (new WebDriverWait(driver, 3)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@LocalizedControlType='Edit Box' and contains(@Name,'Dialpad Text')]")));
+		txtConfirenceIDEditBox.click(); 
+		txtConfirenceIDEditBox.sendKeys(meetingID);
+		*/
+		
+		pasteString(meetingID);Thread.sleep(2000);
+		pasteString(meetingID);Thread.sleep(2000);
+		pasteString(pass);Thread.sleep(17000);
+		
+		
+		//Thread.sleep(58000);
+		
+		
+		
+		/*
+		 * List<WebElement> skypeTitleLine = driver.findElements(By.
+		 * xpath("//*[@LocalizedControlType='Button' and contains(@Name,'+')]")); if
+		 * (skypeTitleLine.size()>0) // Name: "+297267340"
+		 */
+		try {
+		List<WebElement> activeSkypeWindows = driver.findElements(By.xpath("//*[@LocalizedControlType='Button' and contains(@Name,'Hang Up')]"));
+		    	
+		// List<WebElement> activeSkypeWindows = driver.findElements(By.xpath("//*[contains(@Name,'1:')]"));
+		System.out.println("Active window class : "+activeSkypeWindows.size());
+		if(activeSkypeWindows.size()>0) {
+			
+			activeSkypeWindows.get(0).click();
+			
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			System.out.println("*** True ***");
+			flag = true; // connection sushestvuet
+			}
+		else {
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			System.out.println("*** False ***");
+			flag = false;}
+			}
+		catch(Exception e) {System.out.println("Check callByNumber method.");}
+		return flag;
+		}
+	
+	
+	
+	
 	public void moveOut(int x, int y) {
 	Actions builder = new Actions(driver);
 	builder.moveByOffset(x, y);
@@ -1904,7 +2162,76 @@ robot.keyRelease(KeyEvent.VK_ALT);
 		  robot.keyPress(KeyEvent.VK_ENTER);  robot.keyRelease(KeyEvent.VK_ENTER);robot.delay(250);
 		  return flag;
 	}
-	
+	// Choose profile
+	public void titleBar() throws AWTException {
+		List<WebElement> titlebar = driver.findElements(By.xpath("//*[@LocalizedControlType='title bar' and contains(@Name,'Choose Profile')]"));
+		if(titlebar.size()>0);
+		{Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_ENTER); robot.delay(250);
+		}
+		
+		
+
+	}
+	public ArrayList<Object> createTeamsMeeting(String mail, boolean allDayParametr, boolean deleteOrNotAfter) throws AWTException, InterruptedException {
+		Thread.sleep(4000);
+		ArrayList<Object> listResult = new ArrayList<Object>();
+		listResult.add(TEST_TITLE);
+		boolean flag = false;
+		Robot robot = new Robot();
+		pasteString(mail); robot.keyPress(KeyEvent.VK_RIGHT); robot.delay(250); robot.keyPress(KeyEvent.VK_TAB); 
+								
+		pasteString(TEST_TITLE); robot.delay(250);
+		System.out.println("Meeting name "+ TEST_TITLE);
+		
+		robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		/*
+		  
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  if(allDayParametr) {
+			  	robot.keyPress(KeyEvent.VK_SPACE); robot.delay(250);
+			  	flag = true;
+		  }
+		  robot.keyPress(KeyEvent.VK_TAB); robot.delay(250);
+		  */
+		/*
+		  WebElement newbodyDocument = (new WebDriverWait(driver, 4)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@LocalizedControlType='document' and contains(@Name,'"+TEST_TITLE+"')]")));
+			String txtBodyNew = newbodyDocument.getText();
+			String MeetingID = getMeetingID(txtBodyNew);
+			*/
+		String MeetingID = TEST_TITLE;
+		  robot.keyPress(KeyEvent.VK_ALT); robot.keyPress(KeyEvent.VK_S);
+		  robot.keyRelease(KeyEvent.VK_S); robot.keyRelease(KeyEvent.VK_ALT);
+		  robot.delay(500);
+		  robot.keyPress(KeyEvent.VK_F9);
+		  robot.keyRelease(KeyEvent.VK_F9);
+		  	
+		  	// listResult.add(MeetingID);
+		  List<WebElement> createdMeeting = driver.findElements(By.xpath("//*[contains(@Name,'"+TEST_TITLE+"')]"));
+		  if (createdMeeting.size()>0) {
+			  flag = true; 
+			  listResult.add(flag);
+			  System.out.println(" *** "+createdMeeting.get(0));
+		  }
+		  		else {flag = false;}
+		  	listResult.add(flag);
+		  	if(deleteOrNotAfter) {WebElement meetingAllDay = driver.findElement(By.xpath("//*[@LocalizedControlType='list item' and contains(@Name,'"+TEST_TITLE+"')]"));
+		  	meetingAllDay.click();
+		  	 robot.keyPress(KeyEvent.VK_DELETE); 
+			  robot.keyRelease(KeyEvent.VK_DELETE); robot.delay(500);
+			  robot.keyPress(KeyEvent.VK_ALT); robot.keyPress(KeyEvent.VK_S);
+			  robot.keyRelease(KeyEvent.VK_S); robot.keyRelease(KeyEvent.VK_ALT);
+			  robot.delay(500);
+		  	}
+		  	else {}
+		  		return listResult;
+		  
+	}
 	
 	public ArrayList<Object> createAllDayMeeting(String mail, boolean allDayParametr, boolean deleteOrNotAfter) throws AWTException, InterruptedException {
 		Thread.sleep(4000);
@@ -2133,8 +2460,10 @@ robot.keyRelease(KeyEvent.VK_ALT);
 	}
 		// for load testing
 		public List<String> specifyLoadMeeting(String mail, int minPlus) throws InterruptedException, AWTException {
-			Thread.sleep(3000);
 			
+			//Thread.sleep(3000);
+			WebElement bodyLink = (new WebDriverWait(driver, 15)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@LocalizedControlType='link' and contains(@Name,'join Skype Meeting')]")));			
+
 			List<String> resultList = new ArrayList<String>();
 			
 			Robot robot = new Robot();

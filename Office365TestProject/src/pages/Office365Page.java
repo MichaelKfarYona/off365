@@ -1,5 +1,10 @@
 package pages;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
@@ -51,7 +56,39 @@ public class Office365Page {
         PageFactory.initElements(driver, this);
     }
     
-   
+    // Show all apps
+    public void OpenAllApps() {
+    	List<WebElement> listEl = driver.findElements(By.xpath("//i[@data-icon-name='allAppsLogo']"));
+    	if(listEl.size()>0)
+    	{
+    	WebElement allApps = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//i[@data-icon-name='allAppsLogo']")));
+    	allApps.click();
+    	}
+    	
+    }
+    // open file . O365 main page
+   public void openFileOnMainPage(String fileName) {
+	   // .//button[@type='button' and contains(text(),'Document.docx')]/ancestor::span
+	   WebElement fileInTheList = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/span[contains(text(),'"+fileName+"')]")));
+	   fileInTheList.click();
+   }
+   // **********************************************************************************************************8
+   public void cleanCanvas() throws AWTException, InterruptedException {
+	   WebElement fileInTheList = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='Outline']")));
+	   fileInTheList.click();
+	 
+	   Thread.sleep(1000);
+	   
+	   Robot robot = new Robot();
+
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_A);
+		robot.keyRelease(KeyEvent.VK_A);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_DELETE);
+		
+		Thread.sleep(2000);
+   }
     
    @FindBy(xpath = "//span[@class='ms-ohp-svg-Icon ms-ohp-Icon ms-ohp-Icon--teamsLogo ms-ohp-Icon--teamsLogoFill ng-star-inserted']")
     public WebElement teamsLink;
@@ -62,7 +99,12 @@ public class Office365Page {
 	 *****************************************/
    				   
        public void chooseApplication(String appName) throws InterruptedException {
-    	   //Thread.sleep(3000);
+		/*
+		 * List<WebElement> allApps =
+		 * driver.findElements(By.xpath("//div[@class and contains(text(),'All apps')]")
+		 * ); //Thread.sleep(3000); if(allApps.size()>0) { allApps.get(0).click();
+		 * System.out.println(" Office365.java ***** "+ allApps.get(0)); }
+		 */
     	   appLink = (new WebDriverWait(driver, 15)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title='"+appName+"']"))); 
     			   //driver.findElement(By.xpath("//div[@title='"+appName+"']"));
     	   appLink.click();
@@ -72,4 +114,10 @@ public class Office365Page {
     	WebElement link = driver.findElement(By.xpath("//a[@class='use-app-lnk']"));
     	link.click();
     }
+
+	public void showAllApps() {
+		WebElement allApps = driver.findElement(By.xpath("//i[@data-icon-name='allAppsLogo']"));
+		allApps.click();
+		
+	}
 }

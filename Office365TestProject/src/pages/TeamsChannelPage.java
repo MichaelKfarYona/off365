@@ -1,5 +1,11 @@
 package pages;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +16,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
+
+import javax.swing.text.DefaultEditorKit.PasteAction;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -100,18 +108,32 @@ public class TeamsChannelPage {
 		}
 
 	}
-
+	// niznyi levii ugol
+	public void clickJoinOrCreateATeam() {
+		joinOrCreateATeamLink = driver.findElement(By.xpath("//span[@id='create_join_team_text']"));
+		joinOrCreateATeamLink.click();
+	}
+	
 	public void buildATeamFromScratch(KindOfTeam kind, String newTeamName, int randTeamNumber) throws Exception {
-		buildTeamFromScratch = driver.findElement(By.xpath("//*[@id='WizardBtnfromScratch']"));
+		// buildTeamFromScratch = driver.findElement(By.xpath("//*[@id='WizardBtnfromScratch']"));
+		buildTeamFromScratch = driver.findElement(By.xpath("//button[@track-summary='Create Team']"));
+			
 		buildTeamFromScratch.click();
+		WebElement scratchElement = driver.findElement(By.xpath("//*[@id='WizardBtnfromScratch']"));
+		scratchElement.click();
+		
 		Thread.sleep(3000);
 		switch (kind) {
 		case PRIVATE:
-			privateKind = driver.findElement(By.xpath("//*[@id='WizardBtnPrivate']"));
+			privateKind = driver.findElement(By.xpath("//span[@title='Private']"));
 			privateKind.click();
 			break;
 		case PUBLIC:
-			publicKind = driver.findElement(By.xpath("//*[@id='WizardBtnPublic']"));
+			// publicKind = driver.findElement(By.xpath("//*[@id='WizardBtnPublic']"));
+			publicKind = driver.findElement(By.xpath("//span[@title='Public']"));
+			
+			//div[contains(text(),'Anyone in your org can join')]
+			
 			publicKind.click();
 			break;
 		}
@@ -226,6 +248,11 @@ public class TeamsChannelPage {
 		linkToMemberSettings.click();
 	}
 
+	public void openTeamSettingsDotAndCheckFile(String searchTeam, String fileName) throws InterruptedException {
+		clickByFilterButton();
+		setFilterByTeamOrChannel(searchTeam);
+		}
+	
 	public void openTeamSettingsDot(String searchTeam, TeamsMenuItemPopUp menuItem) throws InterruptedException {
 		clickByFilterButton();
 		setFilterByTeamOrChannel(searchTeam);
@@ -690,19 +717,42 @@ public class TeamsChannelPage {
 	/********************************
 	 * Specify WebSite name and URL *
 	 * 
-	 * @throws InterruptedException *
+	 * @throws InterruptedException 
+	 * @throws AWTException *
 	 ********************************/
-	public void specifyWebSiteNameAndURL(String name, String URL) throws InterruptedException {
+	public void specifyWebSiteNameAndURL(String name, String URL) throws InterruptedException, AWTException {
 		webSiteName = (new WebDriverWait(driver, 10))
 				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@name='tabName']")));
+		webSiteName.sendKeys(name);
+		/*
 		webSiteURL = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(
 				By.xpath("/html/body/div[5]/div[2]/div/div/div/div/div/div/form/section[3]/div/div/div/div[2]/input")));
-		webSiteName.sendKeys(name);
-		webSiteURL.sendKeys(URL);
+		*/
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB); robot.delay(250);
+		 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+	 		clipboard.setContents(new StringSelection(URL), null);
+	 		robot.keyPress(KeyEvent.VK_CONTROL);
+	        robot.keyPress(KeyEvent.VK_V);
+	        robot.keyRelease(KeyEvent.VK_CONTROL);
+	        robot.keyRelease(KeyEvent.VK_V); robot.delay(250);
+	        robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB); robot.delay(100);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB); robot.delay(100);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_TAB); robot.delay(100);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+		//webSiteURL.sendKeys(URL);
 		Thread.sleep(3000);
-		btnSaveWebSite = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(
-				By.xpath("//*[@id='ngdialog2']/div[2]/div/div/div/div/div/div/form/section[4]/div[2]/div[2]/button")));
-		btnSaveWebSite.click();
+		/*
+		 * btnSaveWebSite = (new WebDriverWait(driver,
+		 * 10)).until(ExpectedConditions.presenceOfElementLocated( By.xpath(
+		 * "//*[@id='ngdialog2']/div[2]/div/div/div/div/div/div/form/section[4]/div[2]/div[2]/button"
+		 * ))); btnSaveWebSite.click();
+		 */
 	}
 
 	public void clickAddATabButton() throws InterruptedException {
@@ -760,10 +810,7 @@ public class TeamsChannelPage {
 		clickCreateTeamButton();
 	}
 
-	public void clickJoinOrCreateATeam() {
-		joinOrCreateATeamLink = driver.findElement(By.xpath("//span[@id='create_join_team_text']"));
-		joinOrCreateATeamLink.click();
-	}
+
 
 	public void clickCreateTeamButton() {
 		createTeamButton = driver.findElement(By.xpath("//*[@id='discover-suggested-tile-suggested']//button"));
@@ -883,42 +930,102 @@ public class TeamsChannelPage {
 		sendMsg();
 
 	}
-
+// to 19 
+	public void openDocInTeams(String fileName, String teamName) {
+		
+	}
 	public void clickByLinkWeb() {
-		WebElement myLinkNew = (new WebDriverWait(driver, 10))
+		List<WebElement> linksIn = driver.findElements(By.xpath("//a[@class='use-app-lnk']"));
+		if(linksIn.size()>0) {
+		WebElement myLinkNew = (new WebDriverWait(driver, 12))
 				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='use-app-lnk']")));
 		// WebElement myLink =
 		// driver.findElement(By.xpath("//a[@class='use-app-lnk']"));
 		myLinkNew.click();
+		}
 	}
 
 	// Add new meeting (Teams -> Calendar)
 	public String createNewMeetingInCalendar(String meetingName_Title, String[] Attendes) throws InterruptedException {
-		WebElement btnNewMeeting = (new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(),'New meeting')]")));
-		btnNewMeeting.click();
-		WebElement txtTitle = (new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@name='subject']")));
+		Thread.sleep(3000);
+		List<WebElement> listr = driver.findElements(By.xpath("//div[contains(text(),'New meeting')]"));
+		if(listr.size()>0) {
+	
+		
+		  WebElement btnNewMeeting = (new WebDriverWait(driver, 20))
+		  .until(ExpectedConditions.presenceOfElementLocated(By.
+		  xpath("//div[contains(text(),'New meeting')]"))); btnNewMeeting.click();
+	}
+		
+		
+		WebElement txtTitle = (new WebDriverWait(driver, 12))
+				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder='Add title']")));
 		txtTitle.sendKeys(meetingName_Title);
+	
+		// List<WebElement> wrongCredentials = driver.findElements(By.xpath("//input[@placeholder='You don't have permissions to create private meetings.']"));
+		
 		for (String user : Attendes) {
+			/*
+			 * WebElement txtInviteSomeone = (new WebDriverWait(driver, 10)).until(
+			 * ExpectedConditions.presenceOfElementLocated(By.xpath(
+			 * "//div[@class='ts-people-picker']//input")));
+			 */
 			WebElement txtInviteSomeone = (new WebDriverWait(driver, 10)).until(
-					ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='ts-people-picker']//input")));
+					ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder='Add required attendees']")));
+			
 			txtInviteSomeone.sendKeys(user);
 			Thread.sleep(1000);
 			txtInviteSomeone.sendKeys(Keys.ENTER);
 			Thread.sleep(1000);
 		}
 
+		/*
+		 * WebElement btnSchedule = (new WebDriverWait(driver,
+		 * 10)).until(ExpectedConditions .presenceOfElementLocated(By.
+		 * xpath("//button[@class='ts-btn ts-btn-fluent ts-btn-fluent-primary']")));
+		 */
 		WebElement btnSchedule = (new WebDriverWait(driver, 10)).until(ExpectedConditions
-				.presenceOfElementLocated(By.xpath("//button[@class='ts-btn ts-btn-fluent ts-btn-fluent-primary']")));
+				.presenceOfElementLocated(By.xpath("//button//div[contains(text(),'Send')]")));
+		
 		btnSchedule.click();
 		Thread.sleep(2000);
-		WebElement titleToCheck = (new WebDriverWait(driver, 10)).until(ExpectedConditions
-				.presenceOfElementLocated(By.xpath("//h1[@class='app-font-family-base ts-modal-dialog-title']")));
-		String meetingTitleAsAResult = titleToCheck.getText();
-		return meetingTitleAsAResult;
+		/*
+		 * WebElement titleToCheck = (new WebDriverWait(driver,
+		 * 10)).until(ExpectedConditions .presenceOfElementLocated(By.
+		 * xpath("//h1[@class='app-font-family-base ts-modal-dialog-title']"))); String
+		 * meetingTitleAsAResult = titleToCheck.getText();
+		 */
+		//return meetingTitleAsAResult;
+		return meetingName_Title;
+		
+		
 	}
-
+	
+	public void openWeek() {
+		WebElement allweek = driver.findElement(By.xpath("//div[2]/div/div/div/div/div[2]/div[2]//i"));
+		allweek.click();
+		WebElement weekElement = driver.findElement(By.xpath("//span[contains(text(),'Week')]"));
+		weekElement.click();
+	}
+	
+	public boolean checkMeeting(String meetingName) {
+		List<WebElement> listElement = driver.findElements(By.xpath("//span[contains(text(), '"+meetingName+"')]"));
+		if(listElement.size()>0) {return true;}
+		else {return false;}
+		
+		
+	}
+	
+public void chooseWebApp() {
+	WebElement useWeb = (new WebDriverWait(driver, 17)).until(ExpectedConditions
+			.presenceOfElementLocated(By.xpath("//a[contains(text(), 'Use the web')]")));
+	useWeb.click();
+	/*
+	List<WebElement> webLink = driver.findElements(By.xpath("//a[contains(text(), 'Use the web')]"));
+	if(webLink.size()>0) {webLink.get(0).click();}
+	*/
+	
+}
 	/****************************************************************************************************************
 	 ********************************************** Left side elements **********************************************
 	 ****************************************************************************************************************/
@@ -944,7 +1051,7 @@ public class TeamsChannelPage {
 			parametrListItem = "app-bar-5af6a76b-40fc-4ba1-af29-8f49b08e44fd";
 			break;
 		}
-		WebElement leftMenuItemElement = (new WebDriverWait(driver, 10))
+		WebElement leftMenuItemElement = (new WebDriverWait(driver, 12))
 				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='" + parametrListItem + "']")));
 		leftMenuItemElement.click();
 	}

@@ -43,14 +43,14 @@ public class OneDriveDesktop {
 			parametrListItem = "More";
 			break;
 		}
-		WebElement bottomMenuItem = (new WebDriverWait(driver, 2))
+		WebElement bottomMenuItem = (new WebDriverWait(driver, 5))
 				.until(ExpectedConditions.presenceOfElementLocated(By.name(parametrListItem)));
 		bottomMenuItem.click();
 	}
 	
 	public boolean checkOneDriveCondition() {
 		List<WebElement> list = null;
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebDriverWait wait = new WebDriverWait(driver, 15);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@Name,'OneDrive is up to date')]")));
 		
 		list = driver.findElements(By.xpath("//*[contains(@Name,'OneDrive is up to date')]"));
@@ -59,9 +59,14 @@ public class OneDriveDesktop {
 			return false;
 		}
 	}
-	public void swithToTaskBarOrTray(String appName) {
+	public void swithToTaskBarOrTray(String appName) throws InterruptedException {
+		
+		  Thread.sleep(10000); 
+		 
 		User32.INSTANCE.GetForegroundWindow(); 
-		WebElement oneDriveTrayIcon = driver.findElement(By.xpath("//*[contains(@Name,'"+appName+"')]"));
+		// WebElement oneDriveTrayIcon =  (new WebDriverWait(driver, 20)).until(ExpectedConditions.presenceOfElementLocated(By.name("//*[contains(@Name,'"+appName+"')]")));   
+
+			   WebElement oneDriveTrayIcon = driver.findElement(By.xpath("//*[contains(@Name,'"+appName+"')]"));
 		oneDriveTrayIcon.click();
 		/*	 HWND hwnd = User32.INSTANCE.FindWindow(null , "OneDrive - AMDOCS");
 		  	 User32.INSTANCE.ShowWindow(hwnd,1);									 */

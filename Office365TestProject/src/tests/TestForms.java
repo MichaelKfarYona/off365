@@ -28,10 +28,11 @@ public class TestForms extends Settings{
 	final String listName = "LIST_NAME_";
 	final String taskName = "TASK_NAME_";
 	final int lineNumber = 2;
-	String loginName = "Michael@msglab.tech"; String password = "Ahmshere577561!";
+	String loginName = "Michapru@amdocs.com"; String password = "Ahmshere577561)";
+	// String loginName = "Michael@msglab.tech"; String password = "Ahmshere577561^";
 	int teamNumber = getRandom();
 	ExtentTest testLogger = null;
-
+// //a[@aria-label="Explore all your apps"]
 	  public void loginAsAmdocsUser(String appName) throws InterruptedException, IOException{
 		  
 	    	testLogger.log(Status.INFO, "Login as User");
@@ -43,7 +44,7 @@ public class TestForms extends Settings{
 	        Office365Page officePage = new Office365Page(driver);
 	        System.out.println("OFFICE 365");
 	        Thread.sleep(2000);
-	        testLogger.log(Status.INFO, "Click Teams link ");
+	        testLogger.log(Status.INFO, "Click App link ");
 	        officePage.chooseApplication(appName);
 	        /************************
 	         * Switch between tabs *
@@ -70,9 +71,10 @@ public class TestForms extends Settings{
 	    	System.out.println("TestForms->formsMainFunctionality");
 	    	testLogger = extent.createTest(getClass().getName());
 	    	testLogger.log(Status.INFO, "Start Forms app");
-	    	try {
+	    	try {loginAsAmdocsUserProduction(ApplicationName.FORMS, 1);
 	    		//loginAsAmdocsUserSettings(ApplicationName.FORMS); // Settings.class method
-	    	loginAsAmdocsUser("Forms");
+	    		
+	    	//loginAsAmdocsUser("Forms");
 	    	String myParam = "Test_Form_Name_"+getRandom();
 	    	Thread.sleep(2000);
 	    	Forms formsPage = new Forms(driver);

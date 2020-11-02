@@ -34,8 +34,8 @@ public class TestOneDrive extends Settings{
 	final String LINKNAME = "TEST_LINK_";
 	final int lineNumber = 2;
 	String wordDocumentTitle, excelDocumentTitle = null;
-	String loginName = "Michael@msglab.tech";String password = "Ahmshere577561!";
-	//String loginName = "yoelap@amdocs.com"; String password = "Newpass1!";
+	String loginName = "Michael@msglab.tech";String password = "Ahmshere577561^";
+	//String loginName = "yoelap@amdocs.com"; String password = "Random#224466";
 	final String ownerName = "Michael Prudnikov";
 	int teamNumber = getRandom();
 	ExtentTest testLog = null;

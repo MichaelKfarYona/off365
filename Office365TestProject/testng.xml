@@ -1,25 +1,191 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="My test suite">
+    <parameter name = "NoteName" value="TEST_NOTE_00000"/>
 	<test name="testing">
 		<classes>
-
-			<!-- Teams -->
-			<class name="tests.TestTeamsChannelPage">
+		   
+			<class name="tests.TestForms">
 				<methods>
-					<include name="createNewTeam" />
-					<include name="checkNewTeam" />
-					<include name="addNewMeeting" />
+					<include name="formsMainFunctionality" />
+				</methods>
+			</class>
+	 
+			
+		   
+<!--
+			<class name="tests.TestPlanner">
+				<methods>
+					<include name="creationAndVerificationOfNewPlan" />
+				</methods>
+			</class>
+			
+		    <class name="tests.TestTeamsChannelPage">
+				<methods>
 					
+					<include name="shareFilesViaChatTeams" />
+														
+				</methods>
+			</class>
+		    
+		    <class name="tests.TestOutlook">
+				<methods>
+					<include name="outlookWebFromToArchive"/>
+					<include name="deleteRules"/>
+				</methods>
+			</class>
+			
+	 <class name="tests.TestOutlook">
+				<methods>
+					<include name="sendMessageWeb"/>
+					<include name="createNewMeetingOutlookWeb"/>
+					<include name="createNewTeamsMeetingOutlookWeb"/>
+					<include name="outlookWebRulesImportance"/>
+					<include name="outlookWebRulesFrom"/>
+					<include name="outlookWebFromToArchive"/>
+					<include name="deleteRules"/>
 					
 				</methods>
 			</class>
- 
+	
+	
+		    <class name="tests.TestPlanner">
+				<methods>
+					<include name="creationAndVerificationOfNewPlan" />
+				</methods>
+			</class>
+		    
+		   
+			
+		    
+	 
+	<class name="tests.TestOneNote">
+				<methods>
+					<include name="oneNoteMainFunctionslity" />
+					<include name="oneNoteSyncFunctionality" />
+				</methods>
+			</class>
+			
+			
+			<class name="tests.TestsToDo">
+				<methods>
+					<include name="toDoApp" />
+				</methods>
+			</class>
+
+		
+			
+			
+			
+		  <class name="tests.TestDelve">
+				<methods>
+					<include name="delveAndMembersValidation" />
+				</methods>
+			</class>
+
+		  <class name="tests.TestTeamsChannelPage">
+				<methods>
+					
+					<include name="createNewTeam" />
+					<include name="deleteNewTeam" />
+														
+					<include name="checkNewTeam" />
+					<include name="addNewTabWeb" />
+														
+				</methods>
+			</class>
+			
+		  -->
+<!--		  
+
 			<class name="tests.TestPowerAutomate">
 				<methods>
 					<include name="createNewFlow" />
 				</methods>
 			</class>
+		   
+			
+		    
+			
+			 <class name="desktop.tests.TestOneNoteSync">
+				<methods>
+					<include name="checkOneNoteSyncLocal" />
+					<include name="openOneNoteDocLocal" />
+				</methods>
+			</class>
+		    
+
+		    
+-->
+			
+		    
+		   
+	<!--	    
+	 		
+	
+			 
+		<class name="tests.TestForms">
+				<methods>
+					<include name="formsMainFunctionality" />
+				</methods>
+			</class>
+
+			<class name="tests.TestPlanner">
+				<methods>
+					<include name="creationAndVerificationOfNewPlan" />
+				</methods>
+			</class>
+				   
+			
+
+			
+		    
+		
+			
+			
+	<class name="tests.TestTeamsChannelPage">
+				<methods>
+					
+					<include name="autosaveOption" />
+					<include name="createNewTeam" />
+					<include name="assignRoleValidation" />
+					
+					<include name="deleteNewTeam" />
+														
+				</methods>
+			</class>
+	
+	
+		    <class name="tests.TestPowerAutomate">
+				<methods>
+					<include name="createNewFlow" />
+				</methods>
+			</class>
+	 		
+		
+		
+
+
+
+			<class name="tests.TestTeamsChannelPage">
+				<methods>
+					<include name="addNewMeeting" />
+					
+					<include name="createNewTeam" />
+					<include name="autosaveOption" />
+					<include name="checkNewTeam" />
+					<include name="addNewTabWeb" />
+					<include name="sendEmojiGiphyStickerToTheChat" />
+					<include name="sendEmojiStickerToTheChat" />
+					<include name="addNewFlow" />
+					<include name="deleteNewTeam" />
+					<include name="shareFilesViaChatTeams" />
+										
+					
+				</methods>
+			</class>
+			
+
  
 			<class name="tests.TestOneDrive">
 				<methods>
@@ -28,25 +194,10 @@
 				</methods>
 			</class>
 			
-			<class name="tests.TestForms">
-				<methods>
-					<include name="formsMainFunctionality" />
-				</methods>
-			</class>
-
-
-			<class name="tests.TestPlanner">
-				<methods>
-					<include name="creationAndVerificationOfNewPlan" />
-				</methods>
-			</class>
-
-			<class name="tests.TestsToDo">
-				<methods>
-					<include name="toDoApp" />
-				</methods>
-
-			</class>
+			
+		
+-->
+			
 <!--
 			<class name="tests.TestPlannerViaTeams">
 				<methods>
@@ -61,14 +212,7 @@
 				</methods>
 			</class>
 -->
-<!--
-<class name="desktop.tests.TestOneDriveDesktop">
-	<methods>
-		<include name="checkOneDriveDesktop"/>
-		<include name="addEntityToTheOneDriveFolder"/>
-	</methods>
-</class>
--->
+
 			<!-- Run by groups -->
 
 			<!-- <groups> <run> <include name="Planner"/> </run> </groups> -->

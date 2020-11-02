@@ -42,8 +42,11 @@ public class OneDrive {
 	
 // ********** Uploading Files and folders ********** 
 	 public void uploadFileOrFolder(UploadType uploadType, String path) throws InterruptedException {
-		 Thread.sleep(1000);
-		 btnUpload = driver.findElement(By.xpath("//button[@name='Upload']"));
+		 Thread.sleep(4000);
+		 // btnUpload = driver.findElement(By.xpath("//button[@name='Upload']"));
+		 btnUpload = (new WebDriverWait(driver, 20))
+		  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name='Upload']")));
+		 
 		 btnUpload.click();
 		boolean FOLDER_CHOOSEN = false;
 		 	String parametrListItem = null;

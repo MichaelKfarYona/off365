@@ -41,7 +41,7 @@ public class PowerAutomate {
 		case SOLUTIONS: parametrListItem = "Solutions";  break;
 		case LEARN: parametrListItem = "Learn";  break;
 		}
-		WebElement leftMenuItemElement = driver.findElement(By.xpath("//div[@role='presentation']//div[contains(text(),'"+parametrListItem+"')]"));
+		WebElement leftMenuItemElement = driver.findElement(By.xpath("//div//span[contains(text(),'"+parametrListItem+"')]"));
 		leftMenuItemElement.click();
 		Thread.sleep(2000);
 		driver.switchTo().alert().accept(); // ALERT
@@ -50,12 +50,13 @@ public class PowerAutomate {
 	public void createNewFlow() throws InterruptedException {
 		Thread.sleep(2000);
 		// btnCreate = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='ms-Button-label label-113' and contains(text(),'Create')]"))); 
-		btnCreate = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(),'Create')]")));
+		btnCreate = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Create')]")));
 		btnCreate.click();
 	}
 	public void addAutomatedFlow(String autoFlowName) throws InterruptedException {
 		boolean isPresent;
-		if(isPresent = driver.findElements(By.xpath("//div[@class='fl-Announcement']//button[@aria-label='Close']")).size()>0) {		WebElement popup = driver.findElement(By.xpath("//div[@class='fl-Announcement']//button[@aria-label='Close']"));
+		if(isPresent = driver.findElements(By.xpath("//div[@class='fl-Announcement']//button[@aria-label='Close']")).size()>0) {		
+			WebElement popup = driver.findElement(By.xpath("//div[@class='fl-Announcement']//button[@aria-label='Close']"));
 		popup.click();}
 		else {System.out.println("There is no notification!");}
 		
@@ -66,9 +67,9 @@ public class PowerAutomate {
 		//driver.switchTo().activeElement();
 		txtFlowName = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@aria-label='Flow name']")));
 		txtFlowName.sendKeys(autoFlowName);
-		btnFlowsTrigger = driver.findElement(By.xpath("//div[@aria-live='polite']//span[contains(text(),'OneDrive for Business')]"));
+		btnFlowsTrigger = driver.findElement(By.xpath("//div[@role]//span[contains(text(),'OneDrive for Business')]"));
 		btnFlowsTrigger.click();
-		btnCreateFlow = driver.findElement(By.xpath("//div[contains(@class,'footer')]//div[contains(text(),'Create')]"));btnCreateFlow.click();
+		btnCreateFlow = driver.findElement(By.xpath("//div[contains(@class,'footer')]//span[contains(text(),'Create')]"));btnCreateFlow.click();
 		System.out.println("TITLE _ "+driver.getTitle());
 		txtFolderName = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='msla-editor-input-control']")));
 		txtFolderName.click();
@@ -88,7 +89,7 @@ public class PowerAutomate {
 		WebElement sendAnEmailNotification = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='msla-operation-text']")));
 		sendAnEmailNotification.click();
 		
-		WebElement txtEmailBody = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//flow-designer/div/div/div/div/div/div[1]/div/div/div/div/div[2]/div/div/div[2]/div/div/div[1]/div[2]/div/div/div/div[3]/div/div/div[2]/div/div[2]/div/div[2]/div/div/div/div")));
+		WebElement txtEmailBody = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@aria-label='Email Body']")));
 		txtEmailBody.click();
 		txtEmailBody.sendKeys(mailBody);
 		
